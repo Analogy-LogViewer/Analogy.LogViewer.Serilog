@@ -18,16 +18,18 @@ namespace Analogy.LogViewer.Serilog
         public string FileSaveDialogFilters { get; } = string.Empty;
         public IEnumerable<string> SupportFormats { get; } = new[] { "*.clef" };
         public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
-        private ClefParser ClefParser { get; }
+        //private ClefParser ClefParser { get; }
+        private JsonParser JsonParser { get; }
 
         public OfflineDataProvider()
         {
-            ClefParser = new ClefParser();
+//            ClefParser = new ClefParser();
+JsonParser=new JsonParser();
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
-                return await ClefParser.Process(fileName, token, messagesHandler);
+                return await JsonParser.Process(fileName, token, messagesHandler);
             return new List<AnalogyLogMessage>(0);
         }
 
