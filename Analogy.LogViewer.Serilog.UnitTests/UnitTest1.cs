@@ -11,9 +11,9 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task TestMethod1()
         {
-            JsonParser p = new JsonParser();
+            ClefParser p = new ClefParser();
             CancellationTokenSource cts=new CancellationTokenSource();
-            await p.Process("testJson.clef", cts.Token, null);
+            await p.Process(@"..\logs\example1.clef", cts.Token, null);
         }
     }
 }

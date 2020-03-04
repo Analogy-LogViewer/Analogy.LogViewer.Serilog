@@ -23,22 +23,15 @@ namespace Analogy.LogViewer.Serilog
                 List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
                 try
                 {
-                    using (var analogy = new LoggerConfiguration()
-                        .WriteTo.Analogy()
-                        .CreateLogger())
+                    using (var clef = File.OpenText(fileName))
                     {
-                        using (var clef = File.OpenText(fileName))
+                        var reader = new LogEventReader(clef);
+                        while (reader.TryRead(out var evt))
                         {
-                            var reader = new LogEventReader(clef);
-                            LogEvent evt;
-                            while (reader.TryRead(out evt))
-                            {
-                                analogy.Write(evt);
-                                var m = ParseEvent(evt);
-                                parsedMessages.Add(m);
-                            }
+                         
+                            var m = ParseEvent(evt);
+                            parsedMessages.Add(m);
                         }
-
                         messagesHandler.AppendMessages(parsedMessages, fileName);
                         return parsedMessages;
                     }
