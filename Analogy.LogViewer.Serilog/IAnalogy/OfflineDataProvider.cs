@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.Managers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -17,14 +18,15 @@ namespace Analogy.LogViewer.Serilog
         public string FileOpenDialogFilters { get; } = "Serilog CLEF log files|*.clef";
         public string FileSaveDialogFilters { get; } = string.Empty;
         public IEnumerable<string> SupportFormats { get; } = new[] { "*.clef" };
+        public bool DisableFilePoolingOption { get; } = false;
         public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
-        //private ClefParser ClefParser { get; }
+        private ClefParser ClefParser { get; }
         private JsonParser JsonParser { get; }
 
         public OfflineDataProvider()
         {
-//            ClefParser = new ClefParser();
-JsonParser=new JsonParser();
+            ClefParser = new ClefParser();
+            JsonParser = new JsonParser();
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
@@ -46,12 +48,14 @@ JsonParser=new JsonParser();
             return fileName.EndsWith(".Clef", StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public bool CanOpenAllFiles(IEnumerable<string> fileNames)=> fileNames.All(CanOpenFile);
+        public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
+
 
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
+            LogManager.Instance.SetLogger(logger);
             return Task.CompletedTask;
-            //nop
+
         }
 
         public void MessageOpened(AnalogyLogMessage message)

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.Managers;
+using System;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -18,7 +19,8 @@ namespace Analogy.LogViewer.Serilog
 
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
-            throw new NotImplementedException();
+            LogManager.Instance.SetLogger(logger);
+            return Task.CompletedTask;
         }
 
         public void MessageOpened(AnalogyLogMessage message)
