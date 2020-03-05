@@ -2,3 +2,5 @@
 Serilog Parser for Analogy Log Viewer.
 Supported formattings are:
 - [Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
+
+![Main screen](Assets/CompactFormat.jpg)
