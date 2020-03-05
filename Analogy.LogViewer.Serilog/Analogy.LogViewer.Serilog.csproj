@@ -12,6 +12,7 @@
     <PackageReleaseNotes>Initial Analogy Serilog Parser for Compact Formatting (*.clef files)</PackageReleaseNotes>
     <PackageIcon>AnalogySerilog.png</PackageIcon>
     <PackageIconUrl />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
