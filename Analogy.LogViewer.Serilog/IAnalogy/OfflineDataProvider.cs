@@ -21,17 +21,17 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public bool DisableFilePoolingOption { get; } = false;
         public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
         private ClefParser ClefParser { get; }
-        private JsonParser JsonParser { get; }
+        //private JsonParser JsonParser { get; }
 
         public OfflineDataProvider()
         {
             ClefParser = new ClefParser();
-            JsonParser = new JsonParser();
+            //  JsonParser = new JsonParser();
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
-                return await JsonParser.Process(fileName, token, messagesHandler);
+                return await ClefParser.Process(fileName, token, messagesHandler);
             return new List<AnalogyLogMessage>(0);
         }
 
