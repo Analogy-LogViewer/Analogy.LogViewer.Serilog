@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Analogy.LogViewer.Serilog
+namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class OfflineDataProvider : IAnalogyOfflineDataProvider
     {

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.Serilog.IAnalogy;
+using System.Collections.Generic;
 
 namespace Analogy.LogViewer.Serilog
 {

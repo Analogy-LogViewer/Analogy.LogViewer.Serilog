@@ -3,7 +3,7 @@ using Analogy.LogViewer.Serilog.Managers;
 using System;
 using System.Threading.Tasks;
 
-namespace Analogy.LogViewer.Serilog
+namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class OnlineDataProvider : IAnalogyRealTimeDataProvider
     {

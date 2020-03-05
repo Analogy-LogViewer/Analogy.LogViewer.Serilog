@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageHandlerForTesting.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,11 +59,11 @@
     <PackageReference Include="Serilog">
       <Version>2.9.0</Version>
     </PackageReference>
-    <PackageReference Include="Serilog.Formatting.Compact.Reader">
-      <Version>1.0.3</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="example1.clef">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="testJson.clef">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

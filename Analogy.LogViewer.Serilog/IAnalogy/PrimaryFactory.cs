@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
+using System;
+using System.Collections.Generic;
 
-namespace Analogy.LogViewer.Serilog
+namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class PrimaryFactory : IAnalogyFactory
     {

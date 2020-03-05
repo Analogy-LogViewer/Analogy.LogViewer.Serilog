@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Newtonsoft.Json;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.CompactClef;
 using Serilog;
 using Serilog.Events;
-using Serilog.Formatting.Compact.Reader;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -23,17 +20,49 @@ namespace Analogy.LogViewer.Serilog
                 List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
                 try
                 {
-                    using (var clef = File.OpenText(fileName))
+                    using (var analogy = new LoggerConfiguration()
+                        .WriteTo.Analogy()
+                        .CreateLogger())
                     {
-                        var reader = new LogEventReader(clef);
-                        while (reader.TryRead(out var evt))
+                        using (var clef = File.OpenText(fileName))
                         {
-                         
-                            var m = ParseEvent(evt);
-                            parsedMessages.Add(m);
+                            var reader = new LogEventReader(clef);
+                            while (reader.TryRead(out var evt))
+                            {
+                                analogy.Write(evt);
+                                AnalogyLogMessage m = new AnalogyLogMessage();
+                                switch (evt.Level)
+                                {
+                                    case LogEventLevel.Verbose:
+                                        m.Level = AnalogyLogLevel.Verbose;
+                                        break;
+                                    case LogEventLevel.Debug:
+                                        m.Level = AnalogyLogLevel.Debug;
+                                        break;
+                                    case LogEventLevel.Information:
+                                        m.Level = AnalogyLogLevel.Event;
+                                        break;
+                                    case LogEventLevel.Warning:
+                                        m.Level = AnalogyLogLevel.Warning;
+                                        break;
+                                    case LogEventLevel.Error:
+                                        m.Level = AnalogyLogLevel.Error;
+                                        break;
+                                    case LogEventLevel.Fatal:
+                                        m.Level = AnalogyLogLevel.Critical;
+                                        break;
+                                    default:
+                                        throw new ArgumentOutOfRangeException();
+                                }
+
+                                m.Date = evt.Timestamp.DateTime;
+                                m.Text = AnalogySink.output;
+                                parsedMessages.Add(m);
+                            }
+
+                            messagesHandler.AppendMessages(parsedMessages, fileName);
+                            return parsedMessages;
                         }
-                        messagesHandler.AppendMessages(parsedMessages, fileName);
-                        return parsedMessages;
                     }
                 }
                 catch (Exception e)
@@ -51,37 +80,6 @@ namespace Analogy.LogViewer.Serilog
             });
             return messages;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private AnalogyLogMessage ParseEvent(LogEvent evt)
-        {
-            AnalogyLogMessage m = new AnalogyLogMessage();
-            switch (evt.Level)
-            {
-                case LogEventLevel.Verbose:
-                    m.Level = AnalogyLogLevel.Verbose;
-                    break;
-                case LogEventLevel.Debug:
-                    m.Level = AnalogyLogLevel.Debug;
-                    break;
-                case LogEventLevel.Information:
-                    m.Level = AnalogyLogLevel.Event;
-                    break;
-                case LogEventLevel.Warning:
-                    m.Level = AnalogyLogLevel.Warning;
-                    break;
-                case LogEventLevel.Error:
-                    m.Level = AnalogyLogLevel.Error;
-                    break;
-                case LogEventLevel.Fatal:
-                    m.Level = AnalogyLogLevel.Critical;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
 
-            m.Date = evt.Timestamp.DateTime;
-            m.Text = evt.ToString();
-            return m;
-        }
     }
 }

@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using Serilog;
+﻿using Serilog;
 using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting;
 using Serilog.Formatting.Display;
 using Serilog.Formatting.Json;
+using System;
+using System.IO;
 
 namespace Analogy.LogViewer.Serilog
 {
     class AnalogySink : ILogEventSink
     {
         readonly ITextFormatter _textFormatter;
-
+        public static string output = string.Empty;
         public AnalogySink(ITextFormatter textFormatter)
         {
             if (textFormatter == null) throw new ArgumentNullException(nameof(textFormatter));
             _textFormatter = textFormatter;
+
         }
 
         public void Emit(LogEvent logEvent)
@@ -28,23 +26,13 @@ namespace Analogy.LogViewer.Serilog
             if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
             var sr = new StringWriter();
             _textFormatter.Format(logEvent, sr);
-
-            var text = sr.ToString().Trim();
-
-            if (logEvent.Level == LogEventLevel.Error || logEvent.Level == LogEventLevel.Fatal)
-                Trace.TraceError(text);
-            else if (logEvent.Level == LogEventLevel.Warning)
-                Trace.TraceWarning(text);
-            else if (logEvent.Level == LogEventLevel.Information)
-                Trace.TraceInformation(text);
-            else
-                Trace.WriteLine(text);
+            output = sr.ToString().Trim();
         }
     }
 
     public static class TraceLoggerConfigurationExtensions
     {
-        const string DefaultOutputTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}";
+        const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
 
         /// <summary>
         /// Write log events to the <see cref="System.Diagnostics.Trace"/>.

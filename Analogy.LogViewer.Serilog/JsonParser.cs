@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Newtonsoft.Json;
-using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Compact.Reader;
 
 namespace Analogy.LogViewer.Serilog
 {
