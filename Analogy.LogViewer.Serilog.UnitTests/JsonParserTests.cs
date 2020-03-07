@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 namespace Analogy.LogViewer.Serilog.UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class JsonParserTests
     {
         [TestMethod]
-        public async Task TestMethod1()
+        public async Task ClefParserTest()
         {
-            ClefParser p = new ClefParser();
+            var p = new JsonParser();
             CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = @"example1.clef";
+            string fileName = @"testJson.clef";
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = await p.Process(fileName, cts.Token, forTesting);
-            Assert.IsTrue(messages.Count() == 4);
+            Assert.IsTrue(messages.Count() == 2);
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Analogy.LogViewer.Serilog
 {
     public class ClefParser
     {
-
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             var messages = await Task<IEnumerable<AnalogyLogMessage>>.Factory.StartNew(() =>

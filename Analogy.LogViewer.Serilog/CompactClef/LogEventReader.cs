@@ -20,6 +20,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Analogy.LogViewer.Serilog.CompactClef
 {
@@ -126,7 +127,9 @@ namespace Analogy.LogViewer.Serilog.CompactClef
                 level = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), l);
             Exception exception = null;
             if (TryGetOptionalField(lineNumber, jObject, ClefFields.Exception, out string ex))
-                exception = new TextException(ex);
+            {
+                exception = TryPopulateException(ex, exception, jObject);
+            }
 
             var parsedTemplate = messageTemplate == null ?
                 new MessageTemplate(Enumerable.Empty<MessageTemplateToken>()) :
@@ -165,6 +168,20 @@ namespace Analogy.LogViewer.Serilog.CompactClef
             }
 
             return new LogEvent(timestamp, level, exception, parsedTemplate, properties);
+        }
+
+        private static Exception TryPopulateException(string header, Exception exception, JObject data)
+        {
+            if (data.TryGetValue("ExceptionDetail", out var info))
+            {
+                var ex = new ExternalException(string.Join(" ", header, info["Message"]?.Value<string>()),
+                    (info["HResult"].HasValues ? info["HResult"].Value<int>() : -1))
+                {
+                    Source = info["Source"]?.Value<string>()
+                };
+                return ex;
+            }
+            return new TextException(header);
         }
 
         static bool TryGetOptionalField(int lineNumber, JObject data, string field, out string value)

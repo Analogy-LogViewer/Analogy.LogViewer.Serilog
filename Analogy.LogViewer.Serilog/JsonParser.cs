@@ -1,8 +1,14 @@
 ﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.CompactClef;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Serilog;
+using Serilog.Events;
+using Serilog.Formatting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +17,7 @@ namespace Analogy.LogViewer.Serilog
 {
     public class JsonParser
     {
+        public static ITextFormatter textFormatter;
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             var messages = await Task<IEnumerable<AnalogyLogMessage>>.Factory.StartNew(() =>
@@ -18,31 +25,34 @@ namespace Analogy.LogViewer.Serilog
                 List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
                 try
                 {
-                    string json = File.ReadAllText(fileName);
-                    var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                    AnalogyLogMessage m = new AnalogyLogMessage();
-                    foreach (KeyValuePair<string, object> kvp in data)
+                    using (var analogy = new LoggerConfiguration()
+                        .WriteTo.Analogy()
+                        .CreateLogger())
                     {
-                        switch (kvp.Key)
+                        string json = File.ReadAllText(fileName);
+                        var data = JsonConvert.DeserializeObject(json);
+                        if (data is JObject jo)
                         {
-                            case "@t":
-                                m.Date = (DateTime)kvp.Value;
-                                break;
-                            case "@mt":
-                                m.Text = kvp.Value.ToString();
-                                break;
-                            case "@l":
-                                m.Level = ParseEvent(kvp.Value.ToString());
-                                break;
-                            default:
-                                m.Text += Environment.NewLine + kvp.Key + " - " + kvp.Value.ToString();
-                                break;
+                            var m = ParserJObject(jo, analogy);
+                            parsedMessages.Add(m);
+                        }
+                        else if (data is JArray arr)
+                        {
+                            foreach (var obj in arr.ToList())
+                            {
+                                if (obj is JObject j)
+                                {
+                                    var m = ParserJObject(j, analogy);
+                                    parsedMessages.Add(m);
+                                }
+                            }
                         }
                     }
-                    messagesHandler.AppendMessage(m, fileName);
-                    return parsedMessages;
 
+                    messagesHandler.AppendMessages(parsedMessages, fileName);
+                    return parsedMessages;
                 }
+
                 catch (Exception e)
                 {
                     AnalogyLogMessage empty = new AnalogyLogMessage($"Error reading file {fileName}: Error: {e.Message}",
@@ -53,11 +63,48 @@ namespace Analogy.LogViewer.Serilog
                     messagesHandler.AppendMessages(parsedMessages, fileName);
                     return parsedMessages;
                 }
-
-
             });
             return messages;
         }
+
+        private AnalogyLogMessage ParserJObject(JObject jo, ILogger analogy)
+        {
+            var evt = LogEventReader.ReadFromJObject(jo);
+            {
+                analogy.Write(evt);
+                AnalogyLogMessage m = new AnalogyLogMessage();
+                switch (evt.Level)
+                {
+                    case LogEventLevel.Verbose:
+                        m.Level = AnalogyLogLevel.Verbose;
+                        break;
+                    case LogEventLevel.Debug:
+                        m.Level = AnalogyLogLevel.Debug;
+                        break;
+                    case LogEventLevel.Information:
+                        m.Level = AnalogyLogLevel.Event;
+                        break;
+                    case LogEventLevel.Warning:
+                        m.Level = AnalogyLogLevel.Warning;
+                        break;
+                    case LogEventLevel.Error:
+                        m.Level = AnalogyLogLevel.Error;
+                        break;
+                    case LogEventLevel.Fatal:
+                        m.Level = AnalogyLogLevel.Critical;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                m.Date = evt.Timestamp.DateTime;
+                m.Text = AnalogySink.output;
+
+                return m;
+            }
+
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private AnalogyLogLevel ParseEvent(string evt)
         {

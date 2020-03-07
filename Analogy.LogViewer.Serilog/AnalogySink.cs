@@ -16,8 +16,7 @@ namespace Analogy.LogViewer.Serilog
         public static string output = string.Empty;
         public AnalogySink(ITextFormatter textFormatter)
         {
-            if (textFormatter == null) throw new ArgumentNullException(nameof(textFormatter));
-            _textFormatter = textFormatter;
+            _textFormatter = textFormatter ?? throw new ArgumentNullException(nameof(textFormatter));
 
         }
 
