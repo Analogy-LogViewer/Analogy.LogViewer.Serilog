@@ -1,6 +1,6 @@
 ﻿namespace Analogy.LogViewer.Serilog
 {
-    partial class SerilogSettings
+    partial class SerilogUCSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -31,14 +31,10 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExportSettings = new System.Windows.Forms.Button();
             this.lblLayout = new System.Windows.Forms.Label();
-            this.btnLoadLayout = new System.Windows.Forms.Button();
-            this.txtNLogLayout = new System.Windows.Forms.TextBox();
-            this.txtNLogSeperator = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtNLogExtension = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
-            this.txtbNLogDirectory = new System.Windows.Forms.TextBox();
+            this.txtbDirectory = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.rbtnCLEF = new System.Windows.Forms.RadioButton();
@@ -49,7 +45,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(592, 463);
+            this.btnSave.Location = new System.Drawing.Point(592, 143);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(114, 40);
             this.btnSave.TabIndex = 1;
@@ -60,7 +56,7 @@
             // btnExportSettings
             // 
             this.btnExportSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportSettings.Location = new System.Drawing.Point(473, 463);
+            this.btnExportSettings.Location = new System.Drawing.Point(473, 143);
             this.btnExportSettings.Name = "btnExportSettings";
             this.btnExportSettings.Size = new System.Drawing.Size(114, 40);
             this.btnExportSettings.TabIndex = 2;
@@ -77,61 +73,20 @@
             this.lblLayout.TabIndex = 3;
             this.lblLayout.Text = "Format:";
             // 
-            // btnLoadLayout
-            // 
-            this.btnLoadLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadLayout.Location = new System.Drawing.Point(592, 107);
-            this.btnLoadLayout.Name = "btnLoadLayout";
-            this.btnLoadLayout.Size = new System.Drawing.Size(114, 25);
-            this.btnLoadLayout.TabIndex = 4;
-            this.btnLoadLayout.Text = "Load layout";
-            this.btnLoadLayout.UseVisualStyleBackColor = true;
-            this.btnLoadLayout.Click += new System.EventHandler(this.btnLoadLayout_Click);
-            // 
-            // txtNLogLayout
-            // 
-            this.txtNLogLayout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNLogLayout.Location = new System.Drawing.Point(172, 108);
-            this.txtNLogLayout.Name = "txtNLogLayout";
-            this.txtNLogLayout.Size = new System.Drawing.Size(416, 23);
-            this.txtNLogLayout.TabIndex = 5;
-            // 
-            // txtNLogSeperator
-            // 
-            this.txtNLogSeperator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNLogSeperator.Location = new System.Drawing.Point(172, 136);
-            this.txtNLogSeperator.Name = "txtNLogSeperator";
-            this.txtNLogSeperator.Size = new System.Drawing.Size(416, 23);
-            this.txtNLogSeperator.TabIndex = 7;
-            this.txtNLogSeperator.Text = "|";
-            this.txtNLogSeperator.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 138);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 17);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Seperator character:";
-            this.label1.Visible = false;
-            // 
             // txtNLogExtension
             // 
             this.txtNLogExtension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNLogExtension.Location = new System.Drawing.Point(172, 188);
+            this.txtNLogExtension.Location = new System.Drawing.Point(169, 111);
             this.txtNLogExtension.Name = "txtNLogExtension";
-            this.txtNLogExtension.Size = new System.Drawing.Size(416, 23);
+            this.txtNLogExtension.Size = new System.Drawing.Size(537, 23);
             this.txtNLogExtension.TabIndex = 9;
             this.txtNLogExtension.Text = "*.Clef";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 190);
+            this.label2.Location = new System.Drawing.Point(3, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 17);
             this.label2.TabIndex = 8;
@@ -140,7 +95,7 @@
             // btnImport
             // 
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImport.Location = new System.Drawing.Point(592, 134);
+            this.btnImport.Location = new System.Drawing.Point(592, 3);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(114, 25);
             this.btnImport.TabIndex = 10;
@@ -148,28 +103,28 @@
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
-            // txtbNLogDirectory
+            // txtbDirectory
             // 
-            this.txtbNLogDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtbDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbNLogDirectory.Location = new System.Drawing.Point(172, 161);
-            this.txtbNLogDirectory.Name = "txtbNLogDirectory";
-            this.txtbNLogDirectory.Size = new System.Drawing.Size(381, 23);
-            this.txtbNLogDirectory.TabIndex = 12;
+            this.txtbDirectory.Location = new System.Drawing.Point(169, 84);
+            this.txtbDirectory.Name = "txtbDirectory";
+            this.txtbDirectory.Size = new System.Drawing.Size(502, 23);
+            this.txtbDirectory.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 163);
+            this.label3.Location = new System.Drawing.Point(3, 86);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 17);
+            this.label3.Size = new System.Drawing.Size(98, 17);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Logs Location";
+            this.label3.Text = "Logs Location:";
             // 
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(559, 159);
+            this.btnOpenFolder.Location = new System.Drawing.Point(677, 82);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(28, 25);
             this.btnOpenFolder.TabIndex = 13;
@@ -185,6 +140,7 @@
             this.rbtnCLEF.Name = "rbtnCLEF";
             this.rbtnCLEF.Size = new System.Drawing.Size(219, 21);
             this.rbtnCLEF.TabIndex = 14;
+            this.rbtnCLEF.TabStop = true;
             this.rbtnCLEF.Text = "Compact Log Event File (CLEF)";
             this.rbtnCLEF.UseVisualStyleBackColor = true;
             // 
@@ -210,7 +166,7 @@
             this.rbSimpleTextFile.Text = "Single simple line (Use Plain text parser)";
             this.rbSimpleTextFile.UseVisualStyleBackColor = true;
             // 
-            // SerilogSettings
+            // SerilogUCSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -218,21 +174,17 @@
             this.Controls.Add(this.rbJson);
             this.Controls.Add(this.rbtnCLEF);
             this.Controls.Add(this.btnOpenFolder);
-            this.Controls.Add(this.txtbNLogDirectory);
+            this.Controls.Add(this.txtbDirectory);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.txtNLogExtension);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtNLogSeperator);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtNLogLayout);
-            this.Controls.Add(this.btnLoadLayout);
             this.Controls.Add(this.lblLayout);
             this.Controls.Add(this.btnExportSettings);
             this.Controls.Add(this.btnSave);
             this.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "SerilogSettings";
-            this.Size = new System.Drawing.Size(709, 506);
+            this.Name = "SerilogUCSettings";
+            this.Size = new System.Drawing.Size(709, 186);
             this.Load += new System.EventHandler(this.NLogSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -243,14 +195,10 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnExportSettings;
         private System.Windows.Forms.Label lblLayout;
-        private System.Windows.Forms.Button btnLoadLayout;
-        private System.Windows.Forms.TextBox txtNLogLayout;
-        private System.Windows.Forms.TextBox txtNLogSeperator;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNLogExtension;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.TextBox txtbNLogDirectory;
+        private System.Windows.Forms.TextBox txtbDirectory;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.RadioButton rbtnCLEF;

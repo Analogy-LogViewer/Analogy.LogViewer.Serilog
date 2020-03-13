@@ -13,33 +13,29 @@ namespace Analogy.LogViewer.Serilog.Managers
         private static readonly Lazy<UserSettingsManager> _instance =
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        private string NLogFileSetting { get; } = "AnalogySerilogSettings.json";
-        public ILogParserSettings LogParserSettings { get; set; }
+        public string SerilogFileSetting { get; private set; } = "AnalogySerilogSettings.json";
+        public SerilogSettings LogParserSettings { get; set; }
 
 
         public UserSettingsManager()
         {
-            if (File.Exists(NLogFileSetting))
+            if (File.Exists(SerilogFileSetting))
             {
                 try
                 {
-                    string data = File.ReadAllText(NLogFileSetting);
-                    LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(data);
+                    string data = File.ReadAllText(SerilogFileSetting);
+                    LogParserSettings = JsonConvert.DeserializeObject<SerilogSettings>(data);
                 }
                 catch (Exception ex)
                 {
-                    LogManager.Instance.LogException(ex, "NLog Provider", "Error loading user setting file");
-                    LogParserSettings = new LogParserSettings();
-                    LogParserSettings.Splitter = "|";
-                    LogParserSettings.SupportedFilesExtensions = new List<string> { "*.Nlog" };
+                    LogManager.Instance.LogException(ex, "Analogy Serilog Parser", "Error loading user setting file");
+                    LogParserSettings = new SerilogSettings();
+                   
                 }
             }
             else
             {
-                LogParserSettings = new LogParserSettings();
-                LogParserSettings.Splitter = "|";
-                LogParserSettings.SupportedFilesExtensions = new List<string> { "*.Nlog" };
-
+                LogParserSettings = new SerilogSettings();
             }
 
         }
@@ -48,11 +44,11 @@ namespace Analogy.LogViewer.Serilog.Managers
         {
             try
             {
-                File.WriteAllText(NLogFileSetting, JsonConvert.SerializeObject(LogParserSettings));
+                File.WriteAllText(SerilogFileSetting, JsonConvert.SerializeObject(LogParserSettings));
             }
             catch (Exception e)
             {
-                LogManager.Instance.LogException(e, "Nlog", "Error saving settings: " + e.Message);
+                LogManager.Instance.LogException(e, "Analogy Serilog Parser", "Error saving settings: " + e.Message);
             }
 
 
