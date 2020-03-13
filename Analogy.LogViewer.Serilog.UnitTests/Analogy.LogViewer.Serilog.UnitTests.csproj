@@ -62,7 +62,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="example1.clef">
+    <None Include="ClefExample1.clef">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="testJson.clef">

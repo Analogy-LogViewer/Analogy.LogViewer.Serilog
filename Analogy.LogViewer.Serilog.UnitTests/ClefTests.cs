@@ -13,7 +13,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         {
             ClefParser p = new ClefParser();
             CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = @"example1.clef";
+            string fileName = @"ClefExample1.clef";
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = await p.Process(fileName, cts.Token, forTesting);
             Assert.IsTrue(messages.Count() == 4);
