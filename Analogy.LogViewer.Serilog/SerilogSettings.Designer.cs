@@ -1,6 +1,6 @@
-﻿namespace Analogy.LogViewer.NLogProvider
+﻿namespace Analogy.LogViewer.Serilog
 {
-    partial class NLogSettings
+    partial class SerilogSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             this.txtNLogExtension = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
-            this.analogyColumnsMatcherUC1 = new Analogy.LogViewer.NLogProvider.AnalogyColumnsMatcherUC();
+            this.analogyColumnsMatcherUC1 = new Analogy.DataProviders.Extensions.AnalogyColumnsMatcherUC();
             this.txtbNLogDirectory = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnOpenFolder = new System.Windows.Forms.Button();
@@ -212,7 +212,7 @@
 
         #endregion
 
-        private AnalogyColumnsMatcherUC analogyColumnsMatcherUC1;
+        private Analogy.DataProviders.Extensions.AnalogyColumnsMatcherUC analogyColumnsMatcherUC1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnExportSettings;
         private System.Windows.Forms.Label lblLayout;

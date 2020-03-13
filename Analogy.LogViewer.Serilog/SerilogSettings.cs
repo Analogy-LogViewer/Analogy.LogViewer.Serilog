@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Analogy.LogViewer.Serilog.Managers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Analogy.DataProviders.Extensions;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.NLogProvider
+namespace Analogy.LogViewer.Serilog
 {
-    public partial class NLogSettings : UserControl
+    public partial class SerilogSettings : UserControl
     {
         private ILogParserSettings LogParsersSettings => UserSettingsManager.UserSettings.LogParserSettings;
-        public NLogSettings()
+        public SerilogSettings()
         {
             InitializeComponent();
         }
