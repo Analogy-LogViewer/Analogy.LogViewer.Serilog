@@ -69,12 +69,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Analogy.LogViewer.Serilog\Analogy.LogViewer.Serilog.csproj">
-      <Project>{ffb5c953-d3d9-4956-ab2b-b6aee239978c}</Project>
-      <Name>Analogy.LogViewer.Serilog</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
