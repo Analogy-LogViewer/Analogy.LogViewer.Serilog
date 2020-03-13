@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog", "Analogy.LogViewer.Serilog\Analogy.LogViewer.Serilog.csproj", "{FFB5C953-D3D9-4956-AB2B-B6AEE239978C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.Core", "Analogy.LogViewer.Serilog.Core\Analogy.LogViewer.Serilog.Core.csproj", "{78A64DEE-47B0-4800-B82A-A413A30D292F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.Framework", "Analogy.LogViewer.Serilog.Framework\Analogy.LogViewer.Serilog.Framework.csproj", "{BD6D1ED8-9842-480F-8FD3-EFA3F193C256}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{FFB5C953-D3D9-4956-AB2B-B6AEE239978C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFB5C953-D3D9-4956-AB2B-B6AEE239978C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFB5C953-D3D9-4956-AB2B-B6AEE239978C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78A64DEE-47B0-4800-B82A-A413A30D292F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78A64DEE-47B0-4800-B82A-A413A30D292F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78A64DEE-47B0-4800-B82A-A413A30D292F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78A64DEE-47B0-4800-B82A-A413A30D292F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD6D1ED8-9842-480F-8FD3-EFA3F193C256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD6D1ED8-9842-480F-8FD3-EFA3F193C256}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD6D1ED8-9842-480F-8FD3-EFA3F193C256}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD6D1ED8-9842-480F-8FD3-EFA3F193C256}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
