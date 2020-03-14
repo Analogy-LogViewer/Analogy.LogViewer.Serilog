@@ -11,3 +11,9 @@ Supported formatters, for now, is:
    {"@t":"2016-10-12T04:46:58.0904378Z","@mt":"Something failed","@l":"Error", "@x":"System.DivideByZer...<snip>"}
    ```
 ![Main screen](Assets/CompactFormat.jpg)
+
+
+
+## How To Use
+1. Download the latest [Analogy Log Viewer](https://github.com/Analogy-LogViewer/Analogy.LogViewer) from the [release](https://github.com/Analogy-LogViewer/Analogy.LogViewer/releases) section (.net framework or .net Core version).
+2. Download (or Compile) this project and put the compiled DLL in the same folder as the Analogy Log Viewer.
