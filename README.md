@@ -4,18 +4,18 @@
 
 [![Gitter](https://badges.gitter.im/Analogy-LogViewer/community.svg)](https://gitter.im/Analogy-LogViewer/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![Build Status](https://dev.azure.com/Analogy-LogViewer/Analogy%20Log%20Viewer/_apis/build/status/Analogy-LogViewer.Analogy.LogViewer.Serilog?branchName=master)](https://dev.azure.com/Analogy-LogViewer/Analogy%20Log%20Viewer/_build/latest?definitionId=15&branchName=master)
  <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/issues">
-    <img alt="Issues" img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.Serilog"/>
+    <img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="Issues"/>
 </a>
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/blob/master/LICENSE.md">
-    <img alt="License" img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.Serilog"/>
+    <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="License"/>
 </a>
 
  [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/releases">
-    <img alt="Latest Release" img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.Serilog"/>
+    <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="Latest Release"/>
 </a>
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/compare/V1.1.0...master">
-    <img alt="Commits Since Latest Release" img src="https://img.shields.io/github/commits-since/Analogy-LogViewer/Analogy.LogViewer.Serilog/latest"/>
+    <img src="https://img.shields.io/github/commits-since/Analogy-LogViewer/Analogy.LogViewer.Serilog/latest" img alt="Commits Since Latest Release"/>
 </a>
 </p>
 
