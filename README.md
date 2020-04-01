@@ -1,4 +1,4 @@
-# Analogy Serilog Parser 
+# Analogy Serilog Parser   <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
 
 <p align="center">
 
@@ -9,6 +9,7 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/blob/master/LICENSE.md">
     <img alt="License" img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.Serilog"/>
 </a>
+
  [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/releases">
     <img alt="Latest Release" img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.Serilog"/>
