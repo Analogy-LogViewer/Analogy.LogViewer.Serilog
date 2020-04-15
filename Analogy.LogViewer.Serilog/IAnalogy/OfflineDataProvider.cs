@@ -2,6 +2,7 @@
 using Analogy.LogViewer.Serilog.Managers;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -11,7 +12,6 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class OfflineDataProvider : IAnalogyOfflineDataProvider
     {
-
         public Guid ID { get; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
         public string OptionalTitle { get; } = "Serilog offline reader";
         public bool CanSaveToLogFile { get; } = false;
@@ -22,7 +22,12 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
         private ClefParser ClefParser { get; }
         //private JsonParser JsonParser { get; }
+        public bool UseCustomColors { get; set; } = false;
+        public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+            => Array.Empty<(string, string)>();
 
+        public (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+            => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {
             ClefParser = new ClefParser();
