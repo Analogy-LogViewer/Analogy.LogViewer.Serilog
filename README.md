@@ -32,6 +32,8 @@ Supported formatters, for now, is:
    ```
 ![Main screen](Assets/CompactFormat.jpg)
 
+## Issues
+- Windows 10 Blocks Zip files by default. Make sure after you download the files to unblock them. Make sure the are [unblocked](https://singularlabs.com/tips/how-to-unblock-a-zip-file-on-windows-10/) before unzipping them
 
 
 ## How To Use
