@@ -21,7 +21,7 @@
 
 Serilog Parser for Analogy Log Viewer.
 Supported formatters, for now, is:
-- [Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
+1. [Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
 
    example log:
    ```json
