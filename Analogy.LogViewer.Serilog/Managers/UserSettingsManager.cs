@@ -20,8 +20,12 @@ namespace Analogy.LogViewer.Serilog.Managers
             {
                 try
                 {
+                    var settings = new JsonSerializerSettings
+                    {
+                        ObjectCreationHandling = ObjectCreationHandling.Replace
+                    };
                     string data = File.ReadAllText(SerilogFileSetting);
-                    Settings = JsonConvert.DeserializeObject<SerilogSettings>(data);
+                    Settings = JsonConvert.DeserializeObject<SerilogSettings>(data, settings);
                 }
                 catch (Exception ex)
                 {

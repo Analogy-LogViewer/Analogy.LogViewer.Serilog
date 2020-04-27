@@ -16,11 +16,16 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public Guid ID { get; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
         public string OptionalTitle { get; } = "Serilog offline reader";
         public bool CanSaveToLogFile { get; } = false;
-        public string FileOpenDialogFilters { get; } = "Serilog CLEF log files|*.clef";
+        public string FileOpenDialogFilters => UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
         public string FileSaveDialogFilters { get; } = string.Empty;
-        public IEnumerable<string> SupportFormats { get; } = new[] { "*.clef" };
+        public IEnumerable<string> SupportFormats => UserSettingsManager.UserSettings.Settings.SupportFormats;
         public bool DisableFilePoolingOption { get; } = false;
-        public string InitialFolderFullPath { get; } = Environment.CurrentDirectory;
+
+        public string InitialFolderFullPath =>
+            (!string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.Directory) &&
+             Directory.Exists(UserSettingsManager.UserSettings.Settings.Directory))
+                ? UserSettingsManager.UserSettings.Settings.Directory
+                : Environment.CurrentDirectory;
         private ClefParser ClefParser { get; }
         //private JsonParser JsonParser { get; }
         public bool UseCustomColors { get; set; } = false;
@@ -38,11 +43,18 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             if (CanOpenFile(fileName))
             {
-                if (fileName.EndsWith(".clef"))
-                    return await ClefParser.Process(fileName, token, messagesHandler);
-                if (fileName.EndsWith(".log"))
-                    return await new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, true,
-                        LogManager.Instance).ParseLog(fileName, token, messagesHandler);
+                switch (UserSettingsManager.UserSettings.Settings.Format)
+                {
+                    case SerilogFileFormat.CLEF:
+                        return await ClefParser.Process(fileName, token, messagesHandler);
+                    case SerilogFileFormat.JSON:
+                        return new List<AnalogyLogMessage>(0);
+                        break;
+                    case SerilogFileFormat.REGEX:
+                        return await new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, true,
+                            LogManager.Instance).ParseLog(fileName, token, messagesHandler);
+                        break;
+                }
             }
             return new List<AnalogyLogMessage>(0);
         }
@@ -57,8 +69,12 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public bool CanOpenFile(string fileName)
         {
-            return fileName.EndsWith(".Clef", StringComparison.InvariantCultureIgnoreCase) ||
-                   fileName.EndsWith(".log", StringComparison.InvariantCultureIgnoreCase);
+            foreach (string pattern in UserSettingsManager.UserSettings.Settings.SupportFormats)
+            {
+                if (PatternMatcher.StrictMatchPattern(pattern, fileName))
+                    return true;
+            }
+            return false;
         }
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
@@ -78,7 +94,12 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
-            List<FileInfo> files = dirInfo.GetFiles("*.clef").Concat(dirInfo.GetFiles("*.log")).ToList();
+            List<FileInfo> files = new List<FileInfo>();
+            foreach (string pattern in UserSettingsManager.UserSettings.Settings.SupportFormats)
+            {
+                files.AddRange(dirInfo.GetFiles(pattern).ToList());
+            }
+
             if (!recursive)
                 return files;
             try

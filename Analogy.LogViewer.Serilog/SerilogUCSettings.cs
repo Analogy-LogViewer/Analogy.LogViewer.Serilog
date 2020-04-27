@@ -93,13 +93,15 @@ namespace Analogy.LogViewer.Serilog
 
         private void LoadSettings(SerilogSettings logSettings)
         {
-            txtbDirectory.Text = Settings.Directory;
-            txtbOpenFileFilters.Text = Settings.FileOpenDialogFilters;
-            txtbSupportedFiles.Text = string.Join(";", Settings.SupportFormats.ToList());
-            lstbRegularExpressions.Items.AddRange(Settings.RegexPatterns.ToArray());
-            txtbDateTimeFormat.Text = Settings.RegexPatterns.First().DateTimeFormat;
-            txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats);
-            rbtnCLEF.Checked = true;
+            txtbDirectory.Text = logSettings.Directory;
+            txtbOpenFileFilters.Text = logSettings.FileOpenDialogFilters;
+            txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
+            lstbRegularExpressions.Items.Clear();
+            lstbRegularExpressions.Items.AddRange(logSettings.RegexPatterns.ToArray());
+            txtbDateTimeFormat.Text = logSettings.RegexPatterns.First().DateTimeFormat;
+            rbtnCLEF.Checked = logSettings.Format == SerilogFileFormat.CLEF;
+            rbRegexFile.Checked = logSettings.Format == SerilogFileFormat.REGEX;
+            rbJson.Checked = logSettings.Format == SerilogFileFormat.JSON;
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)
