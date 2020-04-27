@@ -1,8 +1,5 @@
-﻿using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Analogy.LogViewer.Serilog.Managers
@@ -14,7 +11,7 @@ namespace Analogy.LogViewer.Serilog.Managers
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
         public string SerilogFileSetting { get; private set; } = "AnalogySerilogSettings.json";
-        public SerilogSettings LogParserSettings { get; set; }
+        public SerilogSettings Settings { get; set; }
 
 
         public UserSettingsManager()
@@ -24,18 +21,18 @@ namespace Analogy.LogViewer.Serilog.Managers
                 try
                 {
                     string data = File.ReadAllText(SerilogFileSetting);
-                    LogParserSettings = JsonConvert.DeserializeObject<SerilogSettings>(data);
+                    Settings = JsonConvert.DeserializeObject<SerilogSettings>(data);
                 }
                 catch (Exception ex)
                 {
                     LogManager.Instance.LogException(ex, "Analogy Serilog Parser", "Error loading user setting file");
-                    LogParserSettings = new SerilogSettings();
-                   
+                    Settings = new SerilogSettings();
+
                 }
             }
             else
             {
-                LogParserSettings = new SerilogSettings();
+                Settings = new SerilogSettings();
             }
 
         }
@@ -44,7 +41,7 @@ namespace Analogy.LogViewer.Serilog.Managers
         {
             try
             {
-                File.WriteAllText(SerilogFileSetting, JsonConvert.SerializeObject(LogParserSettings));
+                File.WriteAllText(SerilogFileSetting, JsonConvert.SerializeObject(Settings));
             }
             catch (Exception e)
             {

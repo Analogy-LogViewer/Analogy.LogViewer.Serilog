@@ -31,7 +31,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExportSettings = new System.Windows.Forms.Button();
             this.lblLayout = new System.Windows.Forms.Label();
-            this.txtNLogExtension = new System.Windows.Forms.TextBox();
+            this.txtbSupportedFiles = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
             this.txtbDirectory = new System.Windows.Forms.TextBox();
@@ -57,6 +57,8 @@
             this.lblDateTimeFormat = new System.Windows.Forms.Label();
             this.lblRegex = new System.Windows.Forms.Label();
             this.btnTest = new System.Windows.Forms.Button();
+            this.txtbOpenFileFilters = new System.Windows.Forms.TextBox();
+            this.lblOpenfilesFilters = new System.Windows.Forms.Label();
             this.tcSetttings.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbresult.SuspendLayout();
@@ -93,15 +95,15 @@
             this.lblLayout.TabIndex = 3;
             this.lblLayout.Text = "Format:";
             // 
-            // txtNLogExtension
+            // txtbSupportedFiles
             // 
-            this.txtNLogExtension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtbSupportedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNLogExtension.Location = new System.Drawing.Point(197, 129);
-            this.txtNLogExtension.Name = "txtNLogExtension";
-            this.txtNLogExtension.Size = new System.Drawing.Size(899, 22);
-            this.txtNLogExtension.TabIndex = 9;
-            this.txtNLogExtension.Text = "*.Clef";
+            this.txtbSupportedFiles.Location = new System.Drawing.Point(197, 129);
+            this.txtbSupportedFiles.Name = "txtbSupportedFiles";
+            this.txtbSupportedFiles.Size = new System.Drawing.Size(899, 22);
+            this.txtbSupportedFiles.TabIndex = 9;
+            this.txtbSupportedFiles.Text = "*.Clef";
             // 
             // label2
             // 
@@ -127,7 +129,7 @@
             // 
             this.txtbDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbDirectory.Location = new System.Drawing.Point(197, 98);
+            this.txtbDirectory.Location = new System.Drawing.Point(197, 76);
             this.txtbDirectory.Name = "txtbDirectory";
             this.txtbDirectory.Size = new System.Drawing.Size(858, 22);
             this.txtbDirectory.TabIndex = 12;
@@ -135,7 +137,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 100);
+            this.label3.Location = new System.Drawing.Point(3, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 14);
             this.label3.TabIndex = 11;
@@ -144,9 +146,9 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(1063, 96);
+            this.btnOpenFolder.Location = new System.Drawing.Point(1063, 76);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(33, 29);
+            this.btnOpenFolder.Size = new System.Drawing.Size(33, 22);
             this.btnOpenFolder.TabIndex = 13;
             this.btnOpenFolder.Text = "..";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
@@ -370,10 +372,30 @@
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
+            // txtbOpenFileFilters
+            // 
+            this.txtbOpenFileFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtbOpenFileFilters.Location = new System.Drawing.Point(197, 103);
+            this.txtbOpenFileFilters.Name = "txtbOpenFileFilters";
+            this.txtbOpenFileFilters.Size = new System.Drawing.Size(899, 22);
+            this.txtbOpenFileFilters.TabIndex = 47;
+            // 
+            // lblOpenfilesFilters
+            // 
+            this.lblOpenfilesFilters.AutoEllipsis = true;
+            this.lblOpenfilesFilters.Location = new System.Drawing.Point(7, 103);
+            this.lblOpenfilesFilters.Name = "lblOpenfilesFilters";
+            this.lblOpenfilesFilters.Size = new System.Drawing.Size(184, 22);
+            this.lblOpenfilesFilters.TabIndex = 46;
+            this.lblOpenfilesFilters.Text = "Open file Filter:";
+            // 
             // SerilogUCSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtbOpenFileFilters);
+            this.Controls.Add(this.lblOpenfilesFilters);
             this.Controls.Add(this.tcSetttings);
             this.Controls.Add(this.rbSimpleTextFile);
             this.Controls.Add(this.rbJson);
@@ -382,7 +404,7 @@
             this.Controls.Add(this.txtbDirectory);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnImport);
-            this.Controls.Add(this.txtNLogExtension);
+            this.Controls.Add(this.txtbSupportedFiles);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblLayout);
             this.Controls.Add(this.btnExportSettings);
@@ -404,7 +426,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnExportSettings;
         private System.Windows.Forms.Label lblLayout;
-        private System.Windows.Forms.TextBox txtNLogExtension;
+        private System.Windows.Forms.TextBox txtbSupportedFiles;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.TextBox txtbDirectory;
@@ -430,5 +452,7 @@
         private System.Windows.Forms.Label lblDateTimeFormat;
         private System.Windows.Forms.Label lblRegex;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.TextBox txtbOpenFileFilters;
+        private System.Windows.Forms.Label lblOpenfilesFilters;
     }
 }
