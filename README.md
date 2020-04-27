@@ -14,7 +14,7 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/releases">
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="Latest Release"/>
 </a>
-<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/compare/V1.1.3...master">
+<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/compare/V1.1.4...master">
     <img src="https://img.shields.io/github/commits-since/Analogy-LogViewer/Analogy.LogViewer.Serilog/latest" img alt="Commits Since Latest Release"/>
 </a>
 </p>
@@ -32,8 +32,11 @@ Supported formatters, for now, is:
    ```
 ![Main screen](Assets/CompactFormat.jpg)
 
+2. Regular Expression Parser: in this mode you need to define you custom regex to match you log format in the applcation settings.
+![Serilog Settings](Assets/SerilogRegularExpression.jpg)
+
 ## Issues
-- Windows 10 Blocks Zip files by default. Make sure after you download the files to unblock them. Make sure the are [unblocked](https://singularlabs.com/tips/how-to-unblock-a-zip-file-on-windows-10/) before unzipping them
+- Windows 10 Blocks Zip files by default. Make sure to [unblocked](https://singularlabs.com/tips/how-to-unblock-a-zip-file-on-windows-10/) before unzipping the files.
 
 
 ## How To Use
