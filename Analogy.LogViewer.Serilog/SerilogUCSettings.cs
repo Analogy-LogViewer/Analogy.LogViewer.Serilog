@@ -1,9 +1,9 @@
 ﻿using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
+using Analogy.LogViewer.Serilog.Regex;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -25,10 +25,10 @@ namespace Analogy.LogViewer.Serilog
         public void SaveSettings()
         {
 #if NETCOREAPP3_1
-            LogParsersSettings.SupportedFilesExtensions = txtNLogExtension.Text.Split(";",StringSplitOptions.RemoveEmptyEntries).ToList();
+            LogParsersSettings.SupportFormats = txtNLogExtension.Text.Split(";",StringSplitOptions.RemoveEmptyEntries).ToList();
 #endif
 #if !NETCOREAPP3_1
-            LogParsersSettings.SupportedFilesExtensions = txtNLogExtension.Text.Split(new []{";"}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            LogParsersSettings.SupportFormats = txtNLogExtension.Text.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 #endif
             LogParsersSettings.Directory = txtbDirectory.Text;
             UserSettingsManager.UserSettings.Save();
@@ -58,7 +58,7 @@ namespace Analogy.LogViewer.Serilog
 
             }
         }
-        
+
         private void btnImport_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -86,7 +86,12 @@ namespace Analogy.LogViewer.Serilog
 
         private void LoadSettings(SerilogSettings logSettings)
         {
-            txtNLogExtension.Text = string.Join(";", logSettings.SupportedFilesExtensions);
+            txtLogsLocation.Text = Settings.LogsLocation;
+            txtbOpenFileFilters.Text = Settings.FileOpenDialogFilters;
+            txtbSupportedFiles.Text = string.Join(";", Settings.SupportFormats.ToList());
+            lstbRegularExpressions.Items.AddRange(Settings.RegexPatterns.ToArray());
+            txtbDateTimeFormat.Text = Settings.RegexPatterns.First().DateTimeFormat;
+            txtNLogExtension.Text = string.Join(";", logSettings.SupportFormats);
             rbtnCLEF.Checked = true;
         }
 
@@ -106,6 +111,38 @@ namespace Analogy.LogViewer.Serilog
         private void NLogSettings_Load(object sender, EventArgs e)
         {
             LoadSettings(UserSettingsManager.UserSettings.LogParserSettings);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtbRegEx.Text)) return;
+            var rp = new RegexPattern(txtbRegEx.Text, txtbDateTimeFormat.Text, txtbGuidFormat.Text);
+            lstbRegularExpressions.Items.Add(rp);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstbRegularExpressions.SelectedItem is RegexPattern regexPattern)
+            {
+                lstbRegularExpressions.Items.Remove(lstbRegularExpressions.SelectedItem);
+            }
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            RegexPattern p = new RegexPattern(txtbRegEx.Text, txtbDateTimeFormat.Text, "");
+            bool valid = RegexParser.CheckRegex(txtbTest.Text, p, out AnalogyLogMessage m);
+            if (valid)
+            {
+                lblResult.Text = "Valid Regular Expression";
+                lblResult.BackColor = Color.GreenYellow;
+                lblResultMessage.Text = m.ToString();
+            }
+            else
+            {
+                lblResult.Text = "Non Valid Regular Expression";
+                lblResult.BackColor = Color.OrangeRed;
+            }
         }
     }
 }

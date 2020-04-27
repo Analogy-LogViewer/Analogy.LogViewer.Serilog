@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Analogy.LogViewer.Serilog.Regex;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -10,19 +7,30 @@ namespace Analogy.LogViewer.Serilog
     {
         CLEF,
         JSON,
-        TEXT
+        REGEX
     }
-   public class SerilogSettings
+    public class SerilogSettings
     {
-        public List<string> SupportedFilesExtensions { get; set; }
+        public string FileOpenDialogFilters { get; set; }
+        public string FileSaveDialogFilters { get; } = string.Empty;
+        public List<string> SupportFormats { get; set; }
+        public List<RegexPattern> RegexPatterns { get; set; }
         public string Directory { get; set; }
         public SerilogFileFormat Format { get; set; }
 
         public SerilogSettings()
         {
-            SupportedFilesExtensions = new List<string>();
             Format = SerilogFileFormat.CLEF;
-            SupportedFilesExtensions = new List<string> { "*.Clef" };
+            Directory = string.Empty;
+            FileOpenDialogFilters = "All Supported formats (*.Clef;*.log)|*.clef;*.log|Clef format (*.clef)*.clef|Plain log text file (*.log)|*.log";
+            SupportFormats = new List<string> { "*.Clef", "*.log" };
+            RegexPatterns = new List<RegexPattern>();
+            RegexPatterns.Add(new RegexPattern(@"\$(?<Date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},\d{3})+\|+(?<Thread>\d+)+\|(?<Level>\w+)+\|+(?<Source>.*)\|(?<Text>.*)", "yyyy-MM-dd HH:mm:ss,fff", ""));
+
         }
+
+
+
+
     }
 }
