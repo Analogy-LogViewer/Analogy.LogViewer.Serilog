@@ -35,6 +35,9 @@ namespace Analogy.LogViewer.Serilog
             Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             Settings.RegexPatterns = lstbRegularExpressions.Items.Count > 0 ? lstbRegularExpressions.Items.Cast<RegexPattern>().ToList() : new List<RegexPattern>();
+            Settings.Format = rbtnCLEF.Checked
+                ? SerilogFileFormat.CLEF
+                : (rbRegexFile.Checked ? SerilogFileFormat.REGEX : SerilogFileFormat.JSON);
             UserSettingsManager.UserSettings.Save();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.Managers;
+using Analogy.LogViewer.Serilog.Regex;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -31,12 +32,18 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public OfflineDataProvider()
         {
             ClefParser = new ClefParser();
-            //  JsonParser = new JsonParser();
+
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
-                return await ClefParser.Process(fileName, token, messagesHandler);
+            {
+                if (fileName.EndsWith(".clef"))
+                    return await ClefParser.Process(fileName, token, messagesHandler);
+                if (fileName.EndsWith(".log"))
+                    return await new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, true,
+                        LogManager.Instance).ParseLog(fileName, token, messagesHandler);
+            }
             return new List<AnalogyLogMessage>(0);
         }
 
@@ -50,7 +57,8 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public bool CanOpenFile(string fileName)
         {
-            return fileName.EndsWith(".Clef", StringComparison.InvariantCultureIgnoreCase);
+            return fileName.EndsWith(".Clef", StringComparison.InvariantCultureIgnoreCase) ||
+                   fileName.EndsWith(".log", StringComparison.InvariantCultureIgnoreCase);
         }
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
@@ -70,7 +78,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
-            List<FileInfo> files = dirInfo.GetFiles("*.clef").ToList();
+            List<FileInfo> files = dirInfo.GetFiles("*.clef").Concat(dirInfo.GetFiles("*.log")).ToList();
             if (!recursive)
                 return files;
             try
