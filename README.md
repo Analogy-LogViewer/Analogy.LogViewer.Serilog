@@ -21,6 +21,8 @@
 
 Serilog Parser for Analogy Log Viewer.
 Supported formatters, for now, is:
+
+#### Compact formatting
 1. [Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
 
    example log:
@@ -32,7 +34,7 @@ Supported formatters, for now, is:
    ```
 ![Main screen](Assets/CompactFormat.jpg)
 
-
+#### Regular Expression Parser
 2. Regular Expression Parser: in this mode you need to define your custom regex to match you log format in the applcation settings.
 
 ![Serilog Settings](Assets/SerilogRegularExpression.jpg)
