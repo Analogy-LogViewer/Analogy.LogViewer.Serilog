@@ -32,9 +32,21 @@ Supported formatters, for now, is:
    ```
 ![Main screen](Assets/CompactFormat.jpg)
 
-2. Regular Expression Parser: in this mode you need to define you custom regex to match you log format in the applcation settings.
+
+2. Regular Expression Parser: in this mode you need to define your custom regex to match you log format in the applcation settings.
+
 ![Serilog Settings](Assets/SerilogRegularExpression.jpg)
 
+for example, with the following regex: "\$(?<Date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},\d{3})+\|+(?<Thread>\d+)+\|(?<Level>\w+)+\|+(?<Source>.*)\|(?<Text>.*)" this example log can be parsed:
+```
+$2020-04-24 13:18:23,207|1|INFO|logsource|My Manager App Starting...
+$2020-04-24 13:28:24,380|1|WARN|files|file not found
+$2020-04-24 13:48:27,193|2|INFO|AppBase|Loading done
+   ```
+ 
+ ![Serilog Settings](Assets/serilogParserExample.jpg)
+ 
+ 
 ## Issues
 - Windows 10 Blocks Zip files by default. Make sure to [unblocked](https://singularlabs.com/tips/how-to-unblock-a-zip-file-on-windows-10/) before unzipping the files.
 
