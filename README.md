@@ -20,10 +20,13 @@
 </p>
 
 Serilog Parser for Analogy Log Viewer.
-Supported formatters, for now, is:
+Supported formatters, for now, are:
+
+1. [Compact formatting](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog#Compact-formatting)
+2. [Regular Expression Parser](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog#regular-expression-parser)
 
 #### Compact formatting
-1. [Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
+[Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
 
    example log:
    ```json
@@ -35,7 +38,7 @@ Supported formatters, for now, is:
 ![Main screen](Assets/CompactFormat.jpg)
 
 #### Regular Expression Parser
-2. Regular Expression Parser: in this mode you need to define your custom regex to match you log format in the applcation settings.
+Regular Expression Parser: in this mode you need to define your custom regex to match you log format in the applcation settings.
 
 ![Serilog Settings](Assets/SerilogRegularExpression.jpg)
 
