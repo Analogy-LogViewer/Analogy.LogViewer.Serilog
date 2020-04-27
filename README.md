@@ -37,15 +37,38 @@ Supported formatters, for now, is:
 
 ![Serilog Settings](Assets/SerilogRegularExpression.jpg)
 
-for example, with the following regex: "\$(?<Date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2},\d{3})+\|+(?<Thread>\d+)+\|(?<Level>\w+)+\|+(?<Source>.*)\|(?<Text>.*)" this example log can be parsed:
+for example, with the above regex: in the screenshot this example log can be parsed:
 ```
 $2020-04-24 13:18:23,207|1|INFO|logsource|My Manager App Starting...
 $2020-04-24 13:28:24,380|1|WARN|files|file not found
 $2020-04-24 13:48:27,193|2|INFO|AppBase|Loading done
    ```
  
- ![Serilog Settings](Assets/serilogParserExample.jpg)
- 
+![Serilog Settings](Assets/serilogParserExample.jpg)
+
+the available tags to use for parsing are:
+
+   ```csharp
+   public enum AnalogyLogMessagePropertyName
+  {
+    Date,
+    ID,
+    Text,
+    Category,
+    Source,
+    Module,
+    MethodName,
+    FileName,
+    User,
+    LineNumber,
+    ProcessID,
+    Thread,
+    Level,
+    Class,
+  }
+ ```
+which corresponding the AnalogyLogMessage fields:
+
  
 ## Issues
 - Windows 10 Blocks Zip files by default. Make sure to [unblocked](https://singularlabs.com/tips/how-to-unblock-a-zip-file-on-windows-10/) before unzipping the files.
