@@ -31,6 +31,10 @@ namespace Analogy.LogViewer.Serilog
             LogParsersSettings.SupportFormats = txtNLogExtension.Text.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 #endif
             LogParsersSettings.Directory = txtbDirectory.Text;
+            Settings.LogsLocation = txtLogsLocation.Text;
+            Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
+            Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            Settings.RegexPatterns = lstbRegularExpressions.Items.Cast<RegexPattern>().ToList();
             UserSettingsManager.UserSettings.Save();
         }
 
