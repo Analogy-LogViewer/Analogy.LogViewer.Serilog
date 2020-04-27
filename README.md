@@ -72,7 +72,7 @@ the available tags to use for parsing are:
     Class,
   }
  ```
-which corresponding the AnalogyLogMessage fields:
+which corresponding to AnalogyLogMessage fields
 
  
 ## Issues
