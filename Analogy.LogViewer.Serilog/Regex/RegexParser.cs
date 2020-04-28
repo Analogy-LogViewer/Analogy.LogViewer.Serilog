@@ -15,7 +15,7 @@ namespace Analogy.LogViewer.Serilog.Regex
         private AnalogyLogMessage _current;
         private RegexPattern _lastUsedPattern;
         private readonly List<AnalogyLogMessage> _messages = new List<AnalogyLogMessage>();
-        private readonly List<RegexPattern> _logPatterns;
+        private List<RegexPattern> _logPatterns;
         private readonly bool updateUIAfterEachParsedLine;
         private IAnalogyLogger Logger { get; }
 
@@ -397,5 +397,6 @@ namespace Analogy.LogViewer.Serilog.Regex
             return _messages;
         }
 
+        public void SetRegexPatterns(List<RegexPattern> patterns) => _logPatterns = patterns;
     }
 }
