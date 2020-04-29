@@ -354,7 +354,7 @@ namespace Analogy.LogViewer.Serilog.Regex
             using (StreamReader reader = File.OpenText(fileName))
             {
                 string line;
-                while ((line = await reader.ReadLineAsync()) != null)
+                while ((line = await reader.ReadLineAsync().ConfigureAwait(false)) != null)
                 {
                     AnalogyLogMessage entry = null;
                     foreach (var logPattern in LogPatterns)
