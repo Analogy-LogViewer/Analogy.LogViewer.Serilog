@@ -98,7 +98,6 @@ namespace Analogy.LogViewer.Serilog
             txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
             lstbRegularExpressions.Items.Clear();
             lstbRegularExpressions.Items.AddRange(logSettings.RegexPatterns.ToArray());
-            txtbDateTimeFormat.Text = logSettings.RegexPatterns.First().DateTimeFormat;
             rbtnCLEF.Checked = logSettings.Format == SerilogFileFormat.CLEF;
             rbRegexFile.Checked = logSettings.Format == SerilogFileFormat.REGEX;
             rbJson.Checked = logSettings.Format == SerilogFileFormat.JSON;
