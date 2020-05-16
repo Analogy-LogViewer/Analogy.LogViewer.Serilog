@@ -59,6 +59,7 @@
             this.btnTest = new System.Windows.Forms.Button();
             this.txtbOpenFileFilters = new System.Windows.Forms.TextBox();
             this.lblOpenfilesFilters = new System.Windows.Forms.Label();
+            this.btnTestFilter = new System.Windows.Forms.Button();
             this.tcSetttings.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbresult.SuspendLayout();
@@ -131,7 +132,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbDirectory.Location = new System.Drawing.Point(197, 76);
             this.txtbDirectory.Name = "txtbDirectory";
-            this.txtbDirectory.Size = new System.Drawing.Size(483, 26);
+            this.txtbDirectory.Size = new System.Drawing.Size(463, 26);
             this.txtbDirectory.TabIndex = 12;
             // 
             // label3
@@ -146,11 +147,11 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(688, 76);
+            this.btnOpenFolder.Location = new System.Drawing.Point(674, 76);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(33, 22);
+            this.btnOpenFolder.Size = new System.Drawing.Size(47, 22);
             this.btnOpenFolder.TabIndex = 13;
-            this.btnOpenFolder.Text = "..";
+            this.btnOpenFolder.Text = "...";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.btnOpenFolder_Click);
             // 
@@ -381,7 +382,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbOpenFileFilters.Location = new System.Drawing.Point(197, 103);
             this.txtbOpenFileFilters.Name = "txtbOpenFileFilters";
-            this.txtbOpenFileFilters.Size = new System.Drawing.Size(524, 26);
+            this.txtbOpenFileFilters.Size = new System.Drawing.Size(463, 26);
             this.txtbOpenFileFilters.TabIndex = 47;
             // 
             // lblOpenfilesFilters
@@ -393,10 +394,22 @@
             this.lblOpenfilesFilters.TabIndex = 46;
             this.lblOpenfilesFilters.Text = "Open file Filter:";
             // 
+            // btnTestFilter
+            // 
+            this.btnTestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTestFilter.Location = new System.Drawing.Point(674, 103);
+            this.btnTestFilter.Name = "btnTestFilter";
+            this.btnTestFilter.Size = new System.Drawing.Size(47, 25);
+            this.btnTestFilter.TabIndex = 48;
+            this.btnTestFilter.Text = "Test";
+            this.btnTestFilter.UseVisualStyleBackColor = true;
+            this.btnTestFilter.Click += new System.EventHandler(this.btnTestFilter_Click);
+            // 
             // SerilogUCSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnTestFilter);
             this.Controls.Add(this.txtbOpenFileFilters);
             this.Controls.Add(this.lblOpenfilesFilters);
             this.Controls.Add(this.tcSetttings);
@@ -457,5 +470,6 @@
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.TextBox txtbOpenFileFilters;
         private System.Windows.Forms.Label lblOpenfilesFilters;
+        private System.Windows.Forms.Button btnTestFilter;
     }
 }

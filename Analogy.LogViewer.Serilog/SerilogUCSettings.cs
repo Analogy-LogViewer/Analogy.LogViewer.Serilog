@@ -152,5 +152,23 @@ namespace Analogy.LogViewer.Serilog
                 lblResult.BackColor = Color.OrangeRed;
             }
         }
+
+        private void btnTestFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog1 = new OpenFileDialog
+                {
+                    Filter = txtbOpenFileFilters.Text,
+                    Title = @"Test Open Files",
+                    Multiselect = true
+                };
+                openFileDialog1.ShowDialog(this);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"Incorrect filter: {exception.Message}", "Invalid filter text", MessageBoxButtons.OK);
+            }
+        }
     }
 }
