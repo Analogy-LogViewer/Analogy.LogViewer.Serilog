@@ -65,6 +65,9 @@
     <None Include="ClefExample1.clef">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="SourceContextTest.clef">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="testJson.clef">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

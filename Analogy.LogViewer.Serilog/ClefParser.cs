@@ -56,6 +56,34 @@ namespace Analogy.LogViewer.Serilog
 
                                 m.Date = evt.Timestamp.DateTime;
                                 m.Text = AnalogySink.output;
+
+                                if (evt.Properties.TryGetValue(global::Serilog.Core.Constants.SourceContextPropertyName, out var sourceContext))
+                                {
+                                    if (sourceContext is ScalarValue scalarValue && scalarValue.Value is string sourceContextString)
+                                    {
+                                        m.Source = sourceContextString;
+                                    }
+                                    else
+                                    {
+                                        m.Source = sourceContext.ToString();
+                                    }
+                                }
+
+                                if (evt.Properties.TryGetValue("ThreadId", out var threadId))
+                                {
+                                    if (threadId is ScalarValue scalarValue)
+                                    {
+                                        if (scalarValue.Value is int intValue)
+                                        {
+                                            m.Thread = intValue;
+                                        }
+                                        else if (scalarValue.Value is long longValue && longValue <= int.MaxValue)
+                                        {
+                                            m.Thread = (int)longValue;
+                                        }
+                                    }
+                                }
+
                                 parsedMessages.Add(m);
                             }
 
