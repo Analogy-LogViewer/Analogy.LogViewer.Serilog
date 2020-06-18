@@ -1,0 +1,2 @@
+{"@t":"2020-06-18T18:03:19.2248275Z","@mt":"Hello, Serilog!","ThreadId":1}
+{"@t":"2020-06-18T18:03:19.3586879Z","@mt":"Contextual Log","SourceContext":"SerilogLogging.Program","ThreadId":1}
