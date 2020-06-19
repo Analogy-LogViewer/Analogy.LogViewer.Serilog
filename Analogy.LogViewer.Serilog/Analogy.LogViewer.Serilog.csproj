@@ -1,66 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
-    <UseWindowsForms>true</UseWindowsForms>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <ApplicationIcon />
-    <StartupObject />
-    <Authors>Lior Banai</Authors>
-    <Description>Analogy Serilog Parser for Compact Formatting (*.clef files) and regex parser</Description>
-    <Copyright>Lior Banai 2020</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Initial Analogy Serilog Parser for Compact Formatting (*.clef files)</PackageReleaseNotes>
-    <PackageIcon>AnalogySerilog.png</PackageIcon>
-    <PackageIconUrl />
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.8</Version>
-    <AssemblyVersion>1.1.8.0</AssemblyVersion>
-    <Company>Analogy.LogViewer</Company>
-    <FileVersion>1.1.8.0</FileVersion>
+	<OutputType>Library</OutputType>
+	<TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
+	<UseWindowsForms>true</UseWindowsForms>
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	  <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<ApplicationIcon />
+	<StartupObject />
+	<Authors>Lior Banai</Authors>
+	<Description>Analogy Serilog Parser for Compact Formatting (*.clef files) and regex parser</Description>
+	<Copyright>Lior Banai 2020</Copyright>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageReleaseNotes>Analogy Serilog Parser for Compact Formatting (*.clef files)</PackageReleaseNotes>
+	<PackageIcon>AnalogySerilog.png</PackageIcon>
+	<PackageIconUrl />
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<Version>1.1.9</Version>
+	<AssemblyVersion>1.1.9.0</AssemblyVersion>
+	<Company>Analogy.LogViewer</Company>
+	<FileVersion>1.1.9.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Analogy.DataProviders.Extensions" Version="1.1.4" />
-    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.2.8" />
-    <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Serilog" Version="2.9.0" />
+	  <PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+	  <PackageReference Include="Analogy.DataProviders.Extensions" Version="1.1.4" />
+	<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.2.8" />
+	<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	<PackageReference Include="Serilog" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+	<Compile Update="Properties\Resources.Designer.cs">
+	  <DesignTime>True</DesignTime>
+	  <AutoGen>True</AutoGen>
+	  <DependentUpon>Resources.resx</DependentUpon>
+	</Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+	<EmbeddedResource Update="Properties\Resources.resx">
+	  <Generator>ResXFileCodeGenerator</Generator>
+	  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Resources\AnalogySerilog.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+	<None Include="Resources\AnalogySerilog.png">
+	  <Pack>True</Pack>
+	  <PackagePath></PackagePath>
+	</None>
   </ItemGroup>
 
 </Project>
