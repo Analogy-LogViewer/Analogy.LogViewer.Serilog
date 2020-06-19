@@ -1,7 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.CompactClef;
 using Serilog;
-using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,61 +28,7 @@ namespace Analogy.LogViewer.Serilog
                             while (reader.TryRead(out var evt))
                             {
                                 analogy.Write(evt);
-                                AnalogyLogMessage m = new AnalogyLogMessage();
-                                switch (evt.Level)
-                                {
-                                    case LogEventLevel.Verbose:
-                                        m.Level = AnalogyLogLevel.Verbose;
-                                        break;
-                                    case LogEventLevel.Debug:
-                                        m.Level = AnalogyLogLevel.Debug;
-                                        break;
-                                    case LogEventLevel.Information:
-                                        m.Level = AnalogyLogLevel.Event;
-                                        break;
-                                    case LogEventLevel.Warning:
-                                        m.Level = AnalogyLogLevel.Warning;
-                                        break;
-                                    case LogEventLevel.Error:
-                                        m.Level = AnalogyLogLevel.Error;
-                                        break;
-                                    case LogEventLevel.Fatal:
-                                        m.Level = AnalogyLogLevel.Critical;
-                                        break;
-                                    default:
-                                        throw new ArgumentOutOfRangeException();
-                                }
-
-                                m.Date = evt.Timestamp.DateTime;
-                                m.Text = AnalogySink.output;
-
-                                if (evt.Properties.TryGetValue(global::Serilog.Core.Constants.SourceContextPropertyName, out var sourceContext))
-                                {
-                                    if (sourceContext is ScalarValue scalarValue && scalarValue.Value is string sourceContextString)
-                                    {
-                                        m.Source = sourceContextString;
-                                    }
-                                    else
-                                    {
-                                        m.Source = sourceContext.ToString();
-                                    }
-                                }
-
-                                if (evt.Properties.TryGetValue("ThreadId", out var threadId))
-                                {
-                                    if (threadId is ScalarValue scalarValue)
-                                    {
-                                        if (scalarValue.Value is int intValue)
-                                        {
-                                            m.Thread = intValue;
-                                        }
-                                        else if (scalarValue.Value is long longValue && longValue <= int.MaxValue)
-                                        {
-                                            m.Thread = (int)longValue;
-                                        }
-                                    }
-                                }
-
+                                AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
                                 parsedMessages.Add(m);
                             }
 

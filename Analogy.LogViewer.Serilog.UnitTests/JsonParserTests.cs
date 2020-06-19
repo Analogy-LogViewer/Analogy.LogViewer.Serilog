@@ -9,7 +9,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
     public class JsonParserTests
     {
         [TestMethod]
-        public async Task ClefParserTest()
+        public async Task ClefJsonParserTest()
         {
             var p = new JsonParser();
             CancellationTokenSource cts = new CancellationTokenSource();

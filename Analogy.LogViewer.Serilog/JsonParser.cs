@@ -3,7 +3,6 @@ using Analogy.LogViewer.Serilog.CompactClef;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using Serilog.Events;
 using Serilog.Formatting;
 using System;
 using System.Collections.Generic;
@@ -66,72 +65,17 @@ namespace Analogy.LogViewer.Serilog
             });
             return messages;
         }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private AnalogyLogMessage ParserJObject(JObject jo, ILogger analogy)
         {
             var evt = LogEventReader.ReadFromJObject(jo);
             {
                 analogy.Write(evt);
-                AnalogyLogMessage m = new AnalogyLogMessage();
-                switch (evt.Level)
-                {
-                    case LogEventLevel.Verbose:
-                        m.Level = AnalogyLogLevel.Verbose;
-                        break;
-                    case LogEventLevel.Debug:
-                        m.Level = AnalogyLogLevel.Debug;
-                        break;
-                    case LogEventLevel.Information:
-                        m.Level = AnalogyLogLevel.Event;
-                        break;
-                    case LogEventLevel.Warning:
-                        m.Level = AnalogyLogLevel.Warning;
-                        break;
-                    case LogEventLevel.Error:
-                        m.Level = AnalogyLogLevel.Error;
-                        break;
-                    case LogEventLevel.Fatal:
-                        m.Level = AnalogyLogLevel.Critical;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                return CommonParser.ParseLogEventProperties(evt);
 
-                m.Date = evt.Timestamp.DateTime;
-                m.Text = AnalogySink.output;
-
-                return m;
             }
 
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private AnalogyLogLevel ParseEvent(string evt)
-        {
-
-            switch (evt)
-            {
-                case "Verbose":
-                    return AnalogyLogLevel.Verbose;
-
-                case "Debug":
-                    return AnalogyLogLevel.Debug;
-
-                case "Information":
-                    return AnalogyLogLevel.Event;
-
-                case "Warning":
-                    return AnalogyLogLevel.Warning;
-
-                case "Error":
-                    return AnalogyLogLevel.Error;
-
-                case "Fatal":
-                    return AnalogyLogLevel.Critical;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
     }
 }
