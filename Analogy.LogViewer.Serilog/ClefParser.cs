@@ -4,6 +4,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +23,8 @@ namespace Analogy.LogViewer.Serilog
                         .WriteTo.Analogy()
                         .CreateLogger())
                     {
-                        using (var clef = File.OpenText(fileName))
+                        using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        using (var clef = new StreamReader(fileStream, encoding: Encoding.UTF8))
                         {
                             var reader = new LogEventReader(clef);
                             while (reader.TryRead(out var evt))

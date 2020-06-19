@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,21 +29,25 @@ namespace Analogy.LogViewer.Serilog
                         .WriteTo.Analogy()
                         .CreateLogger())
                     {
-                        string json = File.ReadAllText(fileName);
-                        var data = JsonConvert.DeserializeObject(json);
-                        if (data is JObject jo)
+                        using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                         {
-                            var m = ParserJObject(jo, analogy);
-                            parsedMessages.Add(m);
-                        }
-                        else if (data is JArray arr)
-                        {
-                            foreach (var obj in arr.ToList())
+                            var json = streamReader.ReadToEnd();
+                            var data = JsonConvert.DeserializeObject(json);
+                            if (data is JObject jo)
                             {
-                                if (obj is JObject j)
+                                var m = ParserJObject(jo, analogy);
+                                parsedMessages.Add(m);
+                            }
+                            else if (data is JArray arr)
+                            {
+                                foreach (var obj in arr.ToList())
                                 {
-                                    var m = ParserJObject(j, analogy);
-                                    parsedMessages.Add(m);
+                                    if (obj is JObject j)
+                                    {
+                                        var m = ParserJObject(j, analogy);
+                                        parsedMessages.Add(m);
+                                    }
                                 }
                             }
                         }
