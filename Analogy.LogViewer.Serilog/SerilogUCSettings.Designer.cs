@@ -170,7 +170,6 @@
             // rbJson
             // 
             this.rbJson.AutoSize = true;
-            this.rbJson.Enabled = false;
             this.rbJson.Location = new System.Drawing.Point(87, 51);
             this.rbJson.Name = "rbJson";
             this.rbJson.Size = new System.Drawing.Size(153, 22);

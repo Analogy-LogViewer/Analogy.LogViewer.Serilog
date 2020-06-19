@@ -27,7 +27,8 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 ? UserSettingsManager.UserSettings.Settings.Directory
                 : Environment.CurrentDirectory;
         private ClefParser ClefParser { get; }
-        private RegexParser Parser { get; set; }
+        private JsonParser JsonParser { get; }
+        private RegexParser RegexParser { get; set; }
 
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -38,7 +39,8 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public OfflineDataProvider()
         {
             ClefParser = new ClefParser();
-            Parser = new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
+            JsonParser=new JsonParser();
+            RegexParser = new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
                 LogManager.Instance);
 
         }
@@ -51,10 +53,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                     case SerilogFileFormat.CLEF:
                         return await ClefParser.Process(fileName, token, messagesHandler);
                     case SerilogFileFormat.JSON:
-                        return new List<AnalogyLogMessage>(0);
+                        return await JsonParser.Process(fileName, token, messagesHandler);
                     case SerilogFileFormat.REGEX:
-                        Parser.SetRegexPatterns(UserSettingsManager.UserSettings.Settings.RegexPatterns);
-                        return await Parser.ParseLog(fileName, token, messagesHandler);
+                        RegexParser.SetRegexPatterns(UserSettingsManager.UserSettings.Settings.RegexPatterns);
+                        return await RegexParser.ParseLog(fileName, token, messagesHandler);
                 }
             }
             return new List<AnalogyLogMessage>(0);

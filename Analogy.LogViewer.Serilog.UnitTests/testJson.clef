@@ -49,6 +49,9 @@
       "198441851"
     ],
     "MachineName": "MY-MACHINE",
+    "ProcessId": 11,
+    "ProcessName": "My process",
+    "ThreadId": 1,
     "EnvironmentUserName": "WORKGROUP\\SYSTEM",
     "ExceptionDetail": {
       "HResult": -2146233087,
