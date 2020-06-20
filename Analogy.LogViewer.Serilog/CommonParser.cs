@@ -89,7 +89,14 @@ namespace Analogy.LogViewer.Serilog
                     }
                 }
             }
-
+            if (evt.Properties.TryGetValue(Constants.MachineName, out var machineName))
+            {
+                if (machineName is ScalarValue scalarValue &&
+                    scalarValue.Value is string machineNameString)
+                {
+                    m.MachineName = machineNameString;
+                }
+            }
             return m;
         }
     }
