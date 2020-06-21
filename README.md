@@ -70,7 +70,7 @@ the available tags to use for parsing are:
     Thread,
     Level,
     Class,
-    MachineName
+    MachineName,
   }
  ```
 which corresponding to AnalogyLogMessage fields
