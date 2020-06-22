@@ -97,6 +97,14 @@ namespace Analogy.LogViewer.Serilog
                     m.MachineName = machineNameString;
                 }
             }
+            if (evt.Properties.TryGetValue(Constants.EnvironmentUserName, out var environmentUserName))
+            {
+                if (environmentUserName is ScalarValue scalarValue &&
+                    scalarValue.Value is string environmentUserNameString)
+                {
+                    m.User = environmentUserNameString;
+                }
+            }
             return m;
         }
     }

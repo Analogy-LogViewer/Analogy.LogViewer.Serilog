@@ -8,6 +8,6 @@
         public static string ProcessId { get; } = "ProcessId";
         public static string ProcessName { get; } = "ProcessName";
         public static string MachineName { get; } = "MachineName";
-
+        public static string EnvironmentUserName { get; } = "EnvironmentUserName";
     }
 }
