@@ -67,11 +67,11 @@ namespace Analogy.LogViewer.Serilog
                 {
                     if (scalarValue.Value is int intValue)
                     {
-                        m.Thread = intValue;
+                        m.ThreadId = intValue;
                     }
                     else if (scalarValue.Value is long longValue && longValue <= int.MaxValue)
                     {
-                        m.Thread = (int)longValue;
+                        m.ThreadId = (int)longValue;
                     }
                 }
             }
@@ -81,11 +81,11 @@ namespace Analogy.LogViewer.Serilog
                 {
                     if (scalarValue.Value is int intValue)
                     {
-                        m.ProcessID = intValue;
+                        m.ProcessId = intValue;
                     }
                     else if (scalarValue.Value is long longValue && longValue <= int.MaxValue)
                     {
-                        m.ProcessID = (int)longValue;
+                        m.ProcessId = (int)longValue;
                     }
                 }
             }
