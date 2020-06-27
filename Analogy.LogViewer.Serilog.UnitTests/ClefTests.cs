@@ -36,24 +36,22 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             var firstEvent = messages.ElementAt(0);
             Assert.AreEqual("Hello, Serilog!", firstEvent.Text);
             Assert.AreEqual(string.Empty, firstEvent.Source);
-            Assert.AreEqual(1, firstEvent.Thread);
+            Assert.AreEqual(1, firstEvent.ThreadId);
             Assert.IsNotNull(firstEvent.Module);
             Assert.IsNotNull(firstEvent.FileName);
             Assert.IsNotNull(firstEvent.Category);
             Assert.IsNotNull(firstEvent.User);
             Assert.IsNotNull(firstEvent.MethodName);
-            Assert.IsNotNull(firstEvent.Parameters);
             // The second event should have a source context
             var secondEvent = messages.ElementAt(1);
             Assert.AreEqual("Contextual Log", secondEvent.Text);
             Assert.AreEqual("SerilogLogging.Program", secondEvent.Source);
-            Assert.AreEqual(1, secondEvent.Thread);
+            Assert.AreEqual(1, secondEvent.ThreadId);
             Assert.IsNotNull(secondEvent.Module);
             Assert.IsNotNull(secondEvent.FileName);
             Assert.IsNotNull(secondEvent.Category);
             Assert.IsNotNull(secondEvent.User);
             Assert.IsNotNull(secondEvent.MethodName);
-            Assert.IsNotNull(secondEvent.Parameters);
         }
     }
 }
