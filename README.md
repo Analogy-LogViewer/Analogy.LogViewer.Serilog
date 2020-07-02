@@ -66,14 +66,17 @@ the available tags to use for parsing are:
     FileName,
     User,
     LineNumber,
-    ProcessID,
-    Thread,
+    ProcessId,
+    ThreadId,
     Level,
     Class,
     MachineName,
   }
  ```
-which corresponding to AnalogyLogMessage fields
+which corresponding to AnalogyLogMessage fields. Saying that, a dynamic way to read properties is to populate the AddtionalInformation property to show new columns at run time like the following image:
+![Dynamics Columns](Assets/DynamicsColumns.jpg)
+
+
 
  
 ## Issues
