@@ -1,4 +1,5 @@
-﻿using Analogy.Interfaces;
+﻿using System.Collections.Generic;
+using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.Managers;
 using Serilog.Events;
 
@@ -10,6 +11,7 @@ namespace Analogy.LogViewer.Serilog
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
+
             switch (evt.Level)
             {
                 case LogEventLevel.Verbose:
@@ -104,6 +106,24 @@ namespace Analogy.LogViewer.Serilog
                 {
                     m.User = environmentUserNameString;
                 }
+            }
+            if (evt.Properties.TryGetValue(Constants.User, out var environmentUser))
+            {
+                if (environmentUser is ScalarValue scalarValue &&
+                    scalarValue.Value is string environmentUserString)
+                {
+                    m.User = environmentUserString;
+                }
+                if (environmentUser is StructureValue structure)
+
+                {
+                    m.User = structure.ToString();
+                }
+            }
+            m.AdditionalInformation = new Dictionary<string, string>();
+            foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
+            {
+                m.AdditionalInformation.Add(property.Key, property.Value.ToString());
             }
             return m;
         }
