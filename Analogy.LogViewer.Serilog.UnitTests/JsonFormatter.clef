@@ -1,0 +1,1 @@
+{"Timestamp":"2016-06-07T13:44:57.8532799+10:00","Level":"Information","MessageTemplate":"Hello, {@User}, {N:x8} at {Now}","Properties":{"User":{"Name":"nblumhardt","Tags":[1,2,3]},"N":123,"Now":"2016-06-07T13:44:57.8532799+10:00"},"Renderings":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
