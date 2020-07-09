@@ -14,14 +14,14 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public Image GetLargeImage(Guid analogyComponentId)
         {
             if (analogyComponentId == PrimaryFactory.Id)
-                return Resources.AnalogySerilog32x32;
+                return Resources.Serilog_icon32x32;
             return null;
         }
 
         public Image GetSmallImage(Guid analogyComponentId)
         {
             if (analogyComponentId == PrimaryFactory.Id)
-                return Resources.AnalogySerilog16x16;
+                return Resources.Serilog_icon;
             return null;
         }
 
