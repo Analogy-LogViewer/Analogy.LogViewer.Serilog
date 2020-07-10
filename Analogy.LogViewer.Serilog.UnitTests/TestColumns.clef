@@ -1,0 +1,4 @@
+{"@t":"2020-06-26T14:21:34.7233612Z","@mt":"x","@l":"Error", "MachineName":"Test", "SourceContext":"Program"}
+{"@t":"2020-06-30T18:49:18.2133753Z","@mt":"y", "CustomProperty":"Custom Value"}
+{"@t":"2020-06-30T18:49:18.2342331Z","@mt":"z","@l":"Error", "ThreadId":42, "ProcessId":876}
+{"@t":"2020-06-30T18:49:18.2342331Z","@mt":"z","@l":"Error", "User":"Me", "CustomProperty2":"Another Value"}

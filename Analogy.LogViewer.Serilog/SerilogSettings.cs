@@ -17,11 +17,13 @@ namespace Analogy.LogViewer.Serilog
         public List<RegexPattern> RegexPatterns { get; set; }
         public string Directory { get; set; }
         public SerilogFileFormat Format { get; set; }
+        public List<string> IgnoredAttributes { get; set; }
 
         public SerilogSettings()
         {
             Format = SerilogFileFormat.CLEF;
             Directory = string.Empty;
+            IgnoredAttributes = new List<string>() { "N" };
             FileOpenDialogFilters = "All Supported formats (*.Clef;*.log)|*.clef;*.log|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log";
             SupportFormats = new List<string> { "*.Clef", "*.log" };
             RegexPatterns = new List<RegexPattern>();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.Managers;
 using Serilog.Events;
@@ -7,7 +8,6 @@ namespace Analogy.LogViewer.Serilog
 {
     public static class CommonParser
     {
-
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
@@ -123,6 +123,15 @@ namespace Analogy.LogViewer.Serilog
             m.AdditionalInformation = new Dictionary<string, string>();
             foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
             {
+                if (property.Key.Equals(Constants.EnvironmentUserName) ||
+                    property.Key.Equals(Constants.Source) ||
+                    property.Key.Equals(Constants.ThreadId) ||
+                    property.Key.Equals(Constants.ProcessName) ||
+                    property.Key.Equals(Constants.MachineName) ||
+                    property.Key.Equals(Constants.User) ||
+                    property.Key.Equals(Constants.ProcessId) ||
+                    UserSettingsManager.UserSettings.Settings.IgnoredAttributes.Contains(property.Key))
+                    continue;
                 m.AdditionalInformation.Add(property.Key, property.Value.ToString());
             }
             return m;

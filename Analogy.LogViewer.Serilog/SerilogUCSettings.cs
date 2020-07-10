@@ -35,6 +35,7 @@ namespace Analogy.LogViewer.Serilog
             Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             Settings.RegexPatterns = lstbRegularExpressions.Items.Count > 0 ? lstbRegularExpressions.Items.Cast<RegexPattern>().ToList() : new List<RegexPattern>();
+            Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
             Settings.Format = rbtnCLEF.Checked
                 ? SerilogFileFormat.CLEF
                 : (rbRegexFile.Checked ? SerilogFileFormat.REGEX : SerilogFileFormat.JSON);
@@ -98,6 +99,8 @@ namespace Analogy.LogViewer.Serilog
             txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
             lstbRegularExpressions.Items.Clear();
             lstbRegularExpressions.Items.AddRange(logSettings.RegexPatterns.ToArray());
+            lstbIgnoreColumn.Items.Clear();
+            lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
             rbtnCLEF.Checked = logSettings.Format == SerilogFileFormat.CLEF;
             rbRegexFile.Checked = logSettings.Format == SerilogFileFormat.REGEX;
             rbJson.Checked = logSettings.Format == SerilogFileFormat.JSON;
@@ -168,6 +171,20 @@ namespace Analogy.LogViewer.Serilog
             catch (Exception exception)
             {
                 MessageBox.Show($"Incorrect filter: {exception.Message}", "Invalid filter text", MessageBoxButtons.OK);
+            }
+        }
+
+        private void btnIgnoreColumn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtbIgnoreColumn.Text)) return;
+            lstbIgnoreColumn.Items.Add(txtbIgnoreColumn.Text);
+        }
+
+        private void btnDeleteIgnoreColumn_Click(object sender, EventArgs e)
+        {
+            if (lstbIgnoreColumn.SelectedItem is string ignore)
+            {
+                lstbIgnoreColumn.Items.Remove(lstbIgnoreColumn.SelectedItem);
             }
         }
     }
