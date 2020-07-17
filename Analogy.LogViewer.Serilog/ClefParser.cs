@@ -4,6 +4,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,20 +25,45 @@ namespace Analogy.LogViewer.Serilog
                         .CreateLogger())
                     {
                         using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                        using (var clef = new StreamReader(fileStream, encoding: Encoding.UTF8))
                         {
-                            var reader = new LogEventReader(clef);
-                            while (reader.TryRead(out var evt))
+                            if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
                             {
-                                analogy.Write(evt);
-                                AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
-                                parsedMessages.Add(m);
-                            }
+                                using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                                {
+                                    using (var clef = new StreamReader(gzStream, encoding: Encoding.UTF8))
+                                    {
+                                        var reader = new LogEventReader(clef);
+                                        while (reader.TryRead(out var evt))
+                                        {
+                                            analogy.Write(evt);
+                                            AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                            parsedMessages.Add(m);
+                                        }
 
-                            messagesHandler.AppendMessages(parsedMessages, fileName);
-                            return parsedMessages;
+                                        messagesHandler.AppendMessages(parsedMessages, fileName);
+                                        return parsedMessages;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                using (var clef = new StreamReader(fileStream, encoding: Encoding.UTF8))
+                                {
+                                    var reader = new LogEventReader(clef);
+                                    while (reader.TryRead(out var evt))
+                                    {
+                                        analogy.Write(evt);
+                                        AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                        parsedMessages.Add(m);
+                                    }
+
+                                    messagesHandler.AppendMessages(parsedMessages, fileName);
+                                    return parsedMessages;
+                                }
+                            }
                         }
                     }
+
                 }
                 catch (Exception e)
                 {
