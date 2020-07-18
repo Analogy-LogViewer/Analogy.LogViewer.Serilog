@@ -50,7 +50,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        configuration: [Release, Debug]
 
     runs-on: windows-latest  # For a list of available runner types, refer to 
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -74,14 +74,40 @@ jobs:
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
-
-    # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
-
+    
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
+    
+    # Buid the application 
+    - name: Build the application
+      run: msbuild $env:Solution_Name /t:Rebuild /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+    # Execute all unit tests in the solution
+    - name: Execute unit tests
+      run: dotnet test
 
+    # Publish Artifacts 
+    - name: 'Publish Artifacts'   
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: 'artifactory'
+        path: ./Analogy.LogViewer.Serilog/bin/${{ matrix.configuration }}
+  push-nuget:
+    name: 'Push NuGet Packages'
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: 'Download Artifact'
+        uses: actions/download-artifact@v1
+        with:
+          name: 'artifactory'
+      - name: 'Dotnet NuGet Push'
+        run: |
+          Get-ChildItem .\artifactory -Filter *.*nupkg |
+          Where-Object { !$_.Name.Contains('preview') } |
+          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+        shell: pwsh
