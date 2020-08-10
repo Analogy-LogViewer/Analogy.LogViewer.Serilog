@@ -20,10 +20,10 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.2.5</Version>
-		<AssemblyVersion>1.2.5.0</AssemblyVersion>
+		<Version>1.2.5.1</Version>
+		<AssemblyVersion>1.2.5.1</AssemblyVersion>
 		<Company>Analogy.LogViewer</Company>
-		<FileVersion>1.2.5.0</FileVersion>
+		<FileVersion>1.2.5.1</FileVersion>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 
