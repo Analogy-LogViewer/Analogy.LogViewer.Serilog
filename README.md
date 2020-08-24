@@ -1,4 +1,4 @@
-# Analogy Serilog Parser   <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
+# Analogy Serilog Parser   [![Nuget](https://img.shields.io/nuget/dt/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/) <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
 
 <p align="center">
 
@@ -21,6 +21,11 @@
 </p>
 
 Serilog Parser for Analogy Log Viewer.
+| Nuget   |      Version      |  Description |
+|----------|:-------------:|------|
+| [Analogy.LogViewer.Serilog](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog) | Serilog Extension for Analogy Log viewer (this package) |
+| [Analogy.LogViewer.Serilog.Sinks](https://www.nuget.org/packages/Analogy.LogViewer.Serilog.Sinks/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog.Sinks)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog.Sinks) | Serilog Sink for sending logs to Analogy Log server |
+
 Supported formatters, for now, are:
 
 1. [Compact formatting](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog#Compact-formatting)
