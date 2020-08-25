@@ -1,4 +1,4 @@
-# Analogy Serilog Parser   [![Nuget](https://img.shields.io/nuget/dt/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/) <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
+# Analogy LogViewer Serilog Extensions  [![Nuget](https://img.shields.io/nuget/dt/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/) <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
 
 <p align="center">
 
