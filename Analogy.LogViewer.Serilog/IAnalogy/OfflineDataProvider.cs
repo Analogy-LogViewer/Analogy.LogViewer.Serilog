@@ -74,7 +74,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             foreach (string pattern in UserSettingsManager.UserSettings.Settings.SupportFormats)
             {
-                if (PatternMatcher.StrictMatchPattern(pattern, fileName))
+                if (CommonUtilities.Files.FilesPatternMatcher.StrictMatchPattern(pattern, fileName))
                     return true;
             }
             return false;
