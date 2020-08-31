@@ -3,6 +3,7 @@ using Analogy.LogServer.Clients;
 using Serilog.Core;
 using Serilog.Events;
 using System;
+using System.Collections.Generic;
 
 namespace Analogy.LogViewer.Serilog.Sinks
 {
@@ -21,7 +22,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
 
             var alm = ParseLogEventProperties(logEvent, in _formatProvider);
             logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, alm.Category, alm.MachineName, alm.User,
-                alm.Module, alm.ProcessId, alm.ThreadId, alm.MethodName, alm.LineNumber, alm.FileName);
+                alm.Module, alm.ProcessId, alm.ThreadId, null, alm.MethodName, alm.LineNumber, alm.FileName);
         }
 
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt, in IFormatProvider formatProvider)
