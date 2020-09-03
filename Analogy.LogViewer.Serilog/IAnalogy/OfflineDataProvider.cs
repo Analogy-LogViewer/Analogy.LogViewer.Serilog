@@ -13,7 +13,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class OfflineDataProvider : IAnalogyOfflineDataProvider
     {
-        public Guid ID { get; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
+        public Guid Id { get; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
+        public Image LargeImage => null;
+        public Image SmallImage => null;
+
         public string OptionalTitle { get; } = "Serilog offline reader";
         public bool CanSaveToLogFile { get; } = false;
         public string FileOpenDialogFilters => UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
@@ -39,7 +42,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public OfflineDataProvider()
         {
             ClefParser = new ClefParser();
-            JsonParser=new JsonParser();
+            JsonParser = new JsonParser();
             RegexParser = new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
                 LogManager.Instance);
 
