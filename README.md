@@ -1,15 +1,16 @@
-# Analogy Serilog Parser   <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
+# Analogy LogViewer Serilog Extensions  [![Nuget](https://img.shields.io/nuget/dt/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/) <img src="./Assets/AnalogySerilog.png" align="right" width="155px" height="155px">
 
 <p align="center">
 
 [![Gitter](https://badges.gitter.im/Analogy-LogViewer/community.svg)](https://gitter.im/Analogy-LogViewer/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![Build Status](https://dev.azure.com/Analogy-LogViewer/Analogy%20Log%20Viewer/_apis/build/status/Analogy-LogViewer.Analogy.LogViewer.Serilog?branchName=master)](https://dev.azure.com/Analogy-LogViewer/Analogy%20Log%20Viewer/_build/latest?definitionId=15&branchName=master) ![.NET Core Desktop](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/workflows/.NET%20Core%20Desktop/badge.svg)
- <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/issues">
-    <img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="Issues"/>
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Analogy-LogViewer/Analogy.LogViewer.Serilog)](https://dependabot.com)
+<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/issues">
+    <img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.Serilog"  alt="Issues" />
 </a>
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/Analogy-LogViewer/Analogy.LogViewer.Serilog)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/blob/master/LICENSE.md">
     <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="License"/>
 </a>
-
  [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/releases">
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.Serilog" img alt="Latest Release"/>
@@ -20,10 +21,16 @@
 </p>
 
 Serilog Parser for Analogy Log Viewer.
+| Nuget   |      Version      |  Description |
+|----------|:-------------:|------|
+| [Analogy.LogViewer.Serilog](https://www.nuget.org/packages/Analogy.LogViewer.Serilog/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog) | Serilog Extension for Analogy Log viewer (this package) |
+| [Analogy.LogViewer.Serilog.Sinks](https://www.nuget.org/packages/Analogy.LogViewer.Serilog.Sinks/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog.Sinks)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog.Sinks) | Serilog Sink for sending logs to Analogy Log server |
+
 Supported formatters, for now, are:
 
 1. [Compact formatting](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog#Compact-formatting)
 2. [Regular Expression Parser](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog#regular-expression-parser)
+3. [Real Time Sink](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog#Real-Time-Sink)
 
 #### Compact formatting
 [Compact formatting](https://github.com/serilog/serilog-formatting-compact). The initial version is based on [this project](https://github.com/serilog/serilog-formatting-compact-reader)
@@ -77,6 +84,19 @@ which corresponding to AnalogyLogMessage fields. Saying that, a dynamic way to r
 ![Dynamics Columns](Assets/DynamicsColumns.jpg)
 
 
+#### Real Time Sink
+
+There is a windows GRPC Service for Sending log messages at https://github.com/Analogy-LogViewer/Analogy.LogViewer.gRPC.
+Analogy Log Viewer can read back those messages using the following custom Serilog Sink.
+
+
+The following modules exists:
+| Nuget   |      Version      |  Description |
+|----------|:-------------:|------|
+| [Analogy.LogViewer.gRPC](https://www.nuget.org/packages/Analogy.LogViewer.gRPC/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.gRPC)](https://www.nuget.org/packages/Analogy.LogViewer.gRPC/) | Primary Analogy Log Viewer grRPC providers |
+| [Analogy.LogServer](https://www.nuget.org/packages/Analogy.LogServer/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogServer)](https://www.nuget.org/packages/Analogy.LogServer/) | A windows Service for receiving logs |
+| [Analogy.LogServer.Clients](https://www.nuget.org/packages/Analogy.LogServer.Clients/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogServer.Clients)](https://www.nuget.org/packages/Analogy.LogServer.Clients) | gRPC client to pull back messages from Analogy Service |
+| [Analogy.LogViewer.Serilog.Sinks](https://www.nuget.org/packages/Analogy.LogViewer.Serilog.Sinks/) |   [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Serilog.Sinks)](https://www.nuget.org/packages/Analogy.LogViewer.Serilog.Sinks) | Serilog Sink for sending logs to Analogy Log server |
 
  
 ## Issues
