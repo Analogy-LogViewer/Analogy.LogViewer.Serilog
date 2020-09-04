@@ -20,16 +20,16 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.2.5.4</Version>
-		<AssemblyVersion>1.2.5.4</AssemblyVersion>
+		<Version>1.2.5.5</Version>
+		<AssemblyVersion>1.2.5.5</AssemblyVersion>
 		<Company>Analogy.LogViewer</Company>
-		<FileVersion>1.2.5.4</FileVersion>
+		<FileVersion>1.2.5.5</FileVersion>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="1.0.1" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.4.6" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="1.0.2" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.4.7" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

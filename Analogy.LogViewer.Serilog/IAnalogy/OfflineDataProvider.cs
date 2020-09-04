@@ -13,11 +13,11 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class OfflineDataProvider : IAnalogyOfflineDataProvider
     {
-        public Guid Id { get; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
-        public Image LargeImage => null;
-        public Image SmallImage => null;
+        public Guid Id { get; set; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
+        public Image LargeImage { get; set; } = null;
+        public Image SmallImage { get; set; } = null;
 
-        public string OptionalTitle { get; } = "Serilog offline reader";
+        public string OptionalTitle { get; set; } = "Serilog offline reader";
         public bool CanSaveToLogFile { get; } = false;
         public string FileOpenDialogFilters => UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
         public string FileSaveDialogFilters { get; } = string.Empty;
