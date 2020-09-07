@@ -29,7 +29,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Analogy.CommonUtilities" Version="1.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.4.7" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.4.8" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
