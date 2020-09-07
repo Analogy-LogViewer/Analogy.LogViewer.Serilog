@@ -2,6 +2,8 @@
 using Analogy.Interfaces.Factories;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using Analogy.LogViewer.Serilog.Properties;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
@@ -13,5 +15,9 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = ChangeLogList.GetChangeLog();
         public IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
         public string About { get; set; } = "Serilog Parser for Analogy Log Viewer";
+        public Image SmallImage { get; set; } = Resources.AnalogySerilog16x16;
+        public Image LargeImage { get; set; } = Resources.AnalogySerilog32x32;
+
+
     }
 }
