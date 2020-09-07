@@ -28,7 +28,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="1.0.2" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="1.0.3" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.4.7" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
@@ -67,13 +67,13 @@
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 	  <PackageReference Include="Analogy.CommonUtilities">
-	    <Version>1.0.0</Version>
+	    <Version>1.0.3</Version>
 	  </PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
 	  <PackageReference Include="Analogy.CommonUtilities">
-	    <Version>1.0.0</Version>
+	    <Version>1.0.3</Version>
 	  </PackageReference>
 	</ItemGroup>
 
