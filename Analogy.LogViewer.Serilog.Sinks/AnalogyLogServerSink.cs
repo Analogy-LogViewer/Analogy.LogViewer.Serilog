@@ -38,7 +38,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
                     m.Level = AnalogyLogLevel.Debug;
                     break;
                 case LogEventLevel.Information:
-                    m.Level = AnalogyLogLevel.Event;
+                    m.Level = AnalogyLogLevel.Information;
                     break;
                 case LogEventLevel.Warning:
                     m.Level = AnalogyLogLevel.Warning;
