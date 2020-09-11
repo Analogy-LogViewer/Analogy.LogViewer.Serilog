@@ -10,8 +10,8 @@ namespace Analogy.LogViewer.Serilog.Managers
         private IAnalogyLogger Logger { get; set; }
 
         public void SetLogger(IAnalogyLogger logger) => Logger = logger;
-        public void LogEvent(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
-            => Logger.LogEvent(message, source, memberName, lineNumber, filePath);
+        public void LogInformation(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
+            => Logger.LogInformation(message, source, memberName, lineNumber, filePath);
 
         public void LogWarning(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
             => Logger.LogWarning(message, source, memberName, lineNumber, filePath);
