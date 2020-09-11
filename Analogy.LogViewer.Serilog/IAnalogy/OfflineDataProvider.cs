@@ -31,7 +31,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 : Environment.CurrentDirectory;
         private ClefParser ClefParser { get; }
         private JsonParser JsonParser { get; }
-        private RegexParser RegexParser { get; set; }
+        private Regex.RegexParser RegexParser { get; set; }
 
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -43,7 +43,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             ClefParser = new ClefParser();
             JsonParser = new JsonParser();
-            RegexParser = new RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
+            RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
                 LogManager.Instance);
 
         }

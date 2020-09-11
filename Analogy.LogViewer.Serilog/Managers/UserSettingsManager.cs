@@ -29,7 +29,7 @@ namespace Analogy.LogViewer.Serilog.Managers
                 }
                 catch (Exception ex)
                 {
-                    LogManager.Instance.LogException(ex, "Analogy Serilog Parser", "Error loading user setting file");
+                    LogManager.Instance.LogException("Error loading user setting file",ex, "Analogy Serilog Parser");
                     Settings = new SerilogSettings();
 
                 }
@@ -49,7 +49,7 @@ namespace Analogy.LogViewer.Serilog.Managers
             }
             catch (Exception e)
             {
-                LogManager.Instance.LogException(e, "Analogy Serilog Parser", "Error saving settings: " + e.Message);
+                LogManager.Instance.LogException("Error saving settings: " + e.Message,e, "Analogy Serilog Parser" );
             }
 
 

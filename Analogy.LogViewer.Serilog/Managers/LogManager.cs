@@ -10,42 +10,25 @@ namespace Analogy.LogViewer.Serilog.Managers
         private IAnalogyLogger Logger { get; set; }
 
         public void SetLogger(IAnalogyLogger logger) => Logger = logger;
+        public void LogEvent(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
+            => Logger.LogEvent(message, source, memberName, lineNumber, filePath);
 
-        public void LogEvent(string source, string message, string memberName = "", int lineNumber = 0,
-            string filePath = "")
-        {
-            Logger.LogEvent(source, message, memberName, lineNumber, filePath);
-        }
+        public void LogWarning(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
+            => Logger.LogWarning(message, source, memberName, lineNumber, filePath);
 
-        public void LogWarning(string source, string message, string memberName = "", int lineNumber = 0,
-            string filePath = "")
-        {
-            Logger.LogWarning(source, message, memberName, lineNumber, filePath);
-        }
+        public void LogDebug(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
+            => Logger.LogDebug(message, source, memberName, lineNumber, filePath);
 
-        public void LogDebug(string source, string message, string memberName = "", int lineNumber = 0,
-            string filePath = "")
-        {
-            Logger.LogDebug(source, message, memberName, lineNumber, filePath);
-        }
+        public void LogError(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
+            => Logger.LogError(message, source, memberName, lineNumber, filePath);
 
-        public void LogError(string source, string message, string memberName = "", int lineNumber = 0,
-            string filePath = "")
-        {
-            Logger.LogError(source, message, memberName, lineNumber, filePath);
-        }
-
-        public void LogCritical(string source, string message, string memberName = "", int lineNumber = 0,
-            string filePath = "")
-        {
-            Logger.LogCritical(source, message, memberName, lineNumber, filePath);
-        }
-
-        public void LogException(Exception ex, string source, string message, string memberName = "",
+        public void LogCritical(string message, string source = "", string memberName = "", int lineNumber = 0, string filePath = "")
+            => Logger.LogCritical(message, source, memberName, lineNumber, filePath);
+        public void LogException(string message, Exception ex, string source, string memberName = "",
             int lineNumber = 0,
             string filePath = "")
         {
-            Logger.LogException(ex, source, message, memberName, lineNumber, filePath);
+            Logger.LogException(message,ex, source,  memberName, lineNumber, filePath);
         }
     }
 }

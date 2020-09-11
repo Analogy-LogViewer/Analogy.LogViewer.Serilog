@@ -21,7 +21,7 @@ namespace Analogy.LogViewer.Serilog
                     m.Level = AnalogyLogLevel.Debug;
                     break;
                 case LogEventLevel.Information:
-                    m.Level = AnalogyLogLevel.Event;
+                    m.Level = AnalogyLogLevel.Information;
                     break;
                 case LogEventLevel.Warning:
                     m.Level = AnalogyLogLevel.Warning;
@@ -34,7 +34,7 @@ namespace Analogy.LogViewer.Serilog
                     break;
                 default:
                     {
-                        LogManager.Instance.LogWarning("Serilog parser", "invalid log level:" + evt.Level);
+                        LogManager.Instance.LogWarning("invalid log level:" + evt.Level,"Serilog parser");
                         m.Level = AnalogyLogLevel.Unknown;
                         break;
                     }
