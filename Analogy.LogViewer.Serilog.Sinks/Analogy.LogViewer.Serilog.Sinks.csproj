@@ -6,7 +6,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<Version>0.3.1</Version>
+		<Version>0.3.2</Version>
 		<Authors>Lior Banai</Authors>
 		<Company>Analogy.LogViewer</Company>
 		<Copyright>Lior Banai © 2020</Copyright>
@@ -15,7 +15,6 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<FileVersion>0.3.1.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
