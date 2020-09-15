@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.UnitTests", "Analogy.LogViewer.Serilog.UnitTests\Analogy.LogViewer.Serilog.UnitTests.csproj", "{9BA5C0E0-2055-4D77-BC9C-E66D63BD96F0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog", "Analogy.LogViewer.Serilog\Analogy.LogViewer.Serilog.csproj", "{495BEFBF-44B2-4F3C-BC5A-ED23298779C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.Sinks", "Analogy.LogViewer.Serilog.Sinks\Analogy.LogViewer.Serilog.Sinks.csproj", "{2643AFE0-2FAB-4D73-8D69-9B687416C3B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.Sinks.Tests", "Analogy.LogViewer.Serilog.Sinks.Tests\Analogy.LogViewer.Serilog.Sinks.Tests.csproj", "{4ACFA6E9-BBAD-49DA-97B0-ACBFBCBB973E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.Sinks.Tests", "Analogy.LogViewer.Serilog.Sinks.Tests\Analogy.LogViewer.Serilog.Sinks.Tests.csproj", "{4ACFA6E9-BBAD-49DA-97B0-ACBFBCBB973E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.UnitTests", "Analogy.LogViewer.Serilog.UnitTests\Analogy.LogViewer.Serilog.UnitTests.csproj", "{C999EE65-46BD-462B-B384-9ACB982E20D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9BA5C0E0-2055-4D77-BC9C-E66D63BD96F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BA5C0E0-2055-4D77-BC9C-E66D63BD96F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BA5C0E0-2055-4D77-BC9C-E66D63BD96F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BA5C0E0-2055-4D77-BC9C-E66D63BD96F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{495BEFBF-44B2-4F3C-BC5A-ED23298779C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{495BEFBF-44B2-4F3C-BC5A-ED23298779C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{495BEFBF-44B2-4F3C-BC5A-ED23298779C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{4ACFA6E9-BBAD-49DA-97B0-ACBFBCBB973E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ACFA6E9-BBAD-49DA-97B0-ACBFBCBB973E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ACFA6E9-BBAD-49DA-97B0-ACBFBCBB973E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
