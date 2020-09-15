@@ -62,6 +62,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Analogy.Logserver.20200913.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ClefExample1.clef">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
