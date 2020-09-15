@@ -21,4 +21,28 @@
     <ProjectReference Include="..\Analogy.LogViewer.Serilog\Analogy.LogViewer.Serilog.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="log files\Analogy.Logserver.20200913.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\ClefExample1.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\ClefExample1.clef.gz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\JsonFormatter.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\SourceContextTest.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\TestColumns.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\testJson.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
