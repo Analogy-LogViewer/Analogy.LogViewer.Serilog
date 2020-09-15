@@ -11,7 +11,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task ClefJsonParserTest()
         {
-            var p = new JsonFormatterParser();
+            var p = new ClefParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = @"Analogy.Logserver.20200913.log";
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
