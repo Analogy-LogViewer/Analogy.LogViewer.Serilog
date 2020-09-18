@@ -8,7 +8,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 {
     public enum LogFormat
     {
-        Clef,
+        None,
+        JsonFormat,
+        CompactJsonFormat,
 
     }
 

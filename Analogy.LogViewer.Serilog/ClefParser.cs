@@ -1,5 +1,4 @@
 ﻿using Analogy.Interfaces;
-using Analogy.LogViewer.Serilog.CompactClef;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.LogViewer.Serilog.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {

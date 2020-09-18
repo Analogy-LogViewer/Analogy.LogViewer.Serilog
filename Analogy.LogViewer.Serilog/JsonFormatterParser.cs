@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
-using Analogy.LogViewer.Serilog.CompactClef;
+using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
@@ -44,7 +44,7 @@ namespace Analogy.LogViewer.Serilog
                             {
                                 if (obj is JObject j)
                                 {
-                                    
+
                                     var m = ParserJObject(j, analogy);
                                     parsedMessages.Add(m);
                                 }

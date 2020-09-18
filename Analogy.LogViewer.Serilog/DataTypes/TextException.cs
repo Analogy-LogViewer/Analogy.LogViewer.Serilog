@@ -12,19 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Analogy.LogViewer.Serilog.CompactClef
-{
-    class Rendering
-    {
-        public string Name { get; }
-        public string Format { get; }
-        public string Rendered { get; }
+using System;
 
-        public Rendering(string name, string format, string rendered)
+namespace Analogy.LogViewer.Serilog.DataTypes
+{
+    class TextException : Exception
+    {
+        readonly string _text;
+
+        public TextException(string text)
+            : base("This exception type provides ToString() access to details only.")
         {
-            Name = name;
-            Format = format;
-            Rendered = rendered;
+            _text = text;
+        }
+
+        public override string ToString()
+        {
+            return _text;
         }
     }
 }

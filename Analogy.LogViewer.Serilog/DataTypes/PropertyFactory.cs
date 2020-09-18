@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Newtonsoft.Json.Linq;
-using Serilog.Events;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
+using Serilog.Events;
 
-namespace Analogy.LogViewer.Serilog.CompactClef
+namespace Analogy.LogViewer.Serilog.DataTypes
 {
     static class PropertyFactory
     {
         const string TypeTagPropertyName = "$type";
 
-        public static LogEventProperty CreateProperty(string name, JToken value, IEnumerable<Rendering> renderings)
+        public static LogEventProperty CreateProperty(string name, JToken value, List<Rendering> renderings)
         {
             return new LogEventProperty(name, CreatePropertyValue(value, renderings));
         }
 
-        static LogEventPropertyValue CreatePropertyValue(JToken value, IEnumerable<Rendering> renderings)
+        static LogEventPropertyValue CreatePropertyValue(JToken value, List<Rendering> renderings)
         {
             if (value.Type == JTokenType.Null)
                 return new ScalarValue(null);
