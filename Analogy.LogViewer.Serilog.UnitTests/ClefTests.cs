@@ -14,7 +14,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task ClefParserTest()
         {
-            ClefParser p = new ClefParser();
+            CompactJsonFormatParser p = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(folder, "log files", "ClefExample1.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
@@ -26,7 +26,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task SourceContextTest()
         {
-            ClefParser p = new ClefParser();
+            CompactJsonFormatParser p = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(folder, "log files", "SourceContextTest.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();

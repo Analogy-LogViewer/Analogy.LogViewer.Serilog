@@ -29,7 +29,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
              Directory.Exists(UserSettingsManager.UserSettings.Settings.Directory))
                 ? UserSettingsManager.UserSettings.Settings.Directory
                 : Environment.CurrentDirectory;
-        private ClefParser ClefParser { get; }
+        private CompactJsonFormatParser ClefParser { get; }
         private JsonParser JsonParser { get; }
         private Regex.RegexParser RegexParser { get; set; }
 
@@ -41,7 +41,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {
-            ClefParser = new ClefParser();
+            ClefParser = new CompactJsonFormatParser();
             JsonParser = new JsonParser();
             RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
                 LogManager.Instance);

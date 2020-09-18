@@ -19,16 +19,18 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         static readonly MessageTemplateParser Parser = new MessageTemplateParser();
         readonly TextReader _text;
         readonly JsonSerializer _serializer;
-
+        private readonly IMessageFields _messageFields;
         int _lineNumber;
 
         /// <summary>
         /// Construct a <see cref="LogEventReader"/>.
         /// </summary>
         /// <param name="text">Text to read from.</param>
+        /// <param name="messageFields"></param>
         /// <param name="serializer">If specified, a JSON serializer used when converting event documents.</param>
-        public LogEventReader(TextReader text, JsonSerializer serializer = null)
+        public LogEventReader(TextReader text, IMessageFields messageFields, JsonSerializer serializer = null)
         {
+            _messageFields = messageFields;
             _text = text ?? throw new ArgumentNullException(nameof(text));
             _serializer = serializer ?? CreateSerializer();
         }
@@ -75,7 +77,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         /// <param name="document">The event in compact-JSON.</param>
         /// <param name="serializer">If specified, a JSON serializer used when converting event documents.</param>
         /// <returns>The log event.</returns>
-        public static LogEvent ReadFromString(string document, JsonSerializer serializer = null)
+        public LogEvent ReadFromString(string document, JsonSerializer serializer = null)
         {
             if (document == null) throw new ArgumentNullException(nameof(document));
 
@@ -90,29 +92,29 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         /// </summary>
         /// <param name="jObject">The deserialized compact-JSON event.</param>
         /// <returns>The log event.</returns>
-        public static LogEvent ReadFromJObject(JObject jObject)
+        public LogEvent ReadFromJObject(JObject jObject)
         {
             if (jObject == null) throw new ArgumentNullException(nameof(jObject));
             return ReadFromJObject(1, jObject);
         }
 
-        static LogEvent ReadFromJObject(int lineNumber, JObject jObject)
+        private LogEvent ReadFromJObject(int lineNumber, JObject jObject)
         {
-            var timestamp = GetRequiredTimestampField(lineNumber, jObject, ClefFields.Timestamp);
+            var timestamp = GetRequiredTimestampField(lineNumber, jObject, _messageFields.Timestamp);
 
             string messageTemplate;
-            if (TryGetOptionalField(lineNumber, jObject, ClefFields.MessageTemplate, out var mt))
+            if (TryGetOptionalField(lineNumber, jObject, _messageFields.MessageTemplate, out var mt))
                 messageTemplate = mt;
-            else if (TryGetOptionalField(lineNumber, jObject, ClefFields.Message, out var m))
+            else if (TryGetOptionalField(lineNumber, jObject, _messageFields.Message, out var m))
                 messageTemplate = MessageTemplateSyntax.Escape(m);
             else
                 messageTemplate = null;
 
             var level = LogEventLevel.Information;
-            if (TryGetOptionalField(lineNumber, jObject, ClefFields.Level, out string l))
+            if (TryGetOptionalField(lineNumber, jObject, _messageFields.Level, out string l))
                 level = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), l);
             Exception exception = null;
-            if (TryGetOptionalField(lineNumber, jObject, ClefFields.Exception, out string ex))
+            if (TryGetOptionalField(lineNumber, jObject, _messageFields.Exception, out string ex))
             {
                 exception = TryPopulateException(ex, exception, jObject);
             }
@@ -123,11 +125,11 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             var renderings = Enumerable.Empty<Rendering>();
 
-            if (jObject.TryGetValue(ClefFields.Renderings, out JToken r))
+            if (jObject.TryGetValue(_messageFields.Renderings, out JToken r))
             {
                 var renderedByIndex = r as JArray;
                 if (renderedByIndex == null)
-                    throw new InvalidDataException($"The `{ClefFields.Renderings}` value on line {lineNumber} is not an array as expected.");
+                    throw new InvalidDataException($"The `{_messageFields.Renderings}` value on line {lineNumber} is not an array as expected.");
 
                 renderings = parsedTemplate.Tokens
                     .OfType<PropertyToken>()
@@ -138,17 +140,16 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             var properties = jObject
                 .Properties()
-                .Where(f => !ClefFields.All.Contains(f.Name))
+                .Where(f => !_messageFields.All.Contains(f.Name))
                 .Select(f =>
                 {
-                    var name = ClefFields.Unescape(f.Name);
-                    var renderingsByFormat = renderings.Where(rd => rd.Name == name);
+                    var name = _messageFields.Unescape(f.Name);
+                    var renderingsByFormat = renderings.Where(rd => rd.Name == name).ToList();
                     return PropertyFactory.CreateProperty(name, f.Value, renderingsByFormat);
                 })
                 .ToList();
 
-            string eventId;
-            if (TryGetOptionalField(lineNumber, jObject, ClefFields.EventId, out eventId)) // TODO; should support numeric ids.
+            if (TryGetOptionalField(lineNumber, jObject, _messageFields.EventId, out var eventId)) // TODO; should support numeric ids.
             {
                 properties.Add(new LogEventProperty("@i", new ScalarValue(eventId)));
             }
@@ -170,7 +171,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             return new TextException(header);
         }
 
-        static bool TryGetOptionalField(int lineNumber, JObject data, string field, out string value)
+        private static bool TryGetOptionalField(int lineNumber, JObject data, string field, out string value)
         {
             JToken token;
             if (!data.TryGetValue(field, out token) || token.Type == JTokenType.Null)
@@ -186,17 +187,16 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             return true;
         }
 
-        static DateTimeOffset GetRequiredTimestampField(int lineNumber, JObject data, string field)
+        private static DateTimeOffset GetRequiredTimestampField(int lineNumber, JObject data, string field)
         {
-            JToken token;
-            if (!data.TryGetValue(field, out token) || token.Type == JTokenType.Null)
+            if (!data.TryGetValue(field, out var token) || token.Type == JTokenType.Null)
                 throw new InvalidDataException($"The data on line {lineNumber} does not include the required `{field}` field.");
 
             if (token.Type == JTokenType.Date)
             {
                 var dt = token.Value<JValue>().Value;
-                if (dt is DateTimeOffset)
-                    return (DateTimeOffset)dt;
+                if (dt is DateTimeOffset offset)
+                    return offset;
 
                 return (DateTime)dt;
             }
@@ -208,7 +208,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             return DateTimeOffset.Parse(text);
         }
 
-        static JsonSerializer CreateSerializer()
+        private static JsonSerializer CreateSerializer()
         {
             return JsonSerializer.Create(new JsonSerializerSettings
             {

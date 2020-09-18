@@ -60,7 +60,7 @@ namespace Analogy.LogViewer.Serilog
             catch (Exception e)
             {
                 AnalogyLogMessage empty = new AnalogyLogMessage($"Error reading file {fileName}: Error: {e.Message}", AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
-                empty.Source = nameof(ClefParser);
+                empty.Source = nameof(CompactJsonFormatParser);
                 empty.Module = "Analogy.LogViewer.Serilog";
                 parsedMessages.Add(empty);
                 messagesHandler.AppendMessages(parsedMessages, fileName);

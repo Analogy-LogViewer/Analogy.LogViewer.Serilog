@@ -15,7 +15,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task ClefJsonParserTest()
         {
-            var p = new ClefParser();
+            var p = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(folder, "log files", "SourceContextTest.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();

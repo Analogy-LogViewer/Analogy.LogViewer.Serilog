@@ -8,10 +8,11 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 {
     public enum LogFormat
     {
+        Automatic,
         None,
         JsonFormat,
         CompactJsonFormat,
-
+        JsonFile,
     }
 
 }

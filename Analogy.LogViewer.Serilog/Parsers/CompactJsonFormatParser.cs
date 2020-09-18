@@ -11,8 +11,14 @@ using Analogy.LogViewer.Serilog.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
-    public class ClefParser
+    public class CompactJsonFormatParser
     {
+        private static IMessageFields messageFields;
+
+        static CompactJsonFormatParser()
+        {
+            messageFields=new CompactJsonFormatMessageFields();
+        }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             var messages = await Task<IEnumerable<AnalogyLogMessage>>.Factory.StartNew(() =>
@@ -30,9 +36,9 @@ namespace Analogy.LogViewer.Serilog
                             {
                                 using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
                                 {
-                                    using (var clef = new StreamReader(gzStream, encoding: Encoding.UTF8))
+                                    using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
                                     {
-                                        var reader = new LogEventReader(clef);
+                                        var reader = new LogEventReader(streamReader, messageFields);
                                         while (reader.TryRead(out var evt))
                                         {
                                             analogy.Write(evt);
@@ -47,9 +53,9 @@ namespace Analogy.LogViewer.Serilog
                             }
                             else
                             {
-                                using (var clef = new StreamReader(fileStream, encoding: Encoding.UTF8))
+                                using (var streamReader = new StreamReader(fileStream, encoding: Encoding.UTF8))
                                 {
-                                    var reader = new LogEventReader(clef);
+                                    var reader = new LogEventReader(streamReader, messageFields);
                                     while (reader.TryRead(out var evt))
                                     {
                                         analogy.Write(evt);
@@ -69,7 +75,7 @@ namespace Analogy.LogViewer.Serilog
                 {
                     AnalogyLogMessage empty = new AnalogyLogMessage($"Error reading file {fileName}: Error: {e.Message}",
                         AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
-                    empty.Source = nameof(ClefParser);
+                    empty.Source = nameof(CompactJsonFormatParser);
                     empty.Module = "Analogy.LogViewer.Serilog";
                     parsedMessages.Add(empty);
                     messagesHandler.AppendMessages(parsedMessages, fileName);
