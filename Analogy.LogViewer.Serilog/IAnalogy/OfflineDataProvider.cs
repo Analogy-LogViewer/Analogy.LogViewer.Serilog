@@ -31,6 +31,9 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 : Environment.CurrentDirectory;
         private CompactJsonFormatParser ClefParser { get; }
         private JsonParser JsonParser { get; }
+        private ClefParser ClefParser { get; }
+        private JsonFileParser JsonFileParser { get; }
+        private JsonFormatterParser JsonFormatterParser { get; }
         private Regex.RegexParser RegexParser { get; set; }
 
         public bool UseCustomColors { get; set; } = false;
@@ -43,6 +46,9 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             ClefParser = new CompactJsonFormatParser();
             JsonParser = new JsonParser();
+            ClefParser = new ClefParser();
+            JsonFileParser = new JsonFileParser();
+            JsonFormatterParser=new JsonFormatterParser();
             RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
                 LogManager.Instance);
 
@@ -55,8 +61,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 {
                     case SerilogFileFormat.CLEF:
                         return await ClefParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.JSON:
-                        return await JsonParser.Process(fileName, token, messagesHandler);
+                    case SerilogFileFormat.JSONFile:
+                        return await JsonFileParser.Process(fileName, token, messagesHandler);
+                    case SerilogFileFormat.JSONPerLine:
+                        return await JsonFormatterParser.Process(fileName, token, messagesHandler);
                     case SerilogFileFormat.REGEX:
                         RegexParser.SetRegexPatterns(UserSettingsManager.UserSettings.Settings.RegexPatterns);
                         return await RegexParser.ParseLog(fileName, token, messagesHandler);

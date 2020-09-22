@@ -36,9 +36,14 @@ namespace Analogy.LogViewer.Serilog
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             Settings.RegexPatterns = lstbRegularExpressions.Items.Count > 0 ? lstbRegularExpressions.Items.Cast<RegexPattern>().ToList() : new List<RegexPattern>();
             Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
-            Settings.Format = rbtnCLEF.Checked
-                ? SerilogFileFormat.CLEF
-                : (rbRegexFile.Checked ? SerilogFileFormat.REGEX : SerilogFileFormat.JSON);
+            if (rbtnCLEF.Checked)
+                Settings.Format = SerilogFileFormat.CLEF;
+            else if (rbJson.Checked)
+                Settings.Format = SerilogFileFormat.JSONPerLine;
+            else if (rbRegexFile.Checked)
+                Settings.Format = SerilogFileFormat.REGEX;
+            else if (rbJsonFile.Checked)
+                Settings.Format = SerilogFileFormat.JSONFile;
             UserSettingsManager.UserSettings.Save();
         }
 
@@ -103,7 +108,8 @@ namespace Analogy.LogViewer.Serilog
             lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
             rbtnCLEF.Checked = logSettings.Format == SerilogFileFormat.CLEF;
             rbRegexFile.Checked = logSettings.Format == SerilogFileFormat.REGEX;
-            rbJson.Checked = logSettings.Format == SerilogFileFormat.JSON;
+            rbJson.Checked = logSettings.Format == SerilogFileFormat.JSONPerLine;
+            rbJsonFile.Checked = logSettings.Format == SerilogFileFormat.JSONFile;
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)

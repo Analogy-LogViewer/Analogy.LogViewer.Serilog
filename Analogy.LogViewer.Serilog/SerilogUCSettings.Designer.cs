@@ -69,6 +69,7 @@
             this.btnIgnoreColumn = new System.Windows.Forms.Button();
             this.lstbIgnoreColumn = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rbJsonFile = new System.Windows.Forms.RadioButton();
             this.tcSetttings.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gbresult.SuspendLayout();
@@ -113,7 +114,7 @@
             // 
             this.txtbSupportedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbSupportedFiles.Location = new System.Drawing.Point(198, 137);
+            this.txtbSupportedFiles.Location = new System.Drawing.Point(198, 183);
             this.txtbSupportedFiles.Name = "txtbSupportedFiles";
             this.txtbSupportedFiles.Size = new System.Drawing.Size(515, 26);
             this.txtbSupportedFiles.TabIndex = 9;
@@ -122,7 +123,7 @@
             // label2
             // 
             this.label2.AutoEllipsis = true;
-            this.label2.Location = new System.Drawing.Point(9, 136);
+            this.label2.Location = new System.Drawing.Point(9, 182);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 50);
             this.label2.TabIndex = 8;
@@ -143,7 +144,7 @@
             // 
             this.txtbDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbDirectory.Location = new System.Drawing.Point(198, 82);
+            this.txtbDirectory.Location = new System.Drawing.Point(198, 128);
             this.txtbDirectory.Name = "txtbDirectory";
             this.txtbDirectory.Size = new System.Drawing.Size(454, 26);
             this.txtbDirectory.TabIndex = 12;
@@ -151,7 +152,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 82);
+            this.label3.Location = new System.Drawing.Point(9, 128);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 18);
             this.label3.TabIndex = 11;
@@ -160,7 +161,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(666, 82);
+            this.btnOpenFolder.Location = new System.Drawing.Point(666, 128);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(47, 22);
             this.btnOpenFolder.TabIndex = 13;
@@ -185,9 +186,9 @@
             this.rbJson.AutoSize = true;
             this.rbJson.Location = new System.Drawing.Point(93, 57);
             this.rbJson.Name = "rbJson";
-            this.rbJson.Size = new System.Drawing.Size(153, 22);
+            this.rbJson.Size = new System.Drawing.Size(252, 22);
             this.rbJson.TabIndex = 15;
-            this.rbJson.Text = "Json Log Event File";
+            this.rbJson.Text = "Json Log Event File (Json Per Life)";
             this.rbJson.UseVisualStyleBackColor = true;
             // 
             // rbRegexFile
@@ -206,7 +207,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tcSetttings.Controls.Add(this.tabPage2);
-            this.tcSetttings.Location = new System.Drawing.Point(11, 177);
+            this.tcSetttings.Location = new System.Drawing.Point(11, 223);
             this.tcSetttings.Name = "tcSetttings";
             this.tcSetttings.SelectedIndex = 0;
             this.tcSetttings.Size = new System.Drawing.Size(696, 319);
@@ -298,7 +299,7 @@
             this.gbresult.Controls.Add(this.lblResult);
             this.gbresult.Location = new System.Drawing.Point(9, 294);
             this.gbresult.Name = "gbresult";
-            this.gbresult.Size = new System.Drawing.Size(571, 2);
+            this.gbresult.Size = new System.Drawing.Size(571, 4);
             this.gbresult.TabIndex = 52;
             this.gbresult.TabStop = false;
             this.gbresult.Text = "Result";
@@ -392,7 +393,7 @@
             // 
             this.txtbOpenFileFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbOpenFileFilters.Location = new System.Drawing.Point(198, 109);
+            this.txtbOpenFileFilters.Location = new System.Drawing.Point(198, 155);
             this.txtbOpenFileFilters.Name = "txtbOpenFileFilters";
             this.txtbOpenFileFilters.Size = new System.Drawing.Size(454, 26);
             this.txtbOpenFileFilters.TabIndex = 47;
@@ -400,7 +401,7 @@
             // lblOpenfilesFilters
             // 
             this.lblOpenfilesFilters.AutoEllipsis = true;
-            this.lblOpenfilesFilters.Location = new System.Drawing.Point(13, 107);
+            this.lblOpenfilesFilters.Location = new System.Drawing.Point(13, 153);
             this.lblOpenfilesFilters.Name = "lblOpenfilesFilters";
             this.lblOpenfilesFilters.Size = new System.Drawing.Size(184, 22);
             this.lblOpenfilesFilters.TabIndex = 46;
@@ -409,7 +410,7 @@
             // btnTestFilter
             // 
             this.btnTestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTestFilter.Location = new System.Drawing.Point(666, 109);
+            this.btnTestFilter.Location = new System.Drawing.Point(666, 155);
             this.btnTestFilter.Name = "btnTestFilter";
             this.btnTestFilter.Size = new System.Drawing.Size(47, 25);
             this.btnTestFilter.TabIndex = 48;
@@ -430,6 +431,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rbJsonFile);
             this.tabPage1.Controls.Add(this.lblLayout);
             this.tabPage1.Controls.Add(this.btnTestFilter);
             this.tabPage1.Controls.Add(this.rbtnCLEF);
@@ -530,6 +532,16 @@
             this.panel1.Size = new System.Drawing.Size(725, 56);
             this.panel1.TabIndex = 50;
             // 
+            // rbJsonFile
+            // 
+            this.rbJsonFile.AutoSize = true;
+            this.rbJsonFile.Location = new System.Drawing.Point(93, 85);
+            this.rbJsonFile.Name = "rbJsonFile";
+            this.rbJsonFile.Size = new System.Drawing.Size(213, 22);
+            this.rbJsonFile.TabIndex = 49;
+            this.rbJsonFile.Text = "Json File (Single json object)";
+            this.rbJsonFile.UseVisualStyleBackColor = true;
+            // 
             // SerilogUCSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -596,5 +608,6 @@
         private System.Windows.Forms.Button btnDeleteIgnoreColumn;
         private System.Windows.Forms.Button btnIgnoreColumn;
         private System.Windows.Forms.ListBox lstbIgnoreColumn;
+        private System.Windows.Forms.RadioButton rbJsonFile;
     }
 }
