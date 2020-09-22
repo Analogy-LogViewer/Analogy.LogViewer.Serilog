@@ -27,7 +27,7 @@
     <None Update="log files\CompactJsonFormat.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\ClefExample1.clef.gz">
+    <None Update="log files\CompactJsonFormat.gz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log files\JsonPerLine.clef">

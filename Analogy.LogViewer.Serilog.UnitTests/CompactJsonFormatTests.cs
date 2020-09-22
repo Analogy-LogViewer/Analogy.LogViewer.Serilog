@@ -73,5 +73,19 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.IsTrue(messages[1].AdditionalInformation["CustomProperty"] == "\"Custom Value\"");
 
         }
+
+        [TestMethod]
+        public async Task CompactJsonFormatTestGZFile()
+        {
+            CompactJsonFormatParser p = new CompactJsonFormatParser();
+            CancellationTokenSource cts = new CancellationTokenSource();
+            string fileName = Path.Combine(Folder, "log files", "CompactJsonFormat.gz");
+            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            Assert.AreEqual(4, messages.Count());
+            // The first event doesn't have a source context
+            Assert.IsTrue(messages[2].AdditionalInformation["Tags"] == "[\"test\", \"orange\"]");
+
+        }
     }
 }
