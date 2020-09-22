@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.DataTypes;
+using Serilog;
+using Serilog.Formatting.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Serilog;
-using Serilog.Formatting.Json;
 
 namespace Analogy.LogViewer.Serilog
 {
     public class JsonFormatterParser
     {
+        private static IMessageFields messageFields;
+
+        static JsonFormatterParser()
+        {
+            messageFields = new JsonFormatMessageFields();
+        }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
             ILogMessageCreatedHandler messagesHandler)
         {
@@ -31,28 +34,19 @@ namespace Analogy.LogViewer.Serilog
                     using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                     {
-                        var json = await streamReader.ReadLineAsync().ConfigureAwait(false);
-                        var data = JsonConvert.DeserializeObject(json);
-                        if (data is JObject jo)
+                        string json;
+                        while ((json = await streamReader.ReadLineAsync()) != null)
                         {
-                            var m = ParserJObject(jo, analogy);
-                            parsedMessages.Add(m);
-                        }
-                        else if (data is JArray arr)
-                        {
-                            foreach (var obj in arr.ToList())
+                            var data = JsonConvert.DeserializeObject(json);
+                            var evt = LogEventReader.ReadFromJObject(data as JObject, messageFields);
                             {
-                                if (obj is JObject j)
-                                {
-
-                                    var m = ParserJObject(j, analogy);
-                                    parsedMessages.Add(m);
-                                }
+                                AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                parsedMessages.Add(m);
                             }
                         }
                     }
-                }
 
+                }
                 messagesHandler.AppendMessages(parsedMessages, fileName);
                 return parsedMessages;
             }
@@ -67,19 +61,5 @@ namespace Analogy.LogViewer.Serilog
                 return parsedMessages;
             }
         }
-
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private AnalogyLogMessage ParserJObject(JObject jo, ILogger analogy)
-        {
-            var evt = LogEventReader.ReadFromJObject(jo);
-            {
-                analogy.Write(evt);
-                return CommonParser.ParseLogEventProperties(evt);
-
-            }
-
-        }
-
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Serilog.Events;
+using Serilog.Parsing;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Serilog.Events;
-using Serilog.Parsing;
 
 namespace Analogy.LogViewer.Serilog.DataTypes
 {
@@ -67,7 +68,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             if (fields == null)
                 throw new InvalidDataException($"The data on line {_lineNumber} is not a complete JSON object.");
 
-            evt = ReadFromJObject(_lineNumber, fields);
+            evt = ReadFromJObject(_lineNumber, fields,_messageFields);
             return true;
         }
 
@@ -83,7 +84,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             serializer = serializer ?? CreateSerializer();
             var jObject = serializer.Deserialize<JObject>(new JsonTextReader(new StringReader(document)));
-            return ReadFromJObject(jObject);
+            return ReadFromJObject(jObject,_messageFields);
 
         }
 
@@ -92,44 +93,45 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         /// </summary>
         /// <param name="jObject">The deserialized compact-JSON event.</param>
         /// <returns>The log event.</returns>
-        public LogEvent ReadFromJObject(JObject jObject)
+        public static LogEvent ReadFromJObject(JObject jObject, IMessageFields messageFields)
         {
             if (jObject == null) throw new ArgumentNullException(nameof(jObject));
-            return ReadFromJObject(1, jObject);
+            return ReadFromJObject(1, jObject,messageFields);
         }
 
-        private LogEvent ReadFromJObject(int lineNumber, JObject jObject)
+        private static LogEvent ReadFromJObject(int lineNumber, JObject jObject,IMessageFields messageFields)
         {
-            var timestamp = GetRequiredTimestampField(lineNumber, jObject, _messageFields.Timestamp);
+            var timestamp = GetRequiredTimestampField(lineNumber, jObject, messageFields.Timestamp);
 
             string messageTemplate;
-            if (TryGetOptionalField(lineNumber, jObject, _messageFields.MessageTemplate, out var mt))
+            if (TryGetOptionalField(lineNumber, jObject, messageFields.MessageTemplate, out var mt))
                 messageTemplate = mt;
-            else if (TryGetOptionalField(lineNumber, jObject, _messageFields.Message, out var m))
+            else if (TryGetOptionalField(lineNumber, jObject, messageFields.Message, out var m))
                 messageTemplate = MessageTemplateSyntax.Escape(m);
             else
                 messageTemplate = null;
 
             var level = LogEventLevel.Information;
-            if (TryGetOptionalField(lineNumber, jObject, _messageFields.Level, out string l))
+            if (TryGetOptionalField(lineNumber, jObject, messageFields.Level, out string l))
                 level = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), l);
             Exception exception = null;
-            if (TryGetOptionalField(lineNumber, jObject, _messageFields.Exception, out string ex))
+            if (TryGetOptionalField(lineNumber, jObject, messageFields.Exception, out string ex))
             {
                 exception = TryPopulateException(ex, exception, jObject);
             }
 
-            var parsedTemplate = messageTemplate == null ?
-                new MessageTemplate(Enumerable.Empty<MessageTemplateToken>()) :
-                Parser.Parse(messageTemplate);
+            var parsedTemplate = messageTemplate == null
+                ? new MessageTemplate(Enumerable.Empty<MessageTemplateToken>())
+                : Parser.Parse(messageTemplate);
 
             var renderings = Enumerable.Empty<Rendering>();
 
-            if (jObject.TryGetValue(_messageFields.Renderings, out JToken r))
+            if (jObject.TryGetValue(messageFields.Renderings, out JToken r))
             {
                 var renderedByIndex = r as JArray;
                 if (renderedByIndex == null)
-                    throw new InvalidDataException($"The `{_messageFields.Renderings}` value on line {lineNumber} is not an array as expected.");
+                    throw new InvalidDataException(
+                        $"The `{messageFields.Renderings}` value on line {lineNumber} is not an array as expected.");
 
                 renderings = parsedTemplate.Tokens
                     .OfType<PropertyToken>()
@@ -138,18 +140,33 @@ namespace Analogy.LogViewer.Serilog.DataTypes
                     .ToArray();
             }
 
-            var properties = jObject
-                .Properties()
-                .Where(f => !_messageFields.All.Contains(f.Name))
-                .Select(f =>
-                {
-                    var name = _messageFields.Unescape(f.Name);
-                    var renderingsByFormat = renderings.Where(rd => rd.Name == name).ToList();
-                    return PropertyFactory.CreateProperty(name, f.Value, renderingsByFormat);
-                })
-                .ToList();
-
-            if (TryGetOptionalField(lineNumber, jObject, _messageFields.EventId, out var eventId)) // TODO; should support numeric ids.
+            List<LogEventProperty> properties;
+            if (jObject.ContainsKey("Properties") && jObject["Properties"] is JObject props)
+            {
+                properties = props.Properties()
+                    .Where(f => !messageFields.All.Contains(f.Name))
+                    .Select(f =>
+                    {
+                        var name = messageFields.Unescape(f.Name);
+                        var renderingsByFormat = renderings.Where(rd => rd.Name == name).ToList();
+                        return PropertyFactory.CreateProperty(name, f.Value, renderingsByFormat);
+                    })
+                    .ToList();
+            }
+            else
+            {
+                properties = jObject
+                        .Properties()
+                        .Where(f => !messageFields.All.Contains(f.Name))
+                        .Select(f =>
+                        {
+                            var name = messageFields.Unescape(f.Name);
+                            var renderingsByFormat = renderings.Where(rd => rd.Name == name).ToList();
+                            return PropertyFactory.CreateProperty(name, f.Value, renderingsByFormat);
+                        })
+                        .ToList();
+            }
+            if (TryGetOptionalField(lineNumber, jObject, messageFields.EventId, out var eventId)) // TODO; should support numeric ids.
             {
                 properties.Add(new LogEventProperty("@i", new ScalarValue(eventId)));
             }

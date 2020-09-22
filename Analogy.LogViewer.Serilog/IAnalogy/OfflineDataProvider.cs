@@ -30,8 +30,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 ? UserSettingsManager.UserSettings.Settings.Directory
                 : Environment.CurrentDirectory;
         private CompactJsonFormatParser ClefParser { get; }
-        private JsonParser JsonParser { get; }
-        private ClefParser ClefParser { get; }
+        private JsonFormatterParser JsonParser { get; }
         private JsonFileParser JsonFileParser { get; }
         private JsonFormatterParser JsonFormatterParser { get; }
         private Regex.RegexParser RegexParser { get; set; }
@@ -45,8 +44,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public OfflineDataProvider()
         {
             ClefParser = new CompactJsonFormatParser();
-            JsonParser = new JsonParser();
-            ClefParser = new ClefParser();
+            JsonParser = new JsonFormatterParser();
             JsonFileParser = new JsonFileParser();
             JsonFormatterParser=new JsonFormatterParser();
             RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
