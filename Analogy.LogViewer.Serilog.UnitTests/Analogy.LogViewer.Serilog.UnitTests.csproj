@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="log files\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Analogy.LogViewer.Serilog\Analogy.LogViewer.Serilog.csproj" />
   </ItemGroup>
 
@@ -28,7 +24,7 @@
     <None Update="log files\Analogy.Logserver.20200913.log">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\ClefExample1.clef">
+    <None Update="log files\CompactJsonFormat.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log files\ClefExample1.clef.gz">
@@ -37,7 +33,7 @@
     <None Update="log files\JsonFormatter.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\SourceContextTest.clef">
+    <None Update="log files\CompactJsonFormatSourceContextTest.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log files\TestColumns.clef">

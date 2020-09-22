@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,27 +8,28 @@ using System.Threading.Tasks;
 namespace Analogy.LogViewer.Serilog.UnitTests
 {
     [TestClass]
-    public class ClefTests
+    public class CompactJsonFormatTests
     {
-        private string folder { get; } = Environment.CurrentDirectory;
+        private string Folder { get; } = Environment.CurrentDirectory;
         [TestMethod]
-        public async Task ClefParserTest()
+        public async Task CompactJsonFormatParserTest()
         {
             CompactJsonFormatParser p = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(folder, "log files", "ClefExample1.clef");
+            string fileName = Path.Combine(Folder, "log files", "CompactJsonFormat.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = await p.Process(fileName, cts.Token, forTesting);
-            Assert.IsTrue(messages.Count() == 4);
+            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            Assert.IsTrue(messages.Count == 4);
+            Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Id: 101 }");
         }
 
         // Test reading the (optional) source context
         [TestMethod]
-        public async Task SourceContextTest()
+        public async Task CompactJsonFormatSourceContextTest()
         {
             CompactJsonFormatParser p = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(folder, "log files", "SourceContextTest.clef");
+            string fileName = Path.Combine(Folder, "log files", "CompactJsonFormatSourceContextTest.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
 
             var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
