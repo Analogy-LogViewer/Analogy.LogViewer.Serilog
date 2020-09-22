@@ -30,16 +30,16 @@
     <None Update="log files\ClefExample1.clef.gz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\JsonFormatter.clef">
+    <None Update="log files\JsonPerLine.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log files\CompactJsonFormatSourceContextTest.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\TestColumns.clef">
+    <None Update="log files\CompactJsonFormatTestColumns.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\testJson.clef">
+    <None Update="log files\JsonFile.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
