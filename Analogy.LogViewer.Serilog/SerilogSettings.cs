@@ -6,7 +6,8 @@ namespace Analogy.LogViewer.Serilog
     public enum SerilogFileFormat
     {
         CLEF,
-        JSON,
+        JSONPerLine,
+        JSONFile,
         REGEX
     }
     public class SerilogSettings

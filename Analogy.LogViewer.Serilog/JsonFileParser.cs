@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog
 {
-    public class JsonParser
+    public class JsonFileParser
     {
         public static ITextFormatter textFormatter;
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
