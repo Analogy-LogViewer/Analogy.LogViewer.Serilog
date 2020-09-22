@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.LogViewer.Serilog.DataTypes;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
@@ -45,7 +46,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             ClefParser = new CompactJsonFormatParser();
             JsonParser = new JsonFormatterParser();
-            JsonFileParser = new JsonFileParser();
+            JsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
             JsonFormatterParser=new JsonFormatterParser();
             RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
                 LogManager.Instance);

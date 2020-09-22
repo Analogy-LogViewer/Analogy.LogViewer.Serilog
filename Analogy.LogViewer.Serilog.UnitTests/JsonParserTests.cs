@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.LogViewer.Serilog.DataTypes;
 
 namespace Analogy.LogViewer.Serilog.UnitTests
 {
@@ -13,11 +14,11 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         private string folder { get; } = Environment.CurrentDirectory;
 
         [TestMethod]
-        public async Task ClefJsonParserTest()
+        public async Task JsonFileParserWithCompactFormatTest()
         {
-            var p = new CompactJsonFormatParser();
+            var p = new JsonFileParser(new CompactJsonFormatMessageFields());
             CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(folder, "log files", "SourceContextTest.clef");
+            string fileName = Path.Combine(folder, "log files", "JsonFile.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = await p.Process(fileName, cts.Token, forTesting);
             Assert.IsTrue(messages.Count() == 2);
