@@ -1,10 +1,7 @@
-﻿using Analogy.Interfaces;
-using Analogy.LogViewer.Serilog.Managers;
-using Analogy.LogViewer.Serilog.Regex;
+﻿using Analogy.LogViewer.Serilog.Managers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -34,14 +31,11 @@ namespace Analogy.LogViewer.Serilog
             Settings.Directory = txtbDirectory.Text;
             Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            Settings.RegexPatterns = lstbRegularExpressions.Items.Count > 0 ? lstbRegularExpressions.Items.Cast<RegexPattern>().ToList() : new List<RegexPattern>();
             Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
             if (rbtnCLEF.Checked)
                 Settings.Format = SerilogFileFormat.CLEF;
             else if (rbJson.Checked)
                 Settings.Format = SerilogFileFormat.JSONPerLine;
-            else if (rbRegexFile.Checked)
-                Settings.Format = SerilogFileFormat.REGEX;
             else if (rbJsonFile.Checked)
                 Settings.Format = SerilogFileFormat.JSONFile;
             UserSettingsManager.UserSettings.Save();
@@ -102,12 +96,9 @@ namespace Analogy.LogViewer.Serilog
             txtbDirectory.Text = logSettings.Directory;
             txtbOpenFileFilters.Text = logSettings.FileOpenDialogFilters;
             txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
-            lstbRegularExpressions.Items.Clear();
-            lstbRegularExpressions.Items.AddRange(logSettings.RegexPatterns.ToArray());
             lstbIgnoreColumn.Items.Clear();
             lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
             rbtnCLEF.Checked = logSettings.Format == SerilogFileFormat.CLEF;
-            rbRegexFile.Checked = logSettings.Format == SerilogFileFormat.REGEX;
             rbJson.Checked = logSettings.Format == SerilogFileFormat.JSONPerLine;
             rbJsonFile.Checked = logSettings.Format == SerilogFileFormat.JSONFile;
         }
@@ -128,38 +119,6 @@ namespace Analogy.LogViewer.Serilog
         private void NLogSettings_Load(object sender, EventArgs e)
         {
             LoadSettings(UserSettingsManager.UserSettings.Settings);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtbRegEx.Text)) return;
-            var rp = new RegexPattern(txtbRegEx.Text, txtbDateTimeFormat.Text, txtbGuidFormat.Text);
-            lstbRegularExpressions.Items.Add(rp);
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (lstbRegularExpressions.SelectedItem is RegexPattern regexPattern)
-            {
-                lstbRegularExpressions.Items.Remove(lstbRegularExpressions.SelectedItem);
-            }
-        }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            RegexPattern p = new RegexPattern(txtbRegEx.Text, txtbDateTimeFormat.Text, "");
-            bool valid = Regex.RegexParser.CheckRegex(txtbTest.Text, p, out AnalogyLogMessage m);
-            if (valid)
-            {
-                lblResult.Text = "Valid Regular Expression";
-                lblResult.BackColor = Color.GreenYellow;
-                lblResultMessage.Text = m.ToString();
-            }
-            else
-            {
-                lblResult.Text = "Non Valid Regular Expression";
-                lblResult.BackColor = Color.OrangeRed;
-            }
         }
 
         private void btnTestFilter_Click(object sender, EventArgs e)

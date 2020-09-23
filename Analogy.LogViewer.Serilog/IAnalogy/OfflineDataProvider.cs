@@ -1,6 +1,6 @@
 ﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
-using Analogy.LogViewer.Serilog.Regex;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.LogViewer.Serilog.DataTypes;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
@@ -34,7 +33,6 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         private JsonFormatterParser JsonParser { get; }
         private JsonFileParser JsonFileParser { get; }
         private JsonFormatterParser JsonFormatterParser { get; }
-        private Regex.RegexParser RegexParser { get; set; }
 
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -47,9 +45,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             ClefParser = new CompactJsonFormatParser();
             JsonParser = new JsonFormatterParser();
             JsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
-            JsonFormatterParser=new JsonFormatterParser();
-            RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
-                LogManager.Instance);
+            JsonFormatterParser = new JsonFormatterParser();
 
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
@@ -64,9 +60,6 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                         return await JsonFileParser.Process(fileName, token, messagesHandler);
                     case SerilogFileFormat.JSONPerLine:
                         return await JsonFormatterParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.REGEX:
-                        RegexParser.SetRegexPatterns(UserSettingsManager.UserSettings.Settings.RegexPatterns);
-                        return await RegexParser.ParseLog(fileName, token, messagesHandler);
                 }
             }
             return new List<AnalogyLogMessage>(0);
