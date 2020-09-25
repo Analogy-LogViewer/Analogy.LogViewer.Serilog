@@ -38,14 +38,14 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count == 2);
-            Assert.IsTrue(messages[0].Text== "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57");
-            Assert.IsTrue(messages[0].User== "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
+            Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57");
+            Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
         }
 
         [TestMethod]
         [DataRow("JsonFileCompactFormat.clef", FileFormat.CompactJsonFormatPerFile)]
         [DataRow("JsonFormatPerLine.clef", FileFormat.JsonFormatPerLine)]
-        public  void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
+        public void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
         {
             string file = Path.Combine(Folder, "log files", fileName);
             var type = OfflineDataProvider.TryDetectFormat(file);
