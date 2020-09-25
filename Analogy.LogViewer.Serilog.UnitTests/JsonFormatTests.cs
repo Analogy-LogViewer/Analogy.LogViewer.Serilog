@@ -43,12 +43,13 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         }
 
         [TestMethod]
-        [DataRow("JsonFileCompactFormat.clef")]
-        public  void CompactJsonFormatTestAutomaticDetection(string fileName)
+        [DataRow("JsonFileCompactFormat.clef", FileFormat.CompactJsonFormatPerFile)]
+        [DataRow("JsonFormatPerLine.clef", FileFormat.JsonFormatPerLine)]
+        public  void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
         {
             string file = Path.Combine(Folder, "log files", fileName);
             var type = OfflineDataProvider.TryDetectFormat(file);
-            Assert.IsTrue(type == FileFormat.CompactJsonFormatPerFile);
+            Assert.IsTrue(type == format);
         }
     }
 }
