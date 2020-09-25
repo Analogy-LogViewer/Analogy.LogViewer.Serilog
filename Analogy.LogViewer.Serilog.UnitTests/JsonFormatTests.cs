@@ -38,7 +38,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count == 2);
-            Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57");
+            Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
             Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
         }
 
