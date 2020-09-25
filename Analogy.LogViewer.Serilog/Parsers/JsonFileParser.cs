@@ -3,10 +3,10 @@ using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using Serilog.Formatting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,7 +16,7 @@ namespace Analogy.LogViewer.Serilog
 {
     public class JsonFileParser
     {
-        private  IMessageFields messageFields;
+        private IMessageFields messageFields;
 
         public JsonFileParser(IMessageFields messageFields)
         {
@@ -34,10 +34,27 @@ namespace Analogy.LogViewer.Serilog
                         .CreateLogger())
                     {
                         using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                        using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                         {
-                            var json = streamReader.ReadToEnd();
-                            var data = JsonConvert.DeserializeObject(json);
+                            string jsonData;
+                            if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                                {
+                                    using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
+                                    {
+                                        jsonData = streamReader.ReadToEnd();
+
+                                    }
+                                }
+                            }
+                            else
+                                using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+                                {
+                                    jsonData = streamReader.ReadToEnd();
+                                }
+
+
+                            var data = JsonConvert.DeserializeObject(jsonData);
                             if (data is JObject jo)
                             {
                                 var evt = LogEventReader.ReadFromJObject(jo, messageFields);

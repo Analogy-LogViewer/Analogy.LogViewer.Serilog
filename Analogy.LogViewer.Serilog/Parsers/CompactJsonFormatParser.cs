@@ -51,21 +51,19 @@ namespace Analogy.LogViewer.Serilog
                                     }
                                 }
                             }
-                            else
-                            {
-                                using (var streamReader = new StreamReader(fileStream, encoding: Encoding.UTF8))
-                                {
-                                    var reader = new LogEventReader(streamReader, messageFields);
-                                    while (reader.TryRead(out var evt))
-                                    {
-                                        analogy.Write(evt);
-                                        AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
-                                        parsedMessages.Add(m);
-                                    }
 
-                                    messagesHandler.AppendMessages(parsedMessages, fileName);
-                                    return parsedMessages;
+                            using (var streamReader = new StreamReader(fileStream, encoding: Encoding.UTF8))
+                            {
+                                var reader = new LogEventReader(streamReader, messageFields);
+                                while (reader.TryRead(out var evt))
+                                {
+                                    analogy.Write(evt);
+                                    AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                    parsedMessages.Add(m);
                                 }
+
+                                messagesHandler.AppendMessages(parsedMessages, fileName);
+                                return parsedMessages;
                             }
                         }
                     }
