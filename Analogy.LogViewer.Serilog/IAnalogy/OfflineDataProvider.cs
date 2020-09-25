@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -75,17 +77,33 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public static FileFormat TryDetectFormat(string fileName)
         {
-            var format = TryParseAsFile(fileName);
+            string jsonData = string.Empty;
+            if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+            {
+                using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                    {
+                        using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
+                        {
+                            jsonData = streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(jsonData))
+                jsonData = File.ReadAllText(fileName);
+            var format = TryParseAsFile(jsonData);
             if (format == FileFormat.Unknown)
-                format = TryParsePerLine(fileName);
+                format = TryParsePerLine(jsonData);
             return format;
         }
 
-        private static FileFormat TryParsePerLine(string fileName)
+        private static FileFormat TryParsePerLine(string jsonData)
         {
             try
             {
-                var jsonData = File.ReadLines(fileName).First();
                 IMessageFields fields = new JsonFormatMessageFields();
                 if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
                     return FileFormat.JsonFormatPerLine;
@@ -100,11 +118,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             }
         }
 
-        private static FileFormat TryParseAsFile(string fileName)
+        private static FileFormat TryParseAsFile(string jsonData)
         {
             try
             {
-                var jsonData = File.ReadAllText(fileName);
                 var jsonObject = JsonConvert.DeserializeObject(jsonData);
                 IMessageFields fields = new JsonFormatMessageFields();
                 if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
