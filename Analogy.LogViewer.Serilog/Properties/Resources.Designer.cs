@@ -91,6 +91,45 @@ namespace Analogy.LogViewer.Serilog.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string CompactJsonFormatPerFile {
+            get {
+                return ResourceManager.GetString("CompactJsonFormatPerFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;@t&quot;:&quot;2016-10-12T04:46:58.0554314Z&quot;,&quot;@mt&quot;:&quot;Hello, {@User}&quot;,&quot;User&quot;:{&quot;Name&quot;:&quot;nblumhardt&quot;,&quot;Id&quot;:101}}
+        ///{&quot;@t&quot;:&quot;2016-10-12T04:46:58.0684369Z&quot;,&quot;@mt&quot;:&quot;Number {N:x8}&quot;,&quot;@r&quot;:[&quot;0000002a&quot;],&quot;N&quot;:42}
+        ///{&quot;@t&quot;:&quot;2016-10-12T04:46:58.0724384Z&quot;,&quot;@mt&quot;:&quot;Tags are {Tags}&quot;,&quot;@l&quot;:&quot;Warning&quot;,&quot;Tags&quot;:[&quot;test&quot;,&quot;orange&quot;]}
+        ///{&quot;@t&quot;:&quot;2016-10-12T04:46:58.0904378Z&quot;,&quot;@mt&quot;:&quot;Something failed&quot;,&quot;@l&quot;:&quot;Error&quot;, &quot;@x&quot;:&quot;System.DivideByZer...&lt;snip&gt;&quot;}.
+        /// </summary>
+        internal static string CompactJsonFormatPerLine {
+            get {
+                return ResourceManager.GetString("CompactJsonFormatPerLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string JsonFormatFile {
+            get {
+                return ResourceManager.GetString("JsonFormatFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string JsonFormatPerLine {
+            get {
+                return ResourceManager.GetString("JsonFormatPerLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Serilog_icon {

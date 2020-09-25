@@ -1,4 +1,6 @@
-﻿using Analogy.LogViewer.Serilog.Managers;
+﻿using Analogy.LogViewer.Serilog.DataTypes;
+using Analogy.LogViewer.Serilog.Managers;
+using Analogy.LogViewer.Serilog.Properties;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,12 +34,29 @@ namespace Analogy.LogViewer.Serilog
             Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
+            Settings.FileFormatDetection = rbDetectionModeAutomatic.Checked
+                ? FileFormatDetection.Automatic
+                : FileFormatDetection.Manual;
             if (rbtnCLEF.Checked)
-                Settings.Format = SerilogFileFormat.CLEF;
-            else if (rbJson.Checked)
-                Settings.Format = SerilogFileFormat.JSONPerLine;
-            else if (rbJsonFile.Checked)
-                Settings.Format = SerilogFileFormat.JSONFile;
+            {
+                Settings.Format = FileFormat.CompactJsonFormatPerLine;
+                rtxtExample.Text = Resources.CompactJsonFormatPerLine;
+            }
+            else if (rbtnJsonPerLine.Checked)
+            {
+                Settings.Format = FileFormat.JsonFormatPerLine;
+                rtxtExample.Text = Resources.JsonFormatPerLine;
+            }
+            else if (rbtnCompactJsonFile.Checked)
+            {
+                Settings.Format = FileFormat.CompactJsonFormatPerFile;
+                rtxtExample.Text = Resources.CompactJsonFormatPerFile;
+            }
+            else if (rbtnJsonFile.Checked)
+            {
+                Settings.Format = FileFormat.JsonFormatFile;
+                rtxtExample.Text = Resources.JsonFormatFile;
+            }
             UserSettingsManager.UserSettings.Save();
         }
 
@@ -98,9 +117,12 @@ namespace Analogy.LogViewer.Serilog
             txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
             lstbIgnoreColumn.Items.Clear();
             lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
-            rbtnCLEF.Checked = logSettings.Format == SerilogFileFormat.CLEF;
-            rbJson.Checked = logSettings.Format == SerilogFileFormat.JSONPerLine;
-            rbJsonFile.Checked = logSettings.Format == SerilogFileFormat.JSONFile;
+            rbtnCLEF.Checked = Settings.Format == FileFormat.CompactJsonFormatPerLine;
+            rbtnJsonPerLine.Checked = Settings.Format == FileFormat.JsonFormatPerLine;
+            rbtnCompactJsonFile.Checked = Settings.Format == FileFormat.CompactJsonFormatPerFile;
+            rbtnJsonFile.Checked = Settings.Format == FileFormat.JsonFormatFile;
+            rbDetectionModeAutomatic.Checked = Settings.FileFormatDetection == FileFormatDetection.Automatic;
+            rbDetectionModeManual.Checked = Settings.FileFormatDetection == FileFormatDetection.Manual;
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)

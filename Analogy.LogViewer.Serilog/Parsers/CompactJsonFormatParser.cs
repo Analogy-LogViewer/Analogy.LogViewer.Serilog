@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.DataTypes;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.LogViewer.Serilog.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -17,7 +17,7 @@ namespace Analogy.LogViewer.Serilog
 
         static CompactJsonFormatParser()
         {
-            messageFields=new CompactJsonFormatMessageFields();
+            messageFields = new CompactJsonFormatMessageFields();
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
@@ -39,7 +39,7 @@ namespace Analogy.LogViewer.Serilog
                                     using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
                                     {
                                         var reader = new LogEventReader(streamReader, messageFields);
-                                        while (reader.TryRead(out var evt))
+                                        while (reader.TryRead(out var evt) && !token.IsCancellationRequested)
                                         {
                                             analogy.Write(evt);
                                             AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);

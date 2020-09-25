@@ -29,10 +29,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
              Directory.Exists(UserSettingsManager.UserSettings.Settings.Directory))
                 ? UserSettingsManager.UserSettings.Settings.Directory
                 : Environment.CurrentDirectory;
-        private CompactJsonFormatParser ClefParser { get; }
-        private JsonFormatterParser JsonParser { get; }
+        private CompactJsonFormatParser CompactFormatPerLineParser { get; }
+        private JsonFormatterParser JsonPerLineParser { get; }
+        private JsonFileParser CompactJsonFileParser { get; }
         private JsonFileParser JsonFileParser { get; }
-        private JsonFormatterParser JsonFormatterParser { get; }
 
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -42,27 +42,38 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {
-            ClefParser = new CompactJsonFormatParser();
-            JsonParser = new JsonFormatterParser();
-            JsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
-            JsonFormatterParser = new JsonFormatterParser();
+            CompactFormatPerLineParser = new CompactJsonFormatParser();
+            JsonPerLineParser = new JsonFormatterParser();
+            JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
+            CompactJsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
 
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
             {
+                if (UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
+                {
+                    TryDetectFormat(fileName);
+                }
                 switch (UserSettingsManager.UserSettings.Settings.Format)
                 {
-                    case SerilogFileFormat.CLEF:
-                        return await ClefParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.JSONFile:
+                    case FileFormat.CompactJsonFormatPerLine:
+                        return await CompactFormatPerLineParser.Process(fileName, token, messagesHandler);
+                    case FileFormat.CompactJsonFormatPerFile:
+                        return await CompactJsonFileParser.Process(fileName, token, messagesHandler);
+                    case FileFormat.JsonFormatFile:
                         return await JsonFileParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.JSONPerLine:
-                        return await JsonFormatterParser.Process(fileName, token, messagesHandler);
+                    case FileFormat.JsonFormatPerLine:
+                        return await JsonPerLineParser.Process(fileName, token, messagesHandler);
                 }
             }
             return new List<AnalogyLogMessage>(0);
+        }
+
+        private void TryDetectFormat(string fileName)
+        {
+
         }
 
         public IEnumerable<FileInfo> GetSupportedFiles(DirectoryInfo dirInfo, bool recursiveLoad)

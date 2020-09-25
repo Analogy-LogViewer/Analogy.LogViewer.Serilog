@@ -14,11 +14,11 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task CompactJsonFormatParserTest()
         {
-            CompactJsonFormatParser p = new CompactJsonFormatParser();
+            CompactJsonFormatParser parser = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(Folder, "log files", "CompactJsonFormat.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count == 4);
             Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Id: 101 }");
         }
@@ -27,12 +27,12 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task CompactJsonFormatSourceContextTest()
         {
-            CompactJsonFormatParser p = new CompactJsonFormatParser();
+            CompactJsonFormatParser parser = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(Folder, "log files", "CompactJsonFormatSourceContextTest.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
 
-            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
 
             Assert.AreEqual(2, messages.Count());
 
@@ -62,11 +62,11 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task CompactJsonFormatTestColumns()
         {
-            CompactJsonFormatParser p = new CompactJsonFormatParser();
+            CompactJsonFormatParser parser = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(Folder, "log files", "CompactJsonFormatTestColumns.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.AreEqual(4, messages.Count());
             // The first event doesn't have a source context
             Assert.IsTrue(messages[0].MachineName == "Test");
@@ -77,11 +77,11 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [TestMethod]
         public async Task CompactJsonFormatTestGZFile()
         {
-            CompactJsonFormatParser p = new CompactJsonFormatParser();
+            CompactJsonFormatParser parser = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(Folder, "log files", "CompactJsonFormat.gz");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.AreEqual(4, messages.Count());
             // The first event doesn't have a source context
             Assert.IsTrue(messages[2].AdditionalInformation["Tags"] == "[\"test\", \"orange\"]");

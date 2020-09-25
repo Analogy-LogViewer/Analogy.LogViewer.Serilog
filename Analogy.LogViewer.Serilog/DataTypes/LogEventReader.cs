@@ -64,8 +64,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             }
 
             var data = _serializer.Deserialize(new JsonTextReader(new StringReader(line)));
-            var fields = data as JObject;
-            if (fields == null)
+            if (!(data is JObject fields))
                 throw new InvalidDataException($"The data on line {_lineNumber} is not a complete JSON object.");
 
             evt = ReadFromJObject(_lineNumber, fields,_messageFields);
