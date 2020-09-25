@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -54,7 +55,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             {
                 if (UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
                 {
-                    TryDetectFormat(fileName);
+                    UserSettingsManager.UserSettings.Settings.Format = TryDetectFormat(fileName);
                 }
                 switch (UserSettingsManager.UserSettings.Settings.Format)
                 {
@@ -68,12 +69,55 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                         return await JsonPerLineParser.Process(fileName, token, messagesHandler);
                 }
             }
+            LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
         }
 
-        private void TryDetectFormat(string fileName)
+        public static FileFormat TryDetectFormat(string fileName)
         {
+            var format = TryParseAsFile(fileName);
+            if (format == FileFormat.Unknown)
+                format = TryParsePerFile(fileName);
+            return format;
+        }
 
+        private static FileFormat TryParsePerFile(string fileName)
+        {
+            try
+            {
+                var jsonData = File.ReadLines(fileName).First();
+                IMessageFields fields = new JsonFormatMessageFields();
+                if (fields.Required.All(jsonData.Contains))
+                    return FileFormat.JsonFormatFile;
+                fields = new CompactJsonFormatMessageFields();
+                if (fields.Required.All(jsonData.Contains))
+                    return FileFormat.CompactJsonFormatPerFile;
+                return FileFormat.Unknown;
+            }
+            catch (Exception)
+            {
+                return FileFormat.Unknown;
+            }
+        }
+
+        private static FileFormat TryParseAsFile(string fileName)
+        {
+            try
+            {
+                var jsonData = File.ReadAllText(fileName);
+                var jsonObject = JsonConvert.DeserializeObject(jsonData);
+                IMessageFields fields = new JsonFormatMessageFields();
+                if (fields.Required.All(jsonData.Contains))
+                    return FileFormat.JsonFormatFile;
+                fields = new CompactJsonFormatMessageFields();
+                if (fields.Required.All(jsonData.Contains))
+                    return FileFormat.CompactJsonFormatPerFile;
+                return FileFormat.Unknown;
+            }
+            catch (Exception)
+            {
+                return FileFormat.Unknown;
+            }
         }
 
         public IEnumerable<FileInfo> GetSupportedFiles(DirectoryInfo dirInfo, bool recursiveLoad)

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog.DataTypes
 {
@@ -16,6 +13,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         string EventId { get; }
         string Message { get; }
         string[] All { get; }
+        string[] Required { get; }
         string Unescape(string name);
         bool IsUnrecognized(string name);
     }
@@ -29,7 +27,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         public string Renderings { get; }
         public string EventId { get; }
         public string Message { get; }
-
+        public string[] Required { get; }
         public string[] All { get; }
         string Prefix = "@";
         string EscapedInitialAt = "@@";
@@ -46,7 +44,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             Prefix = "@";
             EscapedInitialAt = "@@";
             All = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, EventId, Message };
-
+            Required = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings };
 
         }
         public string Unescape(string name)
@@ -77,6 +75,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         public string Message { get; }
 
         public string[] All { get; }
+        public string[] Required { get; }
         string Prefix = "@";
         string EscapedInitialAt = "@@";
 
@@ -90,7 +89,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             EventId = "@i";
             Message = "@m";
             All = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, EventId, Message };
-
+            Required = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings };
 
         }
         public string Unescape(string name)
