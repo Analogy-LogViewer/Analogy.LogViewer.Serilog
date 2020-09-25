@@ -46,9 +46,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public OfflineDataProvider()
         {
             CompactFormatPerLineParser = new CompactJsonFormatParser();
-            JsonPerLineParser = new JsonFormatterParser();
-            JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
             CompactJsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
+
+            JsonPerLineParser = new JsonFormatterParser(new JsonFormatMessageFields());
+            JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
 
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)

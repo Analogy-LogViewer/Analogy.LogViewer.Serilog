@@ -16,20 +16,20 @@ namespace Analogy.LogViewer.Serilog
 {
     public class JsonFormatterParser
     {
-        private static IMessageFields messageFields;
+        private  IMessageFields messageFields;
 
-        static JsonFormatterParser()
+        public JsonFormatterParser(IMessageFields messageFields)
         {
-            messageFields = new JsonFormatMessageFields();
+            this.messageFields = messageFields;
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
             ILogMessageCreatedHandler messagesHandler)
         {
-            var formatter = new JsonFormatter();
+            //var formatter = new JsonFormatter();
             List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
             try
             {
-                using (var analogy = new LoggerConfiguration().WriteTo.Analogy(formatter)
+                using (var analogy = new LoggerConfiguration().WriteTo.Analogy()
                     .CreateLogger())
                 {
                     using (var fileStream =
@@ -48,6 +48,7 @@ namespace Analogy.LogViewer.Serilog
                                         var data = JsonConvert.DeserializeObject(json);
                                         var evt = LogEventReader.ReadFromJObject(data as JObject, messageFields);
                                         {
+                                            analogy.Write(evt);
                                             AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
                                             parsedMessages.Add(m);
                                         }
@@ -66,6 +67,7 @@ namespace Analogy.LogViewer.Serilog
                                 var data = JsonConvert.DeserializeObject(json);
                                 var evt = LogEventReader.ReadFromJObject(data as JObject, messageFields);
                                 {
+                                    analogy.Write(evt);
                                     AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
                                     parsedMessages.Add(m);
                                 }

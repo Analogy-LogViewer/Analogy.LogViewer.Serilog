@@ -30,7 +30,7 @@
     <None Update="log files\CompactJsonFormat.gz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\JsonPerLine.clef">
+    <None Update="log files\JsonFormatPerLine.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log files\CompactJsonFormatSourceContextTest.clef">
@@ -39,7 +39,7 @@
     <None Update="log files\CompactJsonFormatTestColumns.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log files\JsonFile.clef">
+    <None Update="log files\JsonFileCompactFormat.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -95,7 +95,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [DataRow("CompactJsonFormatSourceContextTest.clef")]
         [DataRow("CompactJsonFormatTestColumns.clef")]
         [DataRow("CompactJsonFormat.gz")]
-        public async Task CompactJsonFormatTestAutomaticDetection(string fileName)
+        public  void CompactJsonFormatTestAutomaticDetection(string fileName)
         {
             string file = Path.Combine(Folder, "log files", fileName);
             var type = OfflineDataProvider.TryDetectFormat(file);
