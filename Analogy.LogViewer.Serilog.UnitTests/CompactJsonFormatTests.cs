@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Analogy.LogViewer.Serilog.DataTypes;
+using Analogy.LogViewer.Serilog.IAnalogy;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
@@ -85,6 +87,19 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.AreEqual(4, messages.Count());
             // The first event doesn't have a source context
             Assert.IsTrue(messages[2].AdditionalInformation["Tags"] == "[\"test\", \"orange\"]");
+
+        }
+
+        [TestMethod]
+        [DataRow("CompactJsonFormat.clef")]
+        [DataRow("CompactJsonFormatSourceContextTest.clef")]
+        [DataRow("CompactJsonFormatTestColumns.clef")]
+        [DataRow("CompactJsonFormat.gz")]
+        public async Task CompactJsonFormatTestAutomaticDetection(string fileName)
+        {
+            string file = Path.Combine(Folder, "log files", fileName);
+            var type = OfflineDataProvider.TryDetectFormat(file);
+            Assert.IsTrue(type == FileFormat.CompactJsonFormatPerLine);
 
         }
     }

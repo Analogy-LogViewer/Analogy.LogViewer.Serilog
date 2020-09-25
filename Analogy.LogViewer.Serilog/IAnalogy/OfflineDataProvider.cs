@@ -77,21 +77,21 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             var format = TryParseAsFile(fileName);
             if (format == FileFormat.Unknown)
-                format = TryParsePerFile(fileName);
+                format = TryParsePerLine(fileName);
             return format;
         }
 
-        private static FileFormat TryParsePerFile(string fileName)
+        private static FileFormat TryParsePerLine(string fileName)
         {
             try
             {
                 var jsonData = File.ReadLines(fileName).First();
                 IMessageFields fields = new JsonFormatMessageFields();
-                if (fields.Required.All(jsonData.Contains))
-                    return FileFormat.JsonFormatFile;
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                    return FileFormat.JsonFormatPerLine;
                 fields = new CompactJsonFormatMessageFields();
-                if (fields.Required.All(jsonData.Contains))
-                    return FileFormat.CompactJsonFormatPerFile;
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                    return FileFormat.CompactJsonFormatPerLine;
                 return FileFormat.Unknown;
             }
             catch (Exception)
@@ -107,10 +107,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 var jsonData = File.ReadAllText(fileName);
                 var jsonObject = JsonConvert.DeserializeObject(jsonData);
                 IMessageFields fields = new JsonFormatMessageFields();
-                if (fields.Required.All(jsonData.Contains))
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
                     return FileFormat.JsonFormatFile;
                 fields = new CompactJsonFormatMessageFields();
-                if (fields.Required.All(jsonData.Contains))
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
                     return FileFormat.CompactJsonFormatPerFile;
                 return FileFormat.Unknown;
             }
