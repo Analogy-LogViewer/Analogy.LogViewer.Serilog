@@ -19,7 +19,7 @@ namespace Analogy.LogViewer.Serilog
         public SerilogSettings()
         {
             FileFormatDetection = FileFormatDetection.Automatic;
-            Format = FileFormat.CompactJsonFormatPerLine;
+            Format = FileFormat.Unknown;
             Directory = string.Empty;
             IgnoredAttributes = new List<string>() { "N" };
             FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";

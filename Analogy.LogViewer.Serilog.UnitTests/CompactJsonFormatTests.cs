@@ -14,6 +14,37 @@ namespace Analogy.LogViewer.Serilog.UnitTests
     {
         private string Folder { get; } = Environment.CurrentDirectory;
         [TestMethod]
+        [DataRow("CompactJsonFormat.clef",4, "2016-10-12T04:46:58.0554314Z")]
+        [DataRow("CompactJsonFormatSourceContextTest.clef",2, "2020-06-18T18:03:19.2248275Z")]
+        [DataRow("CompactJsonFormatTestColumns.clef",4, "2020-06-26T14:21:34.7233612Z")]
+        [DataRow("CompactJsonFormat.gz",4, "2016-10-12T04:46:58.0554314Z")]
+        public async Task OfflineProviderParserTimestampTest(string fileName,int numberOfMessages,string datetimeToParse)
+        {
+            OfflineDataProvider parser = new OfflineDataProvider();
+            CancellationTokenSource cts = new CancellationTokenSource();
+            string file = Path.Combine(Folder, "log files", fileName);
+            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+            var messages = (await parser.Process(file, cts.Token, forTesting)).ToList();
+            DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse);
+            Assert.IsTrue(messages.Count == numberOfMessages);
+            Assert.IsTrue(messages[0].Date == dto.DateTime);
+        }
+
+
+        [TestMethod]
+        [DataRow("CompactJsonFormat.clef")]
+        [DataRow("CompactJsonFormatSourceContextTest.clef")]
+        [DataRow("CompactJsonFormatTestColumns.clef")]
+        [DataRow("CompactJsonFormat.gz")]
+        public void CompactJsonFormatTestAutomaticDetection(string fileName)
+        {
+            string file = Path.Combine(Folder, "log files", fileName);
+            var type = OfflineDataProvider.TryDetectFormat(file);
+            Assert.IsTrue(type == FileFormat.CompactJsonFormatPerLine);
+
+        }
+
+        [TestMethod]
         public async Task CompactJsonFormatParserTest()
         {
             CompactJsonFormatParser parser = new CompactJsonFormatParser();
@@ -90,17 +121,6 @@ namespace Analogy.LogViewer.Serilog.UnitTests
 
         }
 
-        [TestMethod]
-        [DataRow("CompactJsonFormat.clef")]
-        [DataRow("CompactJsonFormatSourceContextTest.clef")]
-        [DataRow("CompactJsonFormatTestColumns.clef")]
-        [DataRow("CompactJsonFormat.gz")]
-        public  void CompactJsonFormatTestAutomaticDetection(string fileName)
-        {
-            string file = Path.Combine(Folder, "log files", fileName);
-            var type = OfflineDataProvider.TryDetectFormat(file);
-            Assert.IsTrue(type == FileFormat.CompactJsonFormatPerLine);
 
-        }
     }
 }
