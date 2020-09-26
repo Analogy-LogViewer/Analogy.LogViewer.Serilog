@@ -128,7 +128,87 @@
     <value>..\Resources\AnalogySerilog32x32.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CompactJsonFormatPerFile" xml:space="preserve">
-    <value />
+    <value>[
+  {
+    "@t": "2019-12-10T13:33:23.0970926Z",
+    "@mt": "An unknown error occurred",
+    "@l": "Error",
+    "@x": "Exception stack trace",
+    "SourceContext": "MySourceContext",
+    "Scope": [
+      "FirstScope",
+      1850562557,
+      "198441851"
+    ],
+    "MachineName": "MY-MACHINE",
+    "EnvironmentUserName": "WORKGROUP\\SYSTEM",
+    "ExceptionDetail": {
+      "HResult": -2146233087,
+      "Message": "Internal Error",
+      "Source": "System.ServiceModel",
+      "Action": null,
+      "Code": {
+        "IsPredefinedFault": true,
+        "IsSenderFault": true,
+        "IsReceiverFault": false,
+        "Namespace": "http://schemas.xmlsoap.org/soap/envelope/",
+        "Name": "Client",
+        "SubCode": null
+      },
+      "Reason": {
+        "Translations": [
+          {
+            "XmlLang": "",
+            "Text": "Internal Error"
+          }
+        ]
+      },
+      "Type": "System.ServiceModel.FaultException"
+    },
+    "AssemblyVersion": "2.1.0.1017"
+  },
+  {
+    "@t": "2019-12-10T13:33:23.0970926Z",
+    "@mt": "An unknown error occurred",
+    "@l": "Error",
+    "@x": "Exception stack trace",
+    "SourceContext": "MySourceContext",
+    "Scope": [
+      "FirstScope",
+      1850562557,
+      "198441851"
+    ],
+    "MachineName": "MY-MACHINE",
+    "ProcessId": 11,
+    "ProcessName": "My process",
+    "ThreadId": 1,
+    "EnvironmentUserName": "WORKGROUP\\SYSTEM",
+    "ExceptionDetail": {
+      "HResult": -2146233087,
+      "Message": "Internal Error",
+      "Source": "System.ServiceModel",
+      "Action": null,
+      "Code": {
+        "IsPredefinedFault": true,
+        "IsSenderFault": true,
+        "IsReceiverFault": false,
+        "Namespace": "http://schemas.xmlsoap.org/soap/envelope/",
+        "Name": "Client",
+        "SubCode": null
+      },
+      "Reason": {
+        "Translations": [
+          {
+            "XmlLang": "",
+            "Text": "Internal Error"
+          }
+        ]
+      },
+      "Type": "System.ServiceModel.FaultException"
+    },
+    "AssemblyVersion": "2.1.0.1017"
+  }
+]</value>
   </data>
   <data name="CompactJsonFormatPerLine" xml:space="preserve">
     <value>{"@t":"2016-10-12T04:46:58.0554314Z","@mt":"Hello, {@User}","User":{"Name":"nblumhardt","Id":101}}
@@ -137,10 +217,54 @@
 {"@t":"2016-10-12T04:46:58.0904378Z","@mt":"Something failed","@l":"Error", "@x":"System.DivideByZer...&lt;snip&gt;"}</value>
   </data>
   <data name="JsonFormatFile" xml:space="preserve">
-    <value />
+    <value>[
+  {
+    "Timestamp": "2020-06-07T13:44:57.8532799+10:00",
+    "Level": "Information",
+    "MessageTemplate": "Hello, {@User}, {N:x8} at {Now}",
+    "Properties": {
+      "User": {
+        "Name": "nblumhardt",
+        "Tags": [ 1, 2, 3 ]
+      },
+      "N": 123,
+      "Now": "2016-06-07T13:44:57.8532799+10:00"
+    },
+    "Renderings": {
+      "N": [
+        {
+          "Format": "x8",
+          "Rendering": "0000007b"
+        }
+      ]
+    }
+  },
+  {
+    "Timestamp": "2016-06-07T13:44:57.8532799+10:00",
+    "Level": "Information",
+    "MessageTemplate": "Hello, {@User}, {N:x8} at {Now}",
+    "Properties": {
+      "User": {
+        "Name": "Lior",
+        "Tags": [ 1, 2, 3 ]
+      },
+      "N": 123,
+      "Now": "2016-06-07T13:44:57.8532799+10:00"
+    },
+    "Renderings": {
+      "N": [
+        {
+          "Format": "x8",
+          "Rendering": "0000007b"
+        }
+      ]
+    }
+  }
+]</value>
   </data>
   <data name="JsonFormatPerLine" xml:space="preserve">
-    <value />
+    <value>{"Timestamp":"2020-06-07T13:44:57.8532799+10:00","Level":"Information","MessageTemplate":"Hello, {@User}, {N:x8} at {Now}","Properties":{"User":{"Name":"nblumhardt","Tags":[1,2,3]},"N":123,"Now":"2016-06-07T13:44:57.8532799+10:00"},"Renderings":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
+{"Timestamp":"2016-06-07T13:44:57.8532799+10:00","Level":"Information","MessageTemplate":"Hello, {@User}, {N:x8} at {Now}","Properties":{"User":{"Name":"Lior","Tags":[1,2,3]},"N":123,"Now":"2016-06-07T13:44:57.8532799+10:00"},"Renderings":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}</value>
   </data>
   <data name="Serilog_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Serilog_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

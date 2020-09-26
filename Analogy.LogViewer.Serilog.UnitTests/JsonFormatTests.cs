@@ -43,6 +43,19 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         }
 
         [TestMethod]
+        public async Task JsonFilePerFileTest()
+        {
+            JsonFileParser parser = new JsonFileParser(new JsonFormatMessageFields());
+            CancellationTokenSource cts = new CancellationTokenSource();
+            string fileName = Path.Combine(Folder, "log files", "JsonFormatPerFile.clef");
+            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
+            Assert.IsTrue(messages.Count == 2);
+            //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
+            Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
+        }
+
+        [TestMethod]
         [DataRow("JsonFileCompactFormat.clef", FileFormat.CompactJsonFormatPerFile)]
         [DataRow("JsonFormatPerLine.clef", FileFormat.JsonFormatPerLine)]
         public void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
