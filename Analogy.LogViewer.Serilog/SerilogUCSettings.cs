@@ -37,7 +37,12 @@ namespace Analogy.LogViewer.Serilog
             Settings.FileFormatDetection = rbDetectionModeAutomatic.Checked
                 ? FileFormatDetection.Automatic
                 : FileFormatDetection.Manual;
-            if (rbtnCLEF.Checked)
+            if (rbtnReset.Checked)
+            {
+                Settings.Format = FileFormat.Unknown;
+                rtxtExample.Text = "";
+            }
+            else if (rbtnCLEF.Checked)
             {
                 Settings.Format = FileFormat.CompactJsonFormatPerLine;
                 rtxtExample.Text = Resources.CompactJsonFormatPerLine;
@@ -121,6 +126,7 @@ namespace Analogy.LogViewer.Serilog
             rbtnJsonPerLine.Checked = Settings.Format == FileFormat.JsonFormatPerLine;
             rbtnCompactJsonFile.Checked = Settings.Format == FileFormat.CompactJsonFormatPerFile;
             rbtnJsonFile.Checked = Settings.Format == FileFormat.JsonFormatFile;
+            rbtnReset.Checked = Settings.Format == FileFormat.Unknown;
             rbDetectionModeAutomatic.Checked = Settings.FileFormatDetection == FileFormatDetection.Automatic;
             rbDetectionModeManual.Checked = Settings.FileFormatDetection == FileFormatDetection.Manual;
         }

@@ -43,7 +43,12 @@
             this.btnTestFilter = new System.Windows.Forms.Button();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rbDetectionModeManual = new System.Windows.Forms.RadioButton();
+            this.rbDetectionModeAutomatic = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtnJsonFile = new System.Windows.Forms.RadioButton();
+            this.rtxtExample = new System.Windows.Forms.RichTextBox();
             this.rbtnCompactJsonFile = new System.Windows.Forms.RadioButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.txtbIgnoreColumn = new System.Windows.Forms.TextBox();
@@ -52,11 +57,7 @@
             this.btnIgnoreColumn = new System.Windows.Forms.Button();
             this.lstbIgnoreColumn = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rtxtExample = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.rbDetectionModeAutomatic = new System.Windows.Forms.RadioButton();
-            this.rbDetectionModeManual = new System.Windows.Forms.RadioButton();
-            this.rbtnJsonFile = new System.Windows.Forms.RadioButton();
+            this.rbtnReset = new System.Windows.Forms.RadioButton();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -153,7 +154,6 @@
             this.rbtnCLEF.Name = "rbtnCLEF";
             this.rbtnCLEF.Size = new System.Drawing.Size(219, 22);
             this.rbtnCLEF.TabIndex = 14;
-            this.rbtnCLEF.TabStop = true;
             this.rbtnCLEF.Text = "Compact Format Per line/row";
             this.rbtnCLEF.UseVisualStyleBackColor = true;
             // 
@@ -229,11 +229,43 @@
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // rbDetectionModeManual
+            // 
+            this.rbDetectionModeManual.AutoSize = true;
+            this.rbDetectionModeManual.Location = new System.Drawing.Point(447, 128);
+            this.rbDetectionModeManual.Name = "rbDetectionModeManual";
+            this.rbDetectionModeManual.Size = new System.Drawing.Size(75, 22);
+            this.rbDetectionModeManual.TabIndex = 53;
+            this.rbDetectionModeManual.Text = "Manual";
+            this.rbDetectionModeManual.UseVisualStyleBackColor = true;
+            // 
+            // rbDetectionModeAutomatic
+            // 
+            this.rbDetectionModeAutomatic.AutoSize = true;
+            this.rbDetectionModeAutomatic.Checked = true;
+            this.rbDetectionModeAutomatic.Location = new System.Drawing.Point(276, 128);
+            this.rbDetectionModeAutomatic.Name = "rbDetectionModeAutomatic";
+            this.rbDetectionModeAutomatic.Size = new System.Drawing.Size(94, 22);
+            this.rbDetectionModeAutomatic.TabIndex = 52;
+            this.rbDetectionModeAutomatic.TabStop = true;
+            this.rbDetectionModeAutomatic.Text = "Automatic";
+            this.rbDetectionModeAutomatic.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoEllipsis = true;
+            this.label1.Location = new System.Drawing.Point(13, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(148, 22);
+            this.label1.TabIndex = 51;
+            this.label1.Text = "File Detection Mode:";
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.rbtnReset);
             this.groupBox1.Controls.Add(this.rbtnJsonFile);
             this.groupBox1.Controls.Add(this.rtxtExample);
             this.groupBox1.Controls.Add(this.rbtnCLEF);
@@ -245,6 +277,28 @@
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Format:";
+            // 
+            // rbtnJsonFile
+            // 
+            this.rbtnJsonFile.AutoSize = true;
+            this.rbtnJsonFile.Location = new System.Drawing.Point(6, 106);
+            this.rbtnJsonFile.Name = "rbtnJsonFile";
+            this.rbtnJsonFile.Size = new System.Drawing.Size(214, 22);
+            this.rbtnJsonFile.TabIndex = 51;
+            this.rbtnJsonFile.Text = "Standard format full Json file";
+            this.rbtnJsonFile.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.rbtnJsonFile.UseVisualStyleBackColor = true;
+            // 
+            // rtxtExample
+            // 
+            this.rtxtExample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtxtExample.Location = new System.Drawing.Point(6, 147);
+            this.rtxtExample.Name = "rtxtExample";
+            this.rtxtExample.Size = new System.Drawing.Size(683, 223);
+            this.rtxtExample.TabIndex = 50;
+            this.rtxtExample.Text = "";
             // 
             // rbtnCompactJsonFile
             // 
@@ -336,57 +390,16 @@
             this.panel1.Size = new System.Drawing.Size(725, 56);
             this.panel1.TabIndex = 50;
             // 
-            // rtxtExample
+            // rbtnReset
             // 
-            this.rtxtExample.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtxtExample.Location = new System.Drawing.Point(6, 147);
-            this.rtxtExample.Name = "rtxtExample";
-            this.rtxtExample.Size = new System.Drawing.Size(683, 223);
-            this.rtxtExample.TabIndex = 50;
-            this.rtxtExample.Text = "";
-            // 
-            // label1
-            // 
-            this.label1.AutoEllipsis = true;
-            this.label1.Location = new System.Drawing.Point(13, 128);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 22);
-            this.label1.TabIndex = 51;
-            this.label1.Text = "File Detection Mode:";
-            // 
-            // rbDetectionModeAutomatic
-            // 
-            this.rbDetectionModeAutomatic.AutoSize = true;
-            this.rbDetectionModeAutomatic.Checked = true;
-            this.rbDetectionModeAutomatic.Location = new System.Drawing.Point(276, 128);
-            this.rbDetectionModeAutomatic.Name = "rbDetectionModeAutomatic";
-            this.rbDetectionModeAutomatic.Size = new System.Drawing.Size(94, 22);
-            this.rbDetectionModeAutomatic.TabIndex = 52;
-            this.rbDetectionModeAutomatic.Text = "Automatic";
-            this.rbDetectionModeAutomatic.UseVisualStyleBackColor = true;
-            // 
-            // rbDetectionModeManual
-            // 
-            this.rbDetectionModeManual.AutoSize = true;
-            this.rbDetectionModeManual.Location = new System.Drawing.Point(447, 128);
-            this.rbDetectionModeManual.Name = "rbDetectionModeManual";
-            this.rbDetectionModeManual.Size = new System.Drawing.Size(75, 22);
-            this.rbDetectionModeManual.TabIndex = 53;
-            this.rbDetectionModeManual.Text = "Manual";
-            this.rbDetectionModeManual.UseVisualStyleBackColor = true;
-            // 
-            // rbtnJsonFile
-            // 
-            this.rbtnJsonFile.AutoSize = true;
-            this.rbtnJsonFile.Location = new System.Drawing.Point(6, 106);
-            this.rbtnJsonFile.Name = "rbtnJsonFile";
-            this.rbtnJsonFile.Size = new System.Drawing.Size(214, 22);
-            this.rbtnJsonFile.TabIndex = 51;
-            this.rbtnJsonFile.Text = "Standard format full Json file";
-            this.rbtnJsonFile.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.rbtnJsonFile.UseVisualStyleBackColor = true;
+            this.rbtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbtnReset.AutoSize = true;
+            this.rbtnReset.Location = new System.Drawing.Point(523, 25);
+            this.rbtnReset.Name = "rbtnReset";
+            this.rbtnReset.Size = new System.Drawing.Size(148, 22);
+            this.rbtnReset.TabIndex = 52;
+            this.rbtnReset.Text = "Reset to Unknown";
+            this.rbtnReset.UseVisualStyleBackColor = true;
             // 
             // SerilogUCSettings
             // 
@@ -440,5 +453,6 @@
         private System.Windows.Forms.RadioButton rbDetectionModeAutomatic;
         private System.Windows.Forms.RadioButton rbDetectionModeManual;
         private System.Windows.Forms.RadioButton rbtnJsonFile;
+        private System.Windows.Forms.RadioButton rbtnReset;
     }
 }
