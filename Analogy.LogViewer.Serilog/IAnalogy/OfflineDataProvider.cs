@@ -56,10 +56,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         {
             if (CanOpenFile(fileName))
             {
-                if (UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
-                {
+                if (UserSettingsManager.UserSettings.Settings.FileFormatDetection==FileFormatDetection.Automatic ||
+                    UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
                     UserSettingsManager.UserSettings.Settings.Format = TryDetectFormat(fileName);
-                }
+     
                 switch (UserSettingsManager.UserSettings.Settings.Format)
                 {
                     case FileFormat.CompactJsonFormatPerLine:
