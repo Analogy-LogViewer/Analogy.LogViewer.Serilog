@@ -91,6 +91,88 @@ namespace Analogy.LogViewer.Serilog.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  {
+        ///    &quot;@t&quot;: &quot;2019-12-10T13:33:23.0970926Z&quot;,
+        ///    &quot;@mt&quot;: &quot;An unknown error occurred&quot;,
+        ///    &quot;@l&quot;: &quot;Error&quot;,
+        ///    &quot;@x&quot;: &quot;Exception stack trace&quot;,
+        ///    &quot;SourceContext&quot;: &quot;MySourceContext&quot;,
+        ///    &quot;Scope&quot;: [
+        ///      &quot;FirstScope&quot;,
+        ///      1850562557,
+        ///      &quot;198441851&quot;
+        ///    ],
+        ///    &quot;MachineName&quot;: &quot;MY-MACHINE&quot;,
+        ///    &quot;EnvironmentUserName&quot;: &quot;WORKGROUP\\SYSTEM&quot;,
+        ///    &quot;ExceptionDetail&quot;: {
+        ///      &quot;HResult&quot;: -2146233087,
+        ///      &quot;Message&quot;: &quot;Internal Error&quot;,
+        ///      &quot;Source&quot;: &quot;System.ServiceModel&quot;,
+        ///      &quot;Action&quot;: null,
+        ///  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CompactJsonFormatPerFile {
+            get {
+                return ResourceManager.GetString("CompactJsonFormatPerFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;@t&quot;:&quot;2016-10-12T04:46:58.0554314Z&quot;,&quot;@mt&quot;:&quot;Hello, {@User}&quot;,&quot;User&quot;:{&quot;Name&quot;:&quot;nblumhardt&quot;,&quot;Id&quot;:101}}
+        ///{&quot;@t&quot;:&quot;2016-10-12T04:46:58.0684369Z&quot;,&quot;@mt&quot;:&quot;Number {N:x8}&quot;,&quot;@r&quot;:[&quot;0000002a&quot;],&quot;N&quot;:42}
+        ///{&quot;@t&quot;:&quot;2016-10-12T04:46:58.0724384Z&quot;,&quot;@mt&quot;:&quot;Tags are {Tags}&quot;,&quot;@l&quot;:&quot;Warning&quot;,&quot;Tags&quot;:[&quot;test&quot;,&quot;orange&quot;]}
+        ///{&quot;@t&quot;:&quot;2016-10-12T04:46:58.0904378Z&quot;,&quot;@mt&quot;:&quot;Something failed&quot;,&quot;@l&quot;:&quot;Error&quot;, &quot;@x&quot;:&quot;System.DivideByZer...&lt;snip&gt;&quot;}.
+        /// </summary>
+        internal static string CompactJsonFormatPerLine {
+            get {
+                return ResourceManager.GetString("CompactJsonFormatPerLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  {
+        ///    &quot;Timestamp&quot;: &quot;2020-06-07T13:44:57.8532799+10:00&quot;,
+        ///    &quot;Level&quot;: &quot;Information&quot;,
+        ///    &quot;MessageTemplate&quot;: &quot;Hello, {@User}, {N:x8} at {Now}&quot;,
+        ///    &quot;Properties&quot;: {
+        ///      &quot;User&quot;: {
+        ///        &quot;Name&quot;: &quot;nblumhardt&quot;,
+        ///        &quot;Tags&quot;: [ 1, 2, 3 ]
+        ///      },
+        ///      &quot;N&quot;: 123,
+        ///      &quot;Now&quot;: &quot;2016-06-07T13:44:57.8532799+10:00&quot;
+        ///    },
+        ///    &quot;Renderings&quot;: {
+        ///      &quot;N&quot;: [
+        ///        {
+        ///          &quot;Format&quot;: &quot;x8&quot;,
+        ///          &quot;Rendering&quot;: &quot;0000007b&quot;
+        ///        }
+        ///      ]
+        ///    }
+        ///  },
+        ///  {
+        ///    &quot;Timestamp&quot;: &quot;2016-06-07T13: [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string JsonFormatFile {
+            get {
+                return ResourceManager.GetString("JsonFormatFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;Timestamp&quot;:&quot;2020-06-07T13:44:57.8532799+10:00&quot;,&quot;Level&quot;:&quot;Information&quot;,&quot;MessageTemplate&quot;:&quot;Hello, {@User}, {N:x8} at {Now}&quot;,&quot;Properties&quot;:{&quot;User&quot;:{&quot;Name&quot;:&quot;nblumhardt&quot;,&quot;Tags&quot;:[1,2,3]},&quot;N&quot;:123,&quot;Now&quot;:&quot;2016-06-07T13:44:57.8532799+10:00&quot;},&quot;Renderings&quot;:{&quot;N&quot;:[{&quot;Format&quot;:&quot;x8&quot;,&quot;Rendering&quot;:&quot;0000007b&quot;}]}}
+        ///{&quot;Timestamp&quot;:&quot;2016-06-07T13:44:57.8532799+10:00&quot;,&quot;Level&quot;:&quot;Information&quot;,&quot;MessageTemplate&quot;:&quot;Hello, {@User}, {N:x8} at {Now}&quot;,&quot;Properties&quot;:{&quot;User&quot;:{&quot;Name&quot;:&quot;Lior&quot;,&quot;Tags&quot;:[1,2,3]},&quot;N&quot;:123,&quot;Now&quot;:&quot;2016-06-07T13:44:57.8532799+ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string JsonFormatPerLine {
+            get {
+                return ResourceManager.GetString("JsonFormatPerLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Serilog_icon {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Analogy.LogViewer.Serilog.CompactClef
+namespace Analogy.LogViewer.Serilog.DataTypes
 {
     static class MessageTemplateSyntax
     {

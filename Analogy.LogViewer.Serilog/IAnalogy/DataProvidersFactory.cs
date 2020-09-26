@@ -1,10 +1,9 @@
-﻿using Analogy.Interfaces;
-using Analogy.Interfaces.Factories;
-using Analogy.LogViewer.Serilog.IAnalogy;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Analogy.Interfaces;
+using Analogy.Interfaces.Factories;
 
-namespace Analogy.LogViewer.Serilog
+namespace Analogy.LogViewer.Serilog.IAnalogy
 {
     public class DataProvidersFactory : IAnalogyDataProvidersFactory
     {

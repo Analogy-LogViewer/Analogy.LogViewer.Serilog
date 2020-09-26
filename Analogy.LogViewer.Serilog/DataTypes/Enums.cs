@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Analogy.LogViewer.Serilog.DataTypes
+﻿namespace Analogy.LogViewer.Serilog.DataTypes
 {
-    public enum LogFormat
+    public enum FileFormat
     {
-        Clef,
-
+        Unknown,
+        CompactJsonFormatPerLine,
+        JsonFormatPerLine,
+        CompactJsonFormatPerFile,
+        JsonFormatFile,
     }
 
+    public enum FileFormatDetection
+    {
+        Automatic,
+        Manual
+    }
 }

@@ -1,11 +1,14 @@
 ﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
-using Analogy.LogViewer.Serilog.Regex;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,10 +32,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
              Directory.Exists(UserSettingsManager.UserSettings.Settings.Directory))
                 ? UserSettingsManager.UserSettings.Settings.Directory
                 : Environment.CurrentDirectory;
-        private ClefParser ClefParser { get; }
+        private CompactJsonFormatParser CompactFormatPerLineParser { get; }
+        private JsonFormatterParser JsonPerLineParser { get; }
+        private JsonFileParser CompactJsonFileParser { get; }
         private JsonFileParser JsonFileParser { get; }
-        private JsonFormatterParser JsonFormatterParser { get; }
-        private Regex.RegexParser RegexParser { get; set; }
 
         public bool UseCustomColors { get; set; } = false;
         public IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -42,31 +45,97 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {
-            ClefParser = new ClefParser();
-            JsonFileParser = new JsonFileParser();
-            JsonFormatterParser=new JsonFormatterParser();
-            RegexParser = new Regex.RegexParser(UserSettingsManager.UserSettings.Settings.RegexPatterns, false,
-                LogManager.Instance);
+            CompactFormatPerLineParser = new CompactJsonFormatParser();
+            CompactJsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
+
+            JsonPerLineParser = new JsonFormatterParser(new JsonFormatMessageFields());
+            JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
 
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
             {
+                if (UserSettingsManager.UserSettings.Settings.FileFormatDetection==FileFormatDetection.Automatic ||
+                    UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
+                    UserSettingsManager.UserSettings.Settings.Format = TryDetectFormat(fileName);
+     
                 switch (UserSettingsManager.UserSettings.Settings.Format)
                 {
-                    case SerilogFileFormat.CLEF:
-                        return await ClefParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.JSONFile:
+                    case FileFormat.CompactJsonFormatPerLine:
+                        return await CompactFormatPerLineParser.Process(fileName, token, messagesHandler);
+                    case FileFormat.CompactJsonFormatPerFile:
+                        return await CompactJsonFileParser.Process(fileName, token, messagesHandler);
+                    case FileFormat.JsonFormatFile:
                         return await JsonFileParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.JSONPerLine:
-                        return await JsonFormatterParser.Process(fileName, token, messagesHandler);
-                    case SerilogFileFormat.REGEX:
-                        RegexParser.SetRegexPatterns(UserSettingsManager.UserSettings.Settings.RegexPatterns);
-                        return await RegexParser.ParseLog(fileName, token, messagesHandler);
+                    case FileFormat.JsonFormatPerLine:
+                        return await JsonPerLineParser.Process(fileName, token, messagesHandler);
                 }
             }
+            LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
+        }
+
+        public static FileFormat TryDetectFormat(string fileName)
+        {
+            string jsonData = string.Empty;
+            if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+            {
+                using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                    {
+                        using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
+                        {
+                            jsonData = streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(jsonData))
+                jsonData = File.ReadAllText(fileName);
+            var format = TryParseAsFile(jsonData);
+            if (format == FileFormat.Unknown)
+                format = TryParsePerLine(jsonData);
+            return format;
+        }
+
+        private static FileFormat TryParsePerLine(string jsonData)
+        {
+            try
+            {
+                IMessageFields fields = new JsonFormatMessageFields();
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                    return FileFormat.JsonFormatPerLine;
+                fields = new CompactJsonFormatMessageFields();
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                    return FileFormat.CompactJsonFormatPerLine;
+                return FileFormat.Unknown;
+            }
+            catch (Exception)
+            {
+                return FileFormat.Unknown;
+            }
+        }
+
+        private static FileFormat TryParseAsFile(string jsonData)
+        {
+            try
+            {
+                var jsonObject = JsonConvert.DeserializeObject(jsonData);
+                IMessageFields fields = new JsonFormatMessageFields();
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                    return FileFormat.JsonFormatFile;
+                fields = new CompactJsonFormatMessageFields();
+                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                    return FileFormat.CompactJsonFormatPerFile;
+                return FileFormat.Unknown;
+            }
+            catch (Exception)
+            {
+                return FileFormat.Unknown;
+            }
         }
 
         public IEnumerable<FileInfo> GetSupportedFiles(DirectoryInfo dirInfo, bool recursiveLoad)

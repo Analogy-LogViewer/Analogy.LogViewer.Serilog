@@ -1,14 +1,13 @@
 ﻿using Analogy.Interfaces;
-using Analogy.LogViewer.Serilog.CompactClef;
+using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using Serilog.Formatting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +16,12 @@ namespace Analogy.LogViewer.Serilog
 {
     public class JsonFileParser
     {
-        public static ITextFormatter textFormatter;
+        private IMessageFields messageFields;
+
+        public JsonFileParser(IMessageFields messageFields)
+        {
+            this.messageFields = messageFields;
+        }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             var messages = await Task<IEnumerable<AnalogyLogMessage>>.Factory.StartNew(() =>
@@ -30,14 +34,34 @@ namespace Analogy.LogViewer.Serilog
                         .CreateLogger())
                     {
                         using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                        using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                         {
-                            var json = streamReader.ReadToEnd();
-                            var data = JsonConvert.DeserializeObject(json);
+                            string jsonData;
+                            if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                                {
+                                    using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
+                                    {
+                                        jsonData = streamReader.ReadToEnd();
+
+                                    }
+                                }
+                            }
+                            else
+                                using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+                                {
+                                    jsonData = streamReader.ReadToEnd();
+                                }
+
+
+                            var data = JsonConvert.DeserializeObject(jsonData);
                             if (data is JObject jo)
                             {
-                                var m = ParserJObject(jo, analogy);
+                                var evt = LogEventReader.ReadFromJObject(jo, messageFields);
+                                analogy.Write(evt);
+                                AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
                                 parsedMessages.Add(m);
+
                             }
                             else if (data is JArray arr)
                             {
@@ -45,8 +69,11 @@ namespace Analogy.LogViewer.Serilog
                                 {
                                     if (obj is JObject j)
                                     {
-                                        var m = ParserJObject(j, analogy);
+                                        var evt = LogEventReader.ReadFromJObject(j, messageFields);
+                                        analogy.Write(evt);
+                                        AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
                                         parsedMessages.Add(m);
+
                                     }
                                 }
                             }
@@ -61,7 +88,7 @@ namespace Analogy.LogViewer.Serilog
                 {
                     AnalogyLogMessage empty = new AnalogyLogMessage($"Error reading file {fileName}: Error: {e.Message}",
                         AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
-                    empty.Source = nameof(ClefParser);
+                    empty.Source = nameof(CompactJsonFormatParser);
                     empty.Module = "Analogy.LogViewer.Serilog";
                     parsedMessages.Add(empty);
                     messagesHandler.AppendMessages(parsedMessages, fileName);
@@ -70,17 +97,5 @@ namespace Analogy.LogViewer.Serilog
             });
             return messages;
         }
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private AnalogyLogMessage ParserJObject(JObject jo, ILogger analogy)
-        {
-            var evt = LogEventReader.ReadFromJObject(jo);
-            {
-                analogy.Write(evt);
-                return CommonParser.ParseLogEventProperties(evt);
-
-            }
-
-        }
-
     }
 }
