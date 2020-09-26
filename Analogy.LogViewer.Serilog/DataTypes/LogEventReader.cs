@@ -169,7 +169,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             {
                 properties.Add(new LogEventProperty("@i", new ScalarValue(eventId)));
             }
-
+            properties.Add(new LogEventProperty("Raw Data",new ScalarValue(jObject.ToString())));
             return new LogEvent(timestamp, level, exception, parsedTemplate, properties);
         }
 
