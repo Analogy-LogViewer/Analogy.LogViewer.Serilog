@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Analogy.Interfaces;
-using Analogy.Interfaces.Factories;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
-    public class DataProvidersFactory : IAnalogyDataProvidersFactory
+    public class DataProvidersFactory : Analogy.LogViewer.Template.DataProvidersFactory
     {
-        public Guid FactoryId { get; set; } = PrimaryFactory.Id;
-        public string Title { get; set; } = "Serilog Parser";
+        public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
+        public override string Title { get; set; } = "Serilog Parser";
 
-        public IEnumerable<IAnalogyDataProvider> DataProviders { get; } =
+        public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } =
             new List<IAnalogyDataProvider> { new OfflineDataProvider() };
 
     }
