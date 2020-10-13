@@ -75,6 +75,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                         return await JsonFileParser.Process(fileName, token, messagesHandler);
                     case FileFormat.JsonFormatPerLine:
                         return await JsonPerLineParser.Process(fileName, token, messagesHandler);
+                    case FileFormat.Unknown:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
