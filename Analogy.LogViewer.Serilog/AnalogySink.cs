@@ -22,7 +22,11 @@ namespace Analogy.LogViewer.Serilog
 
         public void Emit(LogEvent logEvent)
         {
-            if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
+            if (logEvent == null)
+            {
+                throw new ArgumentNullException(nameof(logEvent));
+            }
+
             var sr = new StringWriter();
             _textFormatter.Format(logEvent, sr);
             output = sr.ToString().Trim();
@@ -52,8 +56,16 @@ namespace Analogy.LogViewer.Serilog
             IFormatProvider formatProvider = null,
             LoggingLevelSwitch levelSwitch = null)
         {
-            if (sinkConfiguration == null) throw new ArgumentNullException(nameof(sinkConfiguration));
-            if (outputTemplate == null) throw new ArgumentNullException(nameof(outputTemplate));
+            if (sinkConfiguration == null)
+            {
+                throw new ArgumentNullException(nameof(sinkConfiguration));
+            }
+
+            if (outputTemplate == null)
+            {
+                throw new ArgumentNullException(nameof(outputTemplate));
+            }
+
             var formatter = new MessageTemplateTextFormatter(outputTemplate, formatProvider);
             return Analogy(sinkConfiguration, formatter, restrictedToMinimumLevel, levelSwitch);
         }
@@ -76,8 +88,16 @@ namespace Analogy.LogViewer.Serilog
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
             LoggingLevelSwitch levelSwitch = null)
         {
-            if (sinkConfiguration == null) throw new ArgumentNullException(nameof(sinkConfiguration));
-            if (formatter == null) throw new ArgumentNullException(nameof(formatter));
+            if (sinkConfiguration == null)
+            {
+                throw new ArgumentNullException(nameof(sinkConfiguration));
+            }
+
+            if (formatter == null)
+            {
+                throw new ArgumentNullException(nameof(formatter));
+            }
+
             return sinkConfiguration.Sink(new AnalogySink(formatter), restrictedToMinimumLevel, levelSwitch);
         }
     }

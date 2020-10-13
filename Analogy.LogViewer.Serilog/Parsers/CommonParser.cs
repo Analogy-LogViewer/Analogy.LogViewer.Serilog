@@ -131,7 +131,10 @@ namespace Analogy.LogViewer.Serilog
                     property.Key.Equals(Constants.User) ||
                     property.Key.Equals(Constants.ProcessId) ||
                     UserSettingsManager.UserSettings.Settings.IgnoredAttributes.Contains(property.Key))
+                {
                     continue;
+                }
+
                 m.AdditionalInformation.Add(property.Key, property.Value.ToString());
             }
             return m;

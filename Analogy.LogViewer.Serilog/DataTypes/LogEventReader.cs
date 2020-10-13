@@ -65,7 +65,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             var data = _serializer.Deserialize(new JsonTextReader(new StringReader(line)));
             if (!(data is JObject fields))
+            {
                 throw new InvalidDataException($"The data on line {_lineNumber} is not a complete JSON object.");
+            }
 
             evt = ReadFromJObject(_lineNumber, fields,_messageFields);
             return true;
@@ -79,7 +81,10 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         /// <returns>The log event.</returns>
         public LogEvent ReadFromString(string document, JsonSerializer serializer = null)
         {
-            if (document == null) throw new ArgumentNullException(nameof(document));
+            if (document == null)
+            {
+                throw new ArgumentNullException(nameof(document));
+            }
 
             serializer = serializer ?? CreateSerializer();
             var jObject = serializer.Deserialize<JObject>(new JsonTextReader(new StringReader(document)));
@@ -94,7 +99,11 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         /// <returns>The log event.</returns>
         public static LogEvent ReadFromJObject(JObject jObject, IMessageFields messageFields)
         {
-            if (jObject == null) throw new ArgumentNullException(nameof(jObject));
+            if (jObject == null)
+            {
+                throw new ArgumentNullException(nameof(jObject));
+            }
+
             return ReadFromJObject(1, jObject,messageFields);
         }
 
@@ -104,15 +113,24 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             string messageTemplate;
             if (TryGetOptionalField(lineNumber, jObject, messageFields.MessageTemplate, out var mt))
+            {
                 messageTemplate = mt;
+            }
             else if (TryGetOptionalField(lineNumber, jObject, messageFields.Message, out var m))
+            {
                 messageTemplate = MessageTemplateSyntax.Escape(m);
+            }
             else
+            {
                 messageTemplate = null;
+            }
 
             var level = LogEventLevel.Information;
             if (TryGetOptionalField(lineNumber, jObject, messageFields.Level, out string l))
+            {
                 level = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), l);
+            }
+
             Exception exception = null;
             if (TryGetOptionalField(lineNumber, jObject, messageFields.Exception, out string ex))
             {
@@ -129,8 +147,10 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             {
                 var renderedByIndex = r as JArray;
                 if (renderedByIndex == null)
+                {
                     throw new InvalidDataException(
                         $"The `{messageFields.Renderings}` value on line {lineNumber} is not an array as expected.");
+                }
 
                 renderings = parsedTemplate.Tokens
                     .OfType<PropertyToken>()
@@ -197,7 +217,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             }
 
             if (token.Type != JTokenType.String)
+            {
                 throw new InvalidDataException($"The value of `{field}` on line {lineNumber} is not in a supported format.");
+            }
 
             value = token.Value<string>();
             return true;
@@ -206,19 +228,25 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         private static DateTimeOffset GetRequiredTimestampField(int lineNumber, JObject data, string field)
         {
             if (!data.TryGetValue(field, out var token) || token.Type == JTokenType.Null)
+            {
                 throw new InvalidDataException($"The data on line {lineNumber} does not include the required `{field}` field.");
+            }
 
             if (token.Type == JTokenType.Date)
             {
                 var dt = token.Value<JValue>().Value;
                 if (dt is DateTimeOffset offset)
+                {
                     return offset;
+                }
 
                 return (DateTime)dt;
             }
 
             if (token.Type != JTokenType.String)
+            {
                 throw new InvalidDataException($"The value of `{field}` on line {lineNumber} is not in a supported format.");
+            }
 
             var text = token.Value<string>();
             return DateTimeOffset.Parse(text);

@@ -63,7 +63,9 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             {
                 if (UserSettingsManager.UserSettings.Settings.FileFormatDetection == FileFormatDetection.Automatic ||
                     UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
+                {
                     UserSettingsManager.UserSettings.Settings.Format = TryDetectFormat(fileName);
+                }
 
                 switch (UserSettingsManager.UserSettings.Settings.Format)
                 {
@@ -90,7 +92,9 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             foreach (string pattern in UserSettingsManager.UserSettings.Settings.SupportFormats)
             {
                 if (CommonUtilities.Files.FilesPatternMatcher.StrictMatchPattern(pattern, fileName))
+                {
                     return true;
+                }
             }
             return false;
         }
@@ -104,7 +108,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             }
 
             if (!recursive)
+            {
                 return files;
+            }
+
             try
             {
                 foreach (DirectoryInfo dir in dirInfo.GetDirectories())
@@ -138,10 +145,16 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             }
 
             if (string.IsNullOrEmpty(jsonData))
+            {
                 jsonData = File.ReadAllText(fileName);
+            }
+
             var format = TryParseAsFile(jsonData);
             if (format == FileFormat.Unknown)
+            {
                 format = TryParsePerLine(jsonData);
+            }
+
             return format;
         }
         private static FileFormat TryParsePerLine(string jsonData)
@@ -150,10 +163,16 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             {
                 IMessageFields fields = new JsonFormatMessageFields();
                 if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                {
                     return FileFormat.JsonFormatPerLine;
+                }
+
                 fields = new CompactJsonFormatMessageFields();
                 if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                {
                     return FileFormat.CompactJsonFormatPerLine;
+                }
+
                 return FileFormat.Unknown;
             }
             catch (Exception)
@@ -169,10 +188,16 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 var jsonObject = JsonConvert.DeserializeObject(jsonData);
                 IMessageFields fields = new JsonFormatMessageFields();
                 if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                {
                     return FileFormat.JsonFormatFile;
+                }
+
                 fields = new CompactJsonFormatMessageFields();
                 if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                {
                     return FileFormat.CompactJsonFormatPerFile;
+                }
+
                 return FileFormat.Unknown;
             }
             catch (Exception)

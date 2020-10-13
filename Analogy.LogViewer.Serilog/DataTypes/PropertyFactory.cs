@@ -31,7 +31,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         static LogEventPropertyValue CreatePropertyValue(JToken value, List<Rendering> renderings)
         {
             if (value.Type == JTokenType.Null)
+            {
                 return new ScalarValue(null);
+            }
 
             if (value is JObject obj)
             {

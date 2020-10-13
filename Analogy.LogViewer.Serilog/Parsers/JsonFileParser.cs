@@ -48,10 +48,12 @@ namespace Analogy.LogViewer.Serilog
                                 }
                             }
                             else
+                            {
                                 using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                                 {
                                     jsonData = streamReader.ReadToEnd();
                                 }
+                            }
 
 
                             var data = JsonConvert.DeserializeObject(jsonData);

@@ -50,7 +50,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         public string Unescape(string name)
         {
             if (name.StartsWith(EscapedInitialAt))
+            {
                 return name.Substring(1);
+            }
 
             return name;
         }
@@ -95,7 +97,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         public string Unescape(string name)
         {
             if (name.StartsWith(EscapedInitialAt))
+            {
                 return name.Substring(1);
+            }
 
             return name;
         }

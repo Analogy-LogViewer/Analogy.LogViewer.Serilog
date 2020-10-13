@@ -169,7 +169,11 @@ namespace Analogy.LogViewer.Serilog
 
         private void btnIgnoreColumn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtbIgnoreColumn.Text)) return;
+            if (string.IsNullOrEmpty(txtbIgnoreColumn.Text))
+            {
+                return;
+            }
+
             lstbIgnoreColumn.Items.Add(txtbIgnoreColumn.Text);
         }
 

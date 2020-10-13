@@ -12,7 +12,11 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         public RenderableScalarValue(object value, List<Rendering> renderings)
             : base(value)
         {
-            if (renderings == null) throw new ArgumentNullException(nameof(renderings));
+            if (renderings == null)
+            {
+                throw new ArgumentNullException(nameof(renderings));
+            }
+
             foreach (var rendering in renderings)
                 _renderings[rendering.Format] = rendering.Rendered;
         }
@@ -21,9 +25,13 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         {
             string rendering;
             if (format != null && _renderings.TryGetValue(format, out rendering))
+            {
                 output.Write(rendering);
+            }
             else
+            {
                 base.Render(output, format, formatProvider);
+            }
         }
     }
 }
