@@ -9,6 +9,7 @@ namespace Analogy.LogViewer.Serilog
         public static IEnumerable<AnalogyChangeLog> GetChangeLog()=>
         new List<AnalogyChangeLog>()
         {
+            new AnalogyChangeLog("[V2.1.0] - Serilog Trace Log Level are skipped in the parsers since debug is default level #148", AnalogChangeLogType.Bug, "Darko Vujičić", new DateTime(2020, 10, 18)),
             new AnalogyChangeLog("[V2.1.0] - [Implementation] Simplified code by using Analogy.LogViewer.Template as base implementation #121", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 10, 06)),
             new AnalogyChangeLog("[V2.0.0] - Add Raw message data property and Json Viewer when relevant #109", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 09, 26)),
             new AnalogyChangeLog("[V2.0.0] - Remove Regex parser from Serilog parser #112", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 09, 26)),
