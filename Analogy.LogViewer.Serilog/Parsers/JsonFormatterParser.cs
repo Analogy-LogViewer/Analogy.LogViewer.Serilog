@@ -37,7 +37,9 @@ namespace Analogy.LogViewer.Serilog
             List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
             try
             {
-                using (var analogy = new LoggerConfiguration().WriteTo.Analogy()
+                using (var analogy = new LoggerConfiguration()
+                    .MinimumLevel.Verbose()
+                    .WriteTo.Analogy()
                     .CreateLogger())
                 {
                     using (var fileStream =
