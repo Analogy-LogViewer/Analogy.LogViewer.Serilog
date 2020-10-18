@@ -27,6 +27,7 @@ namespace Analogy.LogViewer.Serilog
                 try
                 {
                     using (var analogy = new LoggerConfiguration()
+                        .MinimumLevel.Verbose()
                         .WriteTo.Analogy()
                         .CreateLogger())
                     {
