@@ -10,7 +10,7 @@ namespace Analogy.LogViewer.Serilog.Managers
         private static readonly Lazy<UserSettingsManager> _instance =
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        public string SerilogFileSetting { get; private set; } = "AnalogySerilogSettings.json";
+        public string SerilogFileSetting { get; private set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogySerilogSettings.json");
         public SerilogSettings Settings { get; set; }
 
 
