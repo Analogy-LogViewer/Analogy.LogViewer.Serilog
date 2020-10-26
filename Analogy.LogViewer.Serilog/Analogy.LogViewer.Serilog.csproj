@@ -30,7 +30,7 @@
 	<ItemGroup>
 		<PackageReference Include="Analogy.CommonUtilities" Version="1.4.1" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.7.9.5" />
-		<PackageReference Include="Analogy.LogViewer.RegexParser" Version="1.6.6" />
+		<PackageReference Include="Analogy.LogViewer.RegexParser" Version="1.6.9" />
 		<PackageReference Include="Analogy.LogViewer.Template" Version="1.6.10" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
