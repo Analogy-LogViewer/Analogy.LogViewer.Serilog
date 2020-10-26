@@ -23,7 +23,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public override bool CanSaveToLogFile { get; set; } = false;
         public override string FileOpenDialogFilters { get; set; } = UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
         public override string FileSaveDialogFilters { get; set; } = string.Empty;
-        public override IEnumerable<string> SupportFormats { get; set; }= UserSettingsManager.UserSettings.Settings.SupportFormats;
+        public override IEnumerable<string> SupportFormats { get; set; } = UserSettingsManager.UserSettings.Settings.SupportFormats;
         public override bool DisableFilePoolingOption { get; set; } = false;
 
         public override string InitialFolderFullPath =>
@@ -86,7 +86,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
         }
-        
+
         public override bool CanOpenFile(string fileName)
         {
             foreach (string pattern in UserSettingsManager.UserSettings.Settings.SupportFormats)
@@ -146,7 +146,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
             if (string.IsNullOrEmpty(jsonData))
             {
-                jsonData = File.ReadAllText(fileName);
+                jsonData = SafeReadAllLines(fileName);
             }
 
             var format = TryParseAsFile(jsonData);
@@ -203,6 +203,16 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             catch (Exception)
             {
                 return FileFormat.Unknown;
+            }
+        }
+
+        private static string SafeReadAllLines(string path)
+        {
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var sr = new StreamReader(stream))
+            {
+                string data = sr.ReadToEnd();
+                return data;
             }
         }
     }
