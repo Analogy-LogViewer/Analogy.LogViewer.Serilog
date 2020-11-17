@@ -35,7 +35,7 @@ jobs:
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+      uses: microsoft/setup-msbuild@v1.0.2
     
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
@@ -83,7 +83,7 @@ jobs:
 
 
       - name: Setup NuGet.exe for use with actions
-        uses: NuGet/setup-nuget@v1.0.2
+        uses: NuGet/setup-nuget@v1.0.5
 
       - name: Add private GitHub registry to NuGet
         run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/Analogy-LogViewer/index.json -Username Analogy-LogViewer -Password ${{ secrets.GITHUB_TOKEN }}
