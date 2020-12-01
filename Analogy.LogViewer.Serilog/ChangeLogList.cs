@@ -9,6 +9,7 @@ namespace Analogy.LogViewer.Serilog
         public static IEnumerable<AnalogyChangeLog> GetChangeLog() =>
         new List<AnalogyChangeLog>
         {
+            new AnalogyChangeLog("[V2.2.0] - Bump Serilog from 2.9.0 to 2.10.0 #151", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 12, 01)),
             new AnalogyChangeLog("[V2.1.4] - File format detection fails if file is already in use. #166", AnalogChangeLogType.Bug, "Lior Banai", new DateTime(2020, 10, 26)),
             new AnalogyChangeLog("[V2.1.3] - Add Update mechanism #164", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 10, 25)),
             new AnalogyChangeLog("[V2.1.1] - When application is not running in admin UnauthorizedAccessException can be thrown #150", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 10, 21)),
