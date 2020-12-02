@@ -22,7 +22,7 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.2.0.2</Version>
+		<Version>2.2.1</Version>
 		<Company>Analogy.LogViewer</Company>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
@@ -43,7 +43,7 @@
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="Serilog" Version="2.10.0" />
-		<PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+		<PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

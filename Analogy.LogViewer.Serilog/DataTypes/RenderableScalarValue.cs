@@ -18,7 +18,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             }
 
             foreach (var rendering in renderings)
+            {
                 _renderings[rendering.Format] = rendering.Rendered;
+            }
         }
 
         public override void Render(TextWriter output, string format = null, IFormatProvider formatProvider = null)
