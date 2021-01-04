@@ -22,7 +22,7 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.2.2</Version>
+		<Version>2.2.2.1</Version>
 		<Company>Analogy.LogViewer</Company>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
@@ -30,9 +30,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="1.4.4" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.9.0" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="1.8.0" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="1.4.5" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.9.1.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="1.8.1" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
