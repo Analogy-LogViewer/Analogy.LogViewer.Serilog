@@ -10,13 +10,25 @@ namespace Analogy.LogViewer.Serilog.Managers
         private static readonly Lazy<UserSettingsManager> _instance =
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        public string SerilogFileSetting { get; private set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", "AnalogySerilogSettings.json");
-        public SerilogSettings Settings { get; set; }
+        private string LocalSettingFileName { get; } = "AnalogySerilogSettings.json";
 
+        public string SerilogPerUserFileSetting => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Analogy.LogViewer", LocalSettingFileName);
+        public SerilogSettings Settings { get; set; }
 
         public UserSettingsManager()
         {
-            if (File.Exists(SerilogFileSetting))
+            //check if local file exist:
+            var loaded = LoadFileSettings(LocalSettingFileName, true);
+            if (!loaded)
+            {
+                LoadFileSettings(SerilogPerUserFileSetting, false);
+            }
+
+        }
+
+        private bool LoadFileSettings(string localSettingFileName, bool optional)
+        {
+            if (File.Exists(localSettingFileName))
             {
                 try
                 {
@@ -24,32 +36,58 @@ namespace Analogy.LogViewer.Serilog.Managers
                     {
                         ObjectCreationHandling = ObjectCreationHandling.Replace
                     };
-                    string data = File.ReadAllText(SerilogFileSetting);
+                    string data = File.ReadAllText(SerilogPerUserFileSetting);
                     Settings = JsonConvert.DeserializeObject<SerilogSettings>(data, settings);
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    LogManager.Instance.LogException("Error loading user setting file",ex, "Analogy Serilog Parser");
+                    LogManager.Instance.LogWarning($"Error loading user setting file: {ex.Message}", "Analogy Serilog Parser");
                     Settings = new SerilogSettings();
-
+                    return true;
                 }
             }
             else
             {
-                Settings = new SerilogSettings();
+                if (!optional)
+                {
+                    Settings = new SerilogSettings();
+                    return false;
+                }
             }
 
+            return false;
         }
 
         public void Save()
         {
             try
             {
-                File.WriteAllText(SerilogFileSetting, JsonConvert.SerializeObject(Settings));
+                if (Settings.UseApplicationFolderForSettings)
+                {
+
+                    File.WriteAllText(LocalSettingFileName, JsonConvert.SerializeObject(Settings));
+                }
+                else
+                {
+                    if (File.Exists(LocalSettingFileName))
+                    {
+                        try
+                        {
+                            File.Delete(LocalSettingFileName);
+                        }
+                        catch (Exception e)
+                        {
+                            LogManager.Instance.LogError($"Error deleting local file: {e.Message}");
+                        }
+                    }
+                    File.WriteAllText(SerilogPerUserFileSetting, JsonConvert.SerializeObject(Settings));
+
+                }
             }
             catch (Exception e)
             {
-                LogManager.Instance.LogException("Error saving settings: " + e.Message,e, "Analogy Serilog Parser" );
+                LogManager.Instance.LogException("Error saving settings: " + e.Message, e, "Analogy Serilog Parser");
             }
 
 

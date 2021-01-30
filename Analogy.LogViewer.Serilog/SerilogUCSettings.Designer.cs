@@ -47,6 +47,7 @@
             this.rbDetectionModeAutomatic = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtnReset = new System.Windows.Forms.RadioButton();
             this.rbtnJsonFile = new System.Windows.Forms.RadioButton();
             this.rtxtExample = new System.Windows.Forms.RichTextBox();
             this.rbtnCompactJsonFile = new System.Windows.Forms.RadioButton();
@@ -57,7 +58,7 @@
             this.btnIgnoreColumn = new System.Windows.Forms.Button();
             this.lstbIgnoreColumn = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rbtnReset = new System.Windows.Forms.RadioButton();
+            this.chkbSettingsMode = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,7 +92,7 @@
             // 
             this.txtbSupportedFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbSupportedFiles.Location = new System.Drawing.Point(276, 75);
+            this.txtbSupportedFiles.Location = new System.Drawing.Point(276, 130);
             this.txtbSupportedFiles.Name = "txtbSupportedFiles";
             this.txtbSupportedFiles.Size = new System.Drawing.Size(437, 26);
             this.txtbSupportedFiles.TabIndex = 9;
@@ -100,7 +101,7 @@
             // label2
             // 
             this.label2.AutoEllipsis = true;
-            this.label2.Location = new System.Drawing.Point(9, 75);
+            this.label2.Location = new System.Drawing.Point(9, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(261, 50);
             this.label2.TabIndex = 8;
@@ -121,7 +122,7 @@
             // 
             this.txtbDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbDirectory.Location = new System.Drawing.Point(276, 11);
+            this.txtbDirectory.Location = new System.Drawing.Point(276, 66);
             this.txtbDirectory.Name = "txtbDirectory";
             this.txtbDirectory.Size = new System.Drawing.Size(376, 26);
             this.txtbDirectory.TabIndex = 12;
@@ -129,7 +130,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 15);
+            this.label3.Location = new System.Drawing.Point(9, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 18);
             this.label3.TabIndex = 11;
@@ -138,9 +139,9 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(666, 6);
+            this.btnOpenFolder.Location = new System.Drawing.Point(658, 66);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(47, 31);
+            this.btnOpenFolder.Size = new System.Drawing.Size(55, 26);
             this.btnOpenFolder.TabIndex = 13;
             this.btnOpenFolder.Text = "...";
             this.btnOpenFolder.UseVisualStyleBackColor = true;
@@ -154,6 +155,7 @@
             this.rbtnCLEF.Name = "rbtnCLEF";
             this.rbtnCLEF.Size = new System.Drawing.Size(219, 22);
             this.rbtnCLEF.TabIndex = 14;
+            this.rbtnCLEF.TabStop = true;
             this.rbtnCLEF.Text = "Compact Format Per line/row";
             this.rbtnCLEF.UseVisualStyleBackColor = true;
             // 
@@ -171,7 +173,7 @@
             // 
             this.txtbOpenFileFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbOpenFileFilters.Location = new System.Drawing.Point(276, 43);
+            this.txtbOpenFileFilters.Location = new System.Drawing.Point(276, 98);
             this.txtbOpenFileFilters.Name = "txtbOpenFileFilters";
             this.txtbOpenFileFilters.Size = new System.Drawing.Size(376, 26);
             this.txtbOpenFileFilters.TabIndex = 47;
@@ -179,7 +181,7 @@
             // lblOpenfilesFilters
             // 
             this.lblOpenfilesFilters.AutoEllipsis = true;
-            this.lblOpenfilesFilters.Location = new System.Drawing.Point(13, 43);
+            this.lblOpenfilesFilters.Location = new System.Drawing.Point(13, 98);
             this.lblOpenfilesFilters.Name = "lblOpenfilesFilters";
             this.lblOpenfilesFilters.Size = new System.Drawing.Size(148, 22);
             this.lblOpenfilesFilters.TabIndex = 46;
@@ -188,9 +190,9 @@
             // btnTestFilter
             // 
             this.btnTestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTestFilter.Location = new System.Drawing.Point(666, 43);
+            this.btnTestFilter.Location = new System.Drawing.Point(658, 98);
             this.btnTestFilter.Name = "btnTestFilter";
-            this.btnTestFilter.Size = new System.Drawing.Size(47, 25);
+            this.btnTestFilter.Size = new System.Drawing.Size(55, 25);
             this.btnTestFilter.TabIndex = 48;
             this.btnTestFilter.Text = "Test";
             this.btnTestFilter.UseVisualStyleBackColor = true;
@@ -209,6 +211,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chkbSettingsMode);
             this.tabPage1.Controls.Add(this.rbDetectionModeManual);
             this.tabPage1.Controls.Add(this.rbDetectionModeAutomatic);
             this.tabPage1.Controls.Add(this.label1);
@@ -232,7 +235,7 @@
             // rbDetectionModeManual
             // 
             this.rbDetectionModeManual.AutoSize = true;
-            this.rbDetectionModeManual.Location = new System.Drawing.Point(447, 128);
+            this.rbDetectionModeManual.Location = new System.Drawing.Point(447, 183);
             this.rbDetectionModeManual.Name = "rbDetectionModeManual";
             this.rbDetectionModeManual.Size = new System.Drawing.Size(75, 22);
             this.rbDetectionModeManual.TabIndex = 53;
@@ -243,7 +246,7 @@
             // 
             this.rbDetectionModeAutomatic.AutoSize = true;
             this.rbDetectionModeAutomatic.Checked = true;
-            this.rbDetectionModeAutomatic.Location = new System.Drawing.Point(276, 128);
+            this.rbDetectionModeAutomatic.Location = new System.Drawing.Point(276, 183);
             this.rbDetectionModeAutomatic.Name = "rbDetectionModeAutomatic";
             this.rbDetectionModeAutomatic.Size = new System.Drawing.Size(94, 22);
             this.rbDetectionModeAutomatic.TabIndex = 52;
@@ -254,7 +257,7 @@
             // label1
             // 
             this.label1.AutoEllipsis = true;
-            this.label1.Location = new System.Drawing.Point(13, 128);
+            this.label1.Location = new System.Drawing.Point(13, 183);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 22);
             this.label1.TabIndex = 51;
@@ -271,12 +274,23 @@
             this.groupBox1.Controls.Add(this.rbtnCLEF);
             this.groupBox1.Controls.Add(this.rbtnCompactJsonFile);
             this.groupBox1.Controls.Add(this.rbtnJsonPerLine);
-            this.groupBox1.Location = new System.Drawing.Point(13, 170);
+            this.groupBox1.Location = new System.Drawing.Point(13, 209);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(695, 377);
+            this.groupBox1.Size = new System.Drawing.Size(695, 338);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Format:";
+            // 
+            // rbtnReset
+            // 
+            this.rbtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbtnReset.AutoSize = true;
+            this.rbtnReset.Location = new System.Drawing.Point(523, 25);
+            this.rbtnReset.Name = "rbtnReset";
+            this.rbtnReset.Size = new System.Drawing.Size(148, 22);
+            this.rbtnReset.TabIndex = 52;
+            this.rbtnReset.Text = "Reset to Unknown";
+            this.rbtnReset.UseVisualStyleBackColor = true;
             // 
             // rbtnJsonFile
             // 
@@ -296,7 +310,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtExample.Location = new System.Drawing.Point(6, 147);
             this.rtxtExample.Name = "rtxtExample";
-            this.rtxtExample.Size = new System.Drawing.Size(683, 223);
+            this.rtxtExample.Size = new System.Drawing.Size(683, 184);
             this.rtxtExample.TabIndex = 50;
             this.rtxtExample.Text = "";
             // 
@@ -390,16 +404,15 @@
             this.panel1.Size = new System.Drawing.Size(725, 56);
             this.panel1.TabIndex = 50;
             // 
-            // rbtnReset
+            // chkbSettingsMode
             // 
-            this.rbtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rbtnReset.AutoSize = true;
-            this.rbtnReset.Location = new System.Drawing.Point(523, 25);
-            this.rbtnReset.Name = "rbtnReset";
-            this.rbtnReset.Size = new System.Drawing.Size(148, 22);
-            this.rbtnReset.TabIndex = 52;
-            this.rbtnReset.Text = "Reset to Unknown";
-            this.rbtnReset.UseVisualStyleBackColor = true;
+            this.chkbSettingsMode.AutoSize = true;
+            this.chkbSettingsMode.Location = new System.Drawing.Point(16, 14);
+            this.chkbSettingsMode.Name = "chkbSettingsMode";
+            this.chkbSettingsMode.Size = new System.Drawing.Size(387, 22);
+            this.chkbSettingsMode.TabIndex = 54;
+            this.chkbSettingsMode.Text = "Local user mode: Settings are save per logged on user";
+            this.chkbSettingsMode.UseVisualStyleBackColor = true;
             // 
             // SerilogUCSettings
             // 
@@ -454,5 +467,6 @@
         private System.Windows.Forms.RadioButton rbDetectionModeManual;
         private System.Windows.Forms.RadioButton rbtnJsonFile;
         private System.Windows.Forms.RadioButton rbtnReset;
+        private System.Windows.Forms.CheckBox chkbSettingsMode;
     }
 }
