@@ -3,7 +3,6 @@ using Analogy.LogServer.Clients;
 using Serilog.Core;
 using Serilog.Events;
 using System;
-using System.Collections.Generic;
 
 namespace Analogy.LogViewer.Serilog.Sinks
 {
@@ -15,7 +14,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
         public AnalogyLogServerSink(IFormatProvider formatProvider)
         {
             _formatProvider = formatProvider;
-            logServerMessageProducer = new AnalogyMessageProducer("http://localhost:6000", null);
+            logServerMessageProducer = new AnalogyMessageProducer("http://localhost:6000");
         }
         public void Emit(LogEvent logEvent)
         {
