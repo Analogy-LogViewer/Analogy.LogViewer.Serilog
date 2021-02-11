@@ -101,16 +101,14 @@ namespace Analogy.LogViewer.Serilog
             }
             if (evt.Properties.TryGetValue(Constants.EnvironmentUserName, out var environmentUserName))
             {
-                if (environmentUserName is ScalarValue scalarValue &&
-                    scalarValue.Value is string environmentUserNameString)
+                if (environmentUserName is ScalarValue {Value: string environmentUserNameString})
                 {
                     m.User = environmentUserNameString;
                 }
             }
             if (evt.Properties.TryGetValue(Constants.User, out var environmentUser))
             {
-                if (environmentUser is ScalarValue scalarValue &&
-                    scalarValue.Value is string environmentUserString)
+                if (environmentUser is ScalarValue {Value: string environmentUserString} scalarValue)
                 {
                     m.User = environmentUserString;
                 }

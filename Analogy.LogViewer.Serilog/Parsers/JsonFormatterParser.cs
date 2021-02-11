@@ -3,7 +3,6 @@ using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
-using Serilog.Formatting.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +15,7 @@ namespace Analogy.LogViewer.Serilog
 {
     public class JsonFormatterParser
     {
-        private  IMessageFields messageFields;
+        private IMessageFields messageFields;
         private JsonSerializerSettings JsonSerializerSettings;
 
         public JsonFormatterParser(IMessageFields messageFields)
@@ -24,7 +23,7 @@ namespace Analogy.LogViewer.Serilog
             this.messageFields = messageFields;
             JsonSerializerSettings = new JsonSerializerSettings
             {
-                DateParseHandling=DateParseHandling.DateTimeOffset,
+                DateParseHandling = DateParseHandling.DateTimeOffset,
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
@@ -57,10 +56,13 @@ namespace Analogy.LogViewer.Serilog
                                     {
 
                                         var data = JsonConvert.DeserializeObject(json, JsonSerializerSettings);
-                                        var evt = LogEventReader.ReadFromJObject(data as JObject, messageFields);
+                                        var jo = data as JObject;
+                                        var evt = LogEventReader.ReadFromJObject(jo, messageFields);
                                         {
                                             analogy.Write(evt);
                                             AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                            m.RawText = jo.ToString(Formatting.None);
+                                            m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
                                         }
                                     }
@@ -76,10 +78,13 @@ namespace Analogy.LogViewer.Serilog
                             while ((json = await streamReader.ReadLineAsync()) != null)
                             {
                                 var data = JsonConvert.DeserializeObject(json);
-                                var evt = LogEventReader.ReadFromJObject(data as JObject, messageFields);
+                                var jo = data as JObject;
+                                var evt = LogEventReader.ReadFromJObject(jo, messageFields);
                                 {
                                     analogy.Write(evt);
                                     AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                    m.RawText = jo.ToString(Formatting.None);
+                                    m.RawTextType = AnalogyRowTextType.JSON;
                                     parsedMessages.Add(m);
                                 }
                             }

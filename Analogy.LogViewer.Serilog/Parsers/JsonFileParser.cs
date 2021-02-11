@@ -63,6 +63,8 @@ namespace Analogy.LogViewer.Serilog
                                 var evt = LogEventReader.ReadFromJObject(jo, messageFields);
                                 analogy.Write(evt);
                                 AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                m.RawText = jo.ToString(Formatting.None);
+                                m.RawTextType = AnalogyRowTextType.JSON;
                                 parsedMessages.Add(m);
 
                             }
@@ -75,6 +77,8 @@ namespace Analogy.LogViewer.Serilog
                                         var evt = LogEventReader.ReadFromJObject(j, messageFields);
                                         analogy.Write(evt);
                                         AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                        m.RawText = j.ToString(Formatting.None);
+                                        m.RawTextType = AnalogyRowTextType.JSON;
                                         parsedMessages.Add(m);
 
                                     }

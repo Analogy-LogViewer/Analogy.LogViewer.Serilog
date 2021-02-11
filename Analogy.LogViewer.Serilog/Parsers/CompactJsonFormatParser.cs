@@ -40,10 +40,12 @@ namespace Analogy.LogViewer.Serilog
                                     using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
                                     {
                                         var reader = new LogEventReader(streamReader, messageFields);
-                                        while (reader.TryRead(out var evt) && !token.IsCancellationRequested)
+                                        while (reader.TryRead(out var result) && !token.IsCancellationRequested)
                                         {
-                                            analogy.Write(evt);
-                                            AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                            analogy.Write(result.evt);
+                                            AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.evt);
+                                            m.RawText = result.Line;
+                                            m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
                                         }
 
@@ -56,10 +58,12 @@ namespace Analogy.LogViewer.Serilog
                             using (var streamReader = new StreamReader(fileStream, encoding: Encoding.UTF8))
                             {
                                 var reader = new LogEventReader(streamReader, messageFields);
-                                while (reader.TryRead(out var evt))
+                                while (reader.TryRead(out var result))
                                 {
-                                    analogy.Write(evt);
-                                    AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
+                                    analogy.Write(result.evt);
+                                    AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.evt);
+                                    m.RawText = result.Line;
+                                    m.RawTextType = AnalogyRowTextType.JSON;
                                     parsedMessages.Add(m);
                                 }
 

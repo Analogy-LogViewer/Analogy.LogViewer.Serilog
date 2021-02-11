@@ -63,7 +63,7 @@ namespace Analogy.LogViewer.Serilog
                 rtxtExample.Text = Resources.JsonFormatFile;
             }
 
-            Settings.UseApplicationFolderForSettings = chkbSettingsMode.Checked;
+            Settings.UseApplicationFolderForSettings = rbtnApplicationFolder.Checked;
             UserSettingsManager.UserSettings.Save();
         }
 
@@ -121,13 +121,11 @@ namespace Analogy.LogViewer.Serilog
         {
             if (Settings.UseApplicationFolderForSettings)
             {
-                chkbSettingsMode.Text = "Portable mode: Settings are saved at the application folder. (may need folder permissions)";
-                chkbSettingsMode.Checked = true;
+                rbtnApplicationFolder.Checked = true;
             }
             else
             {
-                chkbSettingsMode.Text = "Local user mode: Settings are save per logged on user";
-                chkbSettingsMode.Checked = false;
+                rbtnPerUser.Checked = true;
             }
             txtbDirectory.Text = logSettings.Directory;
             txtbOpenFileFilters.Text = logSettings.FileOpenDialogFilters;

@@ -45,10 +45,10 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         /// <summary>
         /// Read a line from the input. Blank lines are skipped.
         /// </summary>
-        /// <param name="evt"></param>
+        /// <param name="result"></param>
         /// <returns>True if an event could be read; false if the end-of-file was encountered.</returns>
         /// <exception cref="InvalidDataException">The data format is invalid.</exception>
-        public bool TryRead(out LogEvent evt)
+        public bool TryRead(out ParsingResult result)
         {
             var line = _text.ReadLine();
             _lineNumber++;
@@ -56,7 +56,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             {
                 if (line == null)
                 {
-                    evt = null;
+                    result = new ParsingResult(null, string.Empty);
                     return false;
                 }
                 line = _text.ReadLine();
@@ -69,7 +69,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
                 throw new InvalidDataException($"The data on line {_lineNumber} is not a complete JSON object.");
             }
 
-            evt = ReadFromJObject(_lineNumber, fields,_messageFields);
+            result = new ParsingResult(ReadFromJObject(_lineNumber, fields, _messageFields), line);
             return true;
         }
 
@@ -88,7 +88,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             serializer = serializer ?? CreateSerializer();
             var jObject = serializer.Deserialize<JObject>(new JsonTextReader(new StringReader(document)));
-            return ReadFromJObject(jObject,_messageFields);
+            return ReadFromJObject(jObject, _messageFields);
 
         }
 
@@ -104,10 +104,10 @@ namespace Analogy.LogViewer.Serilog.DataTypes
                 throw new ArgumentNullException(nameof(jObject));
             }
 
-            return ReadFromJObject(1, jObject,messageFields);
+            return ReadFromJObject(1, jObject, messageFields);
         }
 
-        private static LogEvent ReadFromJObject(int lineNumber, JObject jObject,IMessageFields messageFields)
+        private static LogEvent ReadFromJObject(int lineNumber, JObject jObject, IMessageFields messageFields)
         {
             var timestamp = GetRequiredTimestampField(lineNumber, jObject, messageFields.Timestamp);
 
@@ -189,7 +189,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             {
                 properties.Add(new LogEventProperty("@i", new ScalarValue(eventId)));
             }
-            properties.Add(new LogEventProperty("Raw Data",new ScalarValue(jObject.ToString())));
+            properties.Add(new LogEventProperty("Raw Data", new ScalarValue(jObject.ToString())));
             return new LogEvent(timestamp, level, exception, parsedTemplate, properties);
         }
 

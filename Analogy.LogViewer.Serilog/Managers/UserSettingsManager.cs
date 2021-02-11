@@ -17,6 +17,7 @@ namespace Analogy.LogViewer.Serilog.Managers
 
         public UserSettingsManager()
         {
+
             //check if local file exist:
             var loaded = LoadFileSettings(LocalSettingFileName, true);
             if (!loaded)
