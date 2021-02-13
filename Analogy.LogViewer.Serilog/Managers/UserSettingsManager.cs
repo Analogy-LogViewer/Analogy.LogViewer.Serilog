@@ -39,12 +39,22 @@ namespace Analogy.LogViewer.Serilog.Managers
                     };
                     string data = File.ReadAllText(SerilogPerUserFileSetting);
                     Settings = JsonConvert.DeserializeObject<SerilogSettings>(data, settings);
+                    if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
+                    {
+                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
+
+                    }
                     return true;
                 }
                 catch (Exception ex)
                 {
                     LogManager.Instance.LogWarning($"Error loading user setting file: {ex.Message}", "Analogy Serilog Parser");
                     Settings = new SerilogSettings();
+                    if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
+                    {
+                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
+
+                    }
                     return true;
                 }
             }
@@ -53,6 +63,11 @@ namespace Analogy.LogViewer.Serilog.Managers
                 if (!optional)
                 {
                     Settings = new SerilogSettings();
+                    if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
+                    {
+                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
+
+                    }
                     return false;
                 }
             }
