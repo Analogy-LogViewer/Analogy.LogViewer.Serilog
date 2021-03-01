@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Analogy.LogServer.Clients" Version="0.5.4" />
+	  <PackageReference Include="Analogy.LogServer.Clients" Version="0.5.5" />
 	  <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
