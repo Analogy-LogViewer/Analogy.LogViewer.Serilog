@@ -37,7 +37,7 @@ namespace Analogy.LogViewer.Serilog.Managers
                     {
                         ObjectCreationHandling = ObjectCreationHandling.Replace
                     };
-                    string data = File.ReadAllText(SerilogPerUserFileSetting);
+                    string data = File.ReadAllText(localSettingFileName);
                     Settings = JsonConvert.DeserializeObject<SerilogSettings>(data, settings);
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
