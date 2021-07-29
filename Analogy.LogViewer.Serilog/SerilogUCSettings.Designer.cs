@@ -461,7 +461,7 @@
             this.Font = new System.Drawing.Font("Tahoma", 9F);
             this.Name = "SerilogUCSettings";
             this.Size = new System.Drawing.Size(725, 640);
-            this.Load += new System.EventHandler(this.NLogSettings_Load);
+            this.Load += new System.EventHandler(this.SerilogUCSettings_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

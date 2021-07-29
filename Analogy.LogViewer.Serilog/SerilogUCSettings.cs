@@ -154,7 +154,7 @@ namespace Analogy.LogViewer.Serilog
             }
         }
 
-        private void NLogSettings_Load(object sender, EventArgs e)
+        private void SerilogUCSettings_Load(object sender, EventArgs e)
         {
             LoadSettings(UserSettingsManager.UserSettings.Settings);
         }
