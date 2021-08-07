@@ -24,10 +24,9 @@ namespace Analogy.LogViewer.Serilog
         }
         public void SaveSettings()
         {
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(";", StringSplitOptions.RemoveEmptyEntries).ToList();
-#endif
-#if !NETCOREAPP3_1
+#else
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 #endif
             Settings.Directory = txtbDirectory.Text;
