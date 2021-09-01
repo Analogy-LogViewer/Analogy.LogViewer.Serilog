@@ -16,6 +16,16 @@ namespace Analogy.LogViewer.Serilog.Sinks
             _formatProvider = formatProvider;
             logServerMessageProducer = new AnalogyMessageProducer("http://localhost:6000");
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="formatProvider"></param>
+        /// <param name="address"></param>
+        public AnalogyLogServerSink(IFormatProvider formatProvider, string address)
+        {
+            _formatProvider = formatProvider;
+            logServerMessageProducer = new AnalogyMessageProducer(address);
+        }
         public void Emit(LogEvent logEvent)
         {
 

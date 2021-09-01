@@ -35,5 +35,11 @@ namespace Analogy.LogViewer.Serilog.Sinks.Tests
                 await Task.Delay(250);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            log = new LoggerConfiguration()
+                .WriteTo.AnalogyLogServerSink(txtAddress.Text).CreateLogger();
+        }
     }
 }
