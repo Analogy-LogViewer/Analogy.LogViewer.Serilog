@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.Sinks.Tests", "Analogy.LogViewer.Serilog.Sinks.Tests\Analogy.LogViewer.Serilog.Sinks.Tests.csproj", "{4ACFA6E9-BBAD-49DA-97B0-ACBFBCBB973E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.UnitTests", "Analogy.LogViewer.Serilog.UnitTests\Analogy.LogViewer.Serilog.UnitTests.csproj", "{C999EE65-46BD-462B-B384-9ACB982E20D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.UnitTests", "Analogy.LogViewer.Serilog.UnitTests\Analogy.LogViewer.Serilog.UnitTests.csproj", "{C999EE65-46BD-462B-B384-9ACB982E20D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.AspNet", "Analogy.LogViewer.Serilog.AspNet\Analogy.LogViewer.Serilog.AspNet.csproj", "{863AEB49-888E-49BF-ACDA-5290BE40E039}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C999EE65-46BD-462B-B384-9ACB982E20D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863AEB49-888E-49BF-ACDA-5290BE40E039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863AEB49-888E-49BF-ACDA-5290BE40E039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863AEB49-888E-49BF-ACDA-5290BE40E039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863AEB49-888E-49BF-ACDA-5290BE40E039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
