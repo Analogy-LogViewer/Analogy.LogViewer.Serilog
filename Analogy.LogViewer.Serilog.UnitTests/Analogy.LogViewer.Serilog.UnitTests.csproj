@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net471;net472;net5.0-windows</TargetFrameworks>
+	  <TargetFrameworks>net471;net472;net6.0-windows</TargetFrameworks>
 	  <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.14.6" />
+    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />

@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net5.0-windows;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<Version>0.5.4</Version>
+		<Version>0.6.0</Version>
 		<Authors>Lior Banai</Authors>
 		<Company>Analogy.LogViewer</Company>
 		<Copyright>Lior Banai © 2020-2021</Copyright>
@@ -27,12 +27,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Analogy.LogServer.Clients" Version="0.6.4" />
-	  <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
+	  <PackageReference Include="Analogy.LogServer.Clients" Version="0.7.0" />
+	  <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
