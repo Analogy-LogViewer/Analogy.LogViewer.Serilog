@@ -44,7 +44,7 @@ Supported formatters, for now, are:
 ![Main screen](Assets/CompactFormat.jpg)
 
 #### Regular Expression Parser
-Regular Expression Parser: in this mode you need to define your custom regex to match you log format in the applcation settings.
+Regular Expression Parser: in this mode you need to define your custom regex to match you log format in the application settings.
 
 ![Serilog Settings](Assets/SerilogRegularExpression.jpg)
 
