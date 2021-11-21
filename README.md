@@ -2,7 +2,7 @@
 
 <p align="center">
 
-![CodeQL](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/workflows/CodeQL/badge.svg) ![.NET Core Desktop](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/workflows/.NET%20Core%20Desktop/badge.svg)
+![.NET Core Desktop](https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/workflows/.NET%20Core%20Desktop/badge.svg)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/issues">
     <img src="https://img.shields.io/github/issues/Analogy-LogViewer/Analogy.LogViewer.Serilog"  alt="Issues" />
 </a>
