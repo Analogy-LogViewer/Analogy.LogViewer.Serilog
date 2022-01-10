@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="0.6.0" />
+    <PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="0.6.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
