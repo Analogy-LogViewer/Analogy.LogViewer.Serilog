@@ -48,7 +48,8 @@ namespace Analogy.LogViewer.Serilog
                                             AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.evt);
                                             m.RawText = result.Line;
                                             m.RawTextType = AnalogyRowTextType.JSON;
-                                            parsedMessages.Add(m); 
+                                            parsedMessages.Add(m);
+                                            count++;
                                             messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count));
 
                                         }
