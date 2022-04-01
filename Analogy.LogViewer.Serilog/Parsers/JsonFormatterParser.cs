@@ -66,7 +66,7 @@ namespace Analogy.LogViewer.Serilog
                                             m.RawText = jo.ToString(Formatting.None);
                                             m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
-                                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count));
+                                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
 
                                         }
                                     }
@@ -92,7 +92,7 @@ namespace Analogy.LogViewer.Serilog
                                     m.RawTextType = AnalogyRowTextType.JSON;
                                     parsedMessages.Add(m);
                                     count++;
-                                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count));
+                                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
 
                                 }
                             }
