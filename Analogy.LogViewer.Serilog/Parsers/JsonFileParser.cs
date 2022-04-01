@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -66,12 +67,13 @@ namespace Analogy.LogViewer.Serilog
                                 m.RawText = jo.ToString(Formatting.None);
                                 m.RawTextType = AnalogyRowTextType.JSON;
                                 parsedMessages.Add(m);
-
+                                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, 1));
                             }
                             else if (data is JArray arr)
                             {
-                                foreach (var obj in arr.ToList())
+                                for (var i = 0; i < arr.Count; i++)
                                 {
+                                    var obj = arr[i];
                                     if (obj is JObject j)
                                     {
                                         var evt = LogEventReader.ReadFromJObject(j, messageFields);
@@ -80,7 +82,7 @@ namespace Analogy.LogViewer.Serilog
                                         m.RawText = j.ToString(Formatting.None);
                                         m.RawTextType = AnalogyRowTextType.JSON;
                                         parsedMessages.Add(m);
-
+                                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, i, arr.Count));
                                     }
                                 }
                             }

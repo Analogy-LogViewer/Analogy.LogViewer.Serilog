@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -52,6 +53,7 @@ namespace Analogy.LogViewer.Serilog
                                 using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
                                 {
                                     string json;
+                                    long count = 0;
                                     while ((json = await streamReader.ReadLineAsync()) != null)
                                     {
 
@@ -64,6 +66,8 @@ namespace Analogy.LogViewer.Serilog
                                             m.RawText = jo.ToString(Formatting.None);
                                             m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
+                                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count));
+
                                         }
                                     }
 
@@ -75,6 +79,7 @@ namespace Analogy.LogViewer.Serilog
                         using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                         {
                             string json;
+                            long count = 0;
                             while ((json = await streamReader.ReadLineAsync()) != null)
                             {
                                 var data = JsonConvert.DeserializeObject(json);
@@ -86,6 +91,8 @@ namespace Analogy.LogViewer.Serilog
                                     m.RawText = jo.ToString(Formatting.None);
                                     m.RawTextType = AnalogyRowTextType.JSON;
                                     parsedMessages.Add(m);
+                                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count));
+
                                 }
                             }
                         }
