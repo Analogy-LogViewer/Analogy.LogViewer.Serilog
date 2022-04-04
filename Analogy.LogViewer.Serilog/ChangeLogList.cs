@@ -9,7 +9,8 @@ namespace Analogy.LogViewer.Serilog
         public static IEnumerable<AnalogyChangeLog> GetChangeLog() =>
         new List<AnalogyChangeLog>
         {
-            new AnalogyChangeLog("[V2.5.0] -  Add NET6 compilation target #330", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2021, 11, 09)),
+            new AnalogyChangeLog("[V2.6.0] - [UI] Add parsing counter #374", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2022, 04, 04)),
+            new AnalogyChangeLog("[V2.5.0] - Add NET6 compilation target #330", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2021, 11, 09)),
             new AnalogyChangeLog("[V2.3.0] - fill the new Analogy Interface fields #231", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2021, 02, 11)),
             new AnalogyChangeLog("[V2.3.0] - Add portable option. #225", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2021, 01, 30)),
             new AnalogyChangeLog("[V2.2.0] - Bump Serilog from 2.9.0 to 2.10.0 #151", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 12, 01)),
