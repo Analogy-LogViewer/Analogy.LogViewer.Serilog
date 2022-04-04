@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SerilogUCSettings));
             this.btnSave = new System.Windows.Forms.Button();
             this.btnExportSettings = new System.Windows.Forms.Button();
             this.txtbSupportedFiles = new System.Windows.Forms.TextBox();
@@ -41,8 +43,12 @@
             this.txtbOpenFileFilters = new System.Windows.Forms.TextBox();
             this.lblOpenfilesFilters = new System.Windows.Forms.Label();
             this.btnTestFilter = new System.Windows.Forms.Button();
-            this.tabControlMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControlFiles = new System.Windows.Forms.TabControl();
+            this.tabPageFilesGeneral = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbtnApplicationFolder = new System.Windows.Forms.RadioButton();
+            this.rbtnPerUser = new System.Windows.Forms.RadioButton();
+            this.tabPageFileParsingSettings = new System.Windows.Forms.TabPage();
             this.rbDetectionModeManual = new System.Windows.Forms.RadioButton();
             this.rbDetectionModeAutomatic = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,24 +57,26 @@
             this.rbtnJsonFile = new System.Windows.Forms.RadioButton();
             this.rtxtExample = new System.Windows.Forms.RichTextBox();
             this.rbtnCompactJsonFile = new System.Windows.Forms.RadioButton();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageFileDynamicsColumns = new System.Windows.Forms.TabPage();
             this.txtbIgnoreColumn = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnDeleteIgnoreColumn = new System.Windows.Forms.Button();
             this.btnIgnoreColumn = new System.Windows.Forms.Button();
             this.lstbIgnoreColumn = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rbtnPerUser = new System.Windows.Forms.RadioButton();
-            this.rbtnApplicationFolder = new System.Windows.Forms.RadioButton();
-            this.tabControlMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
+            this.tabPageFiles = new System.Windows.Forms.TabPage();
+            this.tabPageMongoDB = new System.Windows.Forms.TabPage();
+            this.imageList32x32 = new System.Windows.Forms.ImageList(this.components);
+            this.tabControlFiles.SuspendLayout();
+            this.tabPageFilesGeneral.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPageFileParsingSettings.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabPageFileDynamicsColumns.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
+            this.tabPageFiles.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -99,7 +107,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbSupportedFiles.Location = new System.Drawing.Point(276, 67);
             this.txtbSupportedFiles.Name = "txtbSupportedFiles";
-            this.txtbSupportedFiles.Size = new System.Drawing.Size(437, 26);
+            this.txtbSupportedFiles.Size = new System.Drawing.Size(423, 26);
             this.txtbSupportedFiles.TabIndex = 9;
             this.txtbSupportedFiles.Text = "*.Clef";
             // 
@@ -129,7 +137,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbDirectory.Location = new System.Drawing.Point(276, 3);
             this.txtbDirectory.Name = "txtbDirectory";
-            this.txtbDirectory.Size = new System.Drawing.Size(376, 26);
+            this.txtbDirectory.Size = new System.Drawing.Size(362, 26);
             this.txtbDirectory.TabIndex = 12;
             // 
             // label3
@@ -144,7 +152,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(658, 3);
+            this.btnOpenFolder.Location = new System.Drawing.Point(644, 3);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(55, 26);
             this.btnOpenFolder.TabIndex = 13;
@@ -180,7 +188,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbOpenFileFilters.Location = new System.Drawing.Point(276, 35);
             this.txtbOpenFileFilters.Name = "txtbOpenFileFilters";
-            this.txtbOpenFileFilters.Size = new System.Drawing.Size(376, 26);
+            this.txtbOpenFileFilters.Size = new System.Drawing.Size(362, 26);
             this.txtbOpenFileFilters.TabIndex = 47;
             // 
             // lblOpenfilesFilters
@@ -195,7 +203,7 @@
             // btnTestFilter
             // 
             this.btnTestFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTestFilter.Location = new System.Drawing.Point(658, 35);
+            this.btnTestFilter.Location = new System.Drawing.Point(644, 35);
             this.btnTestFilter.Name = "btnTestFilter";
             this.btnTestFilter.Size = new System.Drawing.Size(55, 25);
             this.btnTestFilter.TabIndex = 48;
@@ -203,39 +211,85 @@
             this.btnTestFilter.UseVisualStyleBackColor = true;
             this.btnTestFilter.Click += new System.EventHandler(this.btnTestFilter_Click);
             // 
-            // tabControlMain
+            // tabControlFiles
             // 
-            this.tabControlMain.Controls.Add(this.tabPage2);
-            this.tabControlMain.Controls.Add(this.tabPage1);
-            this.tabControlMain.Controls.Add(this.tabPage3);
-            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
-            this.tabControlMain.Name = "tabControlMain";
-            this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(725, 584);
-            this.tabControlMain.TabIndex = 49;
+            this.tabControlFiles.Controls.Add(this.tabPageFilesGeneral);
+            this.tabControlFiles.Controls.Add(this.tabPageFileParsingSettings);
+            this.tabControlFiles.Controls.Add(this.tabPageFileDynamicsColumns);
+            this.tabControlFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlFiles.ImageList = this.imageList32x32;
+            this.tabControlFiles.Location = new System.Drawing.Point(3, 3);
+            this.tabControlFiles.Name = "tabControlFiles";
+            this.tabControlFiles.SelectedIndex = 0;
+            this.tabControlFiles.Size = new System.Drawing.Size(711, 535);
+            this.tabControlFiles.TabIndex = 49;
             // 
-            // tabPage1
+            // tabPageFilesGeneral
             // 
-            this.tabPage1.Controls.Add(this.rbDetectionModeManual);
-            this.tabPage1.Controls.Add(this.rbDetectionModeAutomatic);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.btnTestFilter);
-            this.tabPage1.Controls.Add(this.txtbOpenFileFilters);
-            this.tabPage1.Controls.Add(this.btnOpenFolder);
-            this.tabPage1.Controls.Add(this.lblOpenfilesFilters);
-            this.tabPage1.Controls.Add(this.txtbDirectory);
-            this.tabPage1.Controls.Add(this.txtbSupportedFiles);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(717, 553);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Parsing Settings";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageFilesGeneral.Controls.Add(this.groupBox2);
+            this.tabPageFilesGeneral.ImageKey = "Technology_32x32.png";
+            this.tabPageFilesGeneral.Location = new System.Drawing.Point(4, 39);
+            this.tabPageFilesGeneral.Name = "tabPageFilesGeneral";
+            this.tabPageFilesGeneral.Size = new System.Drawing.Size(703, 492);
+            this.tabPageFilesGeneral.TabIndex = 2;
+            this.tabPageFilesGeneral.Text = "General Settings";
+            this.tabPageFilesGeneral.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rbtnApplicationFolder);
+            this.groupBox2.Controls.Add(this.rbtnPerUser);
+            this.groupBox2.Location = new System.Drawing.Point(14, 22);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(683, 94);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Storage and Location";
+            // 
+            // rbtnApplicationFolder
+            // 
+            this.rbtnApplicationFolder.AutoSize = true;
+            this.rbtnApplicationFolder.Location = new System.Drawing.Point(14, 54);
+            this.rbtnApplicationFolder.Name = "rbtnApplicationFolder";
+            this.rbtnApplicationFolder.Size = new System.Drawing.Size(540, 22);
+            this.rbtnApplicationFolder.TabIndex = 1;
+            this.rbtnApplicationFolder.TabStop = true;
+            this.rbtnApplicationFolder.Text = "Portable: Store settings in the Application Folder (May need folder permissions)";
+            this.rbtnApplicationFolder.UseVisualStyleBackColor = true;
+            // 
+            // rbtnPerUser
+            // 
+            this.rbtnPerUser.AutoSize = true;
+            this.rbtnPerUser.Location = new System.Drawing.Point(14, 22);
+            this.rbtnPerUser.Name = "rbtnPerUser";
+            this.rbtnPerUser.Size = new System.Drawing.Size(524, 22);
+            this.rbtnPerUser.TabIndex = 0;
+            this.rbtnPerUser.TabStop = true;
+            this.rbtnPerUser.Text = "Per User: Store settings in: %userprofile%\\appdata\\local\\Analogy.LogViewer";
+            this.rbtnPerUser.UseVisualStyleBackColor = true;
+            // 
+            // tabPageFileParsingSettings
+            // 
+            this.tabPageFileParsingSettings.Controls.Add(this.rbDetectionModeManual);
+            this.tabPageFileParsingSettings.Controls.Add(this.rbDetectionModeAutomatic);
+            this.tabPageFileParsingSettings.Controls.Add(this.label1);
+            this.tabPageFileParsingSettings.Controls.Add(this.groupBox1);
+            this.tabPageFileParsingSettings.Controls.Add(this.btnTestFilter);
+            this.tabPageFileParsingSettings.Controls.Add(this.txtbOpenFileFilters);
+            this.tabPageFileParsingSettings.Controls.Add(this.btnOpenFolder);
+            this.tabPageFileParsingSettings.Controls.Add(this.lblOpenfilesFilters);
+            this.tabPageFileParsingSettings.Controls.Add(this.txtbDirectory);
+            this.tabPageFileParsingSettings.Controls.Add(this.txtbSupportedFiles);
+            this.tabPageFileParsingSettings.Controls.Add(this.label2);
+            this.tabPageFileParsingSettings.Controls.Add(this.label3);
+            this.tabPageFileParsingSettings.ImageKey = "EmptyTableRowSeparator_32x32.png";
+            this.tabPageFileParsingSettings.Location = new System.Drawing.Point(4, 39);
+            this.tabPageFileParsingSettings.Name = "tabPageFileParsingSettings";
+            this.tabPageFileParsingSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFileParsingSettings.Size = new System.Drawing.Size(703, 492);
+            this.tabPageFileParsingSettings.TabIndex = 0;
+            this.tabPageFileParsingSettings.Text = "Parsing Settings";
+            this.tabPageFileParsingSettings.UseVisualStyleBackColor = true;
             // 
             // rbDetectionModeManual
             // 
@@ -281,7 +335,7 @@
             this.groupBox1.Controls.Add(this.rbtnJsonPerLine);
             this.groupBox1.Location = new System.Drawing.Point(13, 148);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(695, 399);
+            this.groupBox1.Size = new System.Drawing.Size(681, 338);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Format:";
@@ -290,7 +344,7 @@
             // 
             this.rbtnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbtnReset.AutoSize = true;
-            this.rbtnReset.Location = new System.Drawing.Point(523, 25);
+            this.rbtnReset.Location = new System.Drawing.Point(509, 25);
             this.rbtnReset.Name = "rbtnReset";
             this.rbtnReset.Size = new System.Drawing.Size(148, 22);
             this.rbtnReset.TabIndex = 52;
@@ -315,7 +369,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtxtExample.Location = new System.Drawing.Point(6, 147);
             this.rtxtExample.Name = "rtxtExample";
-            this.rtxtExample.Size = new System.Drawing.Size(683, 245);
+            this.rtxtExample.Size = new System.Drawing.Size(669, 184);
             this.rtxtExample.TabIndex = 50;
             this.rtxtExample.Text = "";
             // 
@@ -330,20 +384,21 @@
             this.rbtnCompactJsonFile.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.rbtnCompactJsonFile.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tabPageFileDynamicsColumns
             // 
-            this.tabPage3.Controls.Add(this.txtbIgnoreColumn);
-            this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Controls.Add(this.btnDeleteIgnoreColumn);
-            this.tabPage3.Controls.Add(this.btnIgnoreColumn);
-            this.tabPage3.Controls.Add(this.lstbIgnoreColumn);
-            this.tabPage3.Location = new System.Drawing.Point(4, 27);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(717, 553);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "Dynamic Columns";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageFileDynamicsColumns.Controls.Add(this.txtbIgnoreColumn);
+            this.tabPageFileDynamicsColumns.Controls.Add(this.label4);
+            this.tabPageFileDynamicsColumns.Controls.Add(this.btnDeleteIgnoreColumn);
+            this.tabPageFileDynamicsColumns.Controls.Add(this.btnIgnoreColumn);
+            this.tabPageFileDynamicsColumns.Controls.Add(this.lstbIgnoreColumn);
+            this.tabPageFileDynamicsColumns.ImageKey = "GridColumnHeader_32x32.png";
+            this.tabPageFileDynamicsColumns.Location = new System.Drawing.Point(4, 39);
+            this.tabPageFileDynamicsColumns.Name = "tabPageFileDynamicsColumns";
+            this.tabPageFileDynamicsColumns.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFileDynamicsColumns.Size = new System.Drawing.Size(703, 492);
+            this.tabPageFileDynamicsColumns.TabIndex = 1;
+            this.tabPageFileDynamicsColumns.Text = "Dynamic Columns";
+            this.tabPageFileDynamicsColumns.UseVisualStyleBackColor = true;
             // 
             // txtbIgnoreColumn
             // 
@@ -351,7 +406,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbIgnoreColumn.Location = new System.Drawing.Point(6, 46);
             this.txtbIgnoreColumn.Name = "txtbIgnoreColumn";
-            this.txtbIgnoreColumn.Size = new System.Drawing.Size(649, 26);
+            this.txtbIgnoreColumn.Size = new System.Drawing.Size(635, 26);
             this.txtbIgnoreColumn.TabIndex = 63;
             // 
             // label4
@@ -361,14 +416,14 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
             this.label4.Location = new System.Drawing.Point(3, 3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(711, 24);
+            this.label4.Size = new System.Drawing.Size(697, 24);
             this.label4.TabIndex = 62;
             this.label4.Text = "Dynamic columns: Ignore the following entries in the dynamic columns generation:";
             // 
             // btnDeleteIgnoreColumn
             // 
             this.btnDeleteIgnoreColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteIgnoreColumn.Location = new System.Drawing.Point(615, 133);
+            this.btnDeleteIgnoreColumn.Location = new System.Drawing.Point(601, 133);
             this.btnDeleteIgnoreColumn.Name = "btnDeleteIgnoreColumn";
             this.btnDeleteIgnoreColumn.Size = new System.Drawing.Size(93, 25);
             this.btnDeleteIgnoreColumn.TabIndex = 61;
@@ -379,7 +434,7 @@
             // btnIgnoreColumn
             // 
             this.btnIgnoreColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnIgnoreColumn.Location = new System.Drawing.Point(661, 46);
+            this.btnIgnoreColumn.Location = new System.Drawing.Point(647, 46);
             this.btnIgnoreColumn.Name = "btnIgnoreColumn";
             this.btnIgnoreColumn.Size = new System.Drawing.Size(47, 25);
             this.btnIgnoreColumn.TabIndex = 60;
@@ -395,7 +450,7 @@
             this.lstbIgnoreColumn.ItemHeight = 18;
             this.lstbIgnoreColumn.Location = new System.Drawing.Point(6, 78);
             this.lstbIgnoreColumn.Name = "lstbIgnoreColumn";
-            this.lstbIgnoreColumn.Size = new System.Drawing.Size(603, 472);
+            this.lstbIgnoreColumn.Size = new System.Drawing.Size(589, 472);
             this.lstbIgnoreColumn.TabIndex = 59;
             // 
             // panel1
@@ -409,48 +464,51 @@
             this.panel1.Size = new System.Drawing.Size(725, 56);
             this.panel1.TabIndex = 50;
             // 
-            // tabPage2
+            // tabControlMain
             // 
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(717, 553);
-            this.tabPage2.TabIndex = 2;
-            this.tabPage2.Text = "General Settings";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabControlMain.Controls.Add(this.tabPageFiles);
+            this.tabControlMain.Controls.Add(this.tabPageMongoDB);
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.ImageList = this.imageList32x32;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 0);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(725, 584);
+            this.tabControlMain.TabIndex = 1;
             // 
-            // groupBox2
+            // tabPageFiles
             // 
-            this.groupBox2.Controls.Add(this.rbtnApplicationFolder);
-            this.groupBox2.Controls.Add(this.rbtnPerUser);
-            this.groupBox2.Location = new System.Drawing.Point(14, 22);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(683, 94);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Storage and Location";
+            this.tabPageFiles.Controls.Add(this.tabControlFiles);
+            this.tabPageFiles.ImageKey = "ListBox_32x32.png";
+            this.tabPageFiles.Location = new System.Drawing.Point(4, 39);
+            this.tabPageFiles.Name = "tabPageFiles";
+            this.tabPageFiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFiles.Size = new System.Drawing.Size(717, 541);
+            this.tabPageFiles.TabIndex = 0;
+            this.tabPageFiles.Text = "File Settings";
+            this.tabPageFiles.UseVisualStyleBackColor = true;
             // 
-            // rbtnPerUser
+            // tabPageMongoDB
             // 
-            this.rbtnPerUser.AutoSize = true;
-            this.rbtnPerUser.Location = new System.Drawing.Point(14, 22);
-            this.rbtnPerUser.Name = "rbtnPerUser";
-            this.rbtnPerUser.Size = new System.Drawing.Size(524, 22);
-            this.rbtnPerUser.TabIndex = 0;
-            this.rbtnPerUser.TabStop = true;
-            this.rbtnPerUser.Text = "Per User: Store settings in: %userprofile%\\appdata\\local\\Analogy.LogViewer";
-            this.rbtnPerUser.UseVisualStyleBackColor = true;
+            this.tabPageMongoDB.ImageKey = "ManageDatasource_32x32.png";
+            this.tabPageMongoDB.Location = new System.Drawing.Point(4, 39);
+            this.tabPageMongoDB.Name = "tabPageMongoDB";
+            this.tabPageMongoDB.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMongoDB.Size = new System.Drawing.Size(717, 541);
+            this.tabPageMongoDB.TabIndex = 1;
+            this.tabPageMongoDB.Text = "MongoDB Settings";
+            this.tabPageMongoDB.UseVisualStyleBackColor = true;
             // 
-            // rbtnApplicationFolder
+            // imageList32x32
             // 
-            this.rbtnApplicationFolder.AutoSize = true;
-            this.rbtnApplicationFolder.Location = new System.Drawing.Point(14, 54);
-            this.rbtnApplicationFolder.Name = "rbtnApplicationFolder";
-            this.rbtnApplicationFolder.Size = new System.Drawing.Size(540, 22);
-            this.rbtnApplicationFolder.TabIndex = 1;
-            this.rbtnApplicationFolder.TabStop = true;
-            this.rbtnApplicationFolder.Text = "Portable: Store settings in the Application Folder (May need folder permissions)";
-            this.rbtnApplicationFolder.UseVisualStyleBackColor = true;
+            this.imageList32x32.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList32x32.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList32x32.ImageStream")));
+            this.imageList32x32.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList32x32.Images.SetKeyName(0, "Technology_32x32.png");
+            this.imageList32x32.Images.SetKeyName(1, "ListBox_32x32.png");
+            this.imageList32x32.Images.SetKeyName(2, "GridColumnHeader_32x32.png");
+            this.imageList32x32.Images.SetKeyName(3, "EmptyTableRowSeparator_32x32.png");
+            this.imageList32x32.Images.SetKeyName(4, "ManageDatasource_32x32.png");
             // 
             // SerilogUCSettings
             // 
@@ -458,21 +516,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "SerilogUCSettings";
             this.Size = new System.Drawing.Size(725, 640);
             this.Load += new System.EventHandler(this.SerilogUCSettings_Load);
-            this.tabControlMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tabControlFiles.ResumeLayout(false);
+            this.tabPageFilesGeneral.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPageFileParsingSettings.ResumeLayout(false);
+            this.tabPageFileParsingSettings.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tabPageFileDynamicsColumns.ResumeLayout(false);
+            this.tabPageFileDynamicsColumns.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
+            this.tabPageFiles.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -491,9 +551,9 @@
         private System.Windows.Forms.TextBox txtbOpenFileFilters;
         private System.Windows.Forms.Label lblOpenfilesFilters;
         private System.Windows.Forms.Button btnTestFilter;
-        private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabControl tabControlFiles;
+        private System.Windows.Forms.TabPage tabPageFileParsingSettings;
+        private System.Windows.Forms.TabPage tabPageFileDynamicsColumns;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtbIgnoreColumn;
         private System.Windows.Forms.Label label4;
@@ -508,9 +568,13 @@
         private System.Windows.Forms.RadioButton rbDetectionModeManual;
         private System.Windows.Forms.RadioButton rbtnJsonFile;
         private System.Windows.Forms.RadioButton rbtnReset;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageFilesGeneral;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rbtnPerUser;
         private System.Windows.Forms.RadioButton rbtnApplicationFolder;
+        private System.Windows.Forms.TabControl tabControlMain;
+        private System.Windows.Forms.TabPage tabPageFiles;
+        private System.Windows.Forms.TabPage tabPageMongoDB;
+        private System.Windows.Forms.ImageList imageList32x32;
     }
 }
