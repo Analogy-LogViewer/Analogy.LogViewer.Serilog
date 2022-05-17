@@ -105,3 +105,5 @@ The following modules exists:
 ## How To Use
 1. Download the latest [Analogy Log Viewer](https://github.com/Analogy-LogViewer/Analogy.LogViewer) from the [release](https://github.com/Analogy-LogViewer/Analogy.LogViewer/releases) section (.net framework or .net Core version).
 2. Download (or Compile) this project and put the compiled DLL in the same folder as the Analogy Log Viewer.
+
+![](https://estruyf-github.azurewebsites.net/api/VisitorHit?user=Analogy-LogViewer&repo=Analogy.LogViewer.Serilog&countColorcountColor) Since May 2022
