@@ -18,10 +18,17 @@ namespace Analogy.LogViewer.Serilog
     public class JsonFileParser
     {
         private IMessageFields messageFields;
+        private JsonSerializerSettings JsonSerializerSettings;
 
         public JsonFileParser(IMessageFields messageFields)
         {
             this.messageFields = messageFields;
+            JsonSerializerSettings = new JsonSerializerSettings
+            {
+                DateParseHandling = DateParseHandling.DateTimeOffset,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+            };
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
@@ -58,7 +65,7 @@ namespace Analogy.LogViewer.Serilog
                             }
 
 
-                            var data = JsonConvert.DeserializeObject(jsonData);
+                            var data = JsonConvert.DeserializeObject(jsonData, JsonSerializerSettings);
                             if (data is JObject jo)
                             {
                                 var evt = LogEventReader.ReadFromJObject(jo, messageFields);

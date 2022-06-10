@@ -82,7 +82,7 @@ namespace Analogy.LogViewer.Serilog
                             long count = 0;
                             while ((json = await streamReader.ReadLineAsync()) != null)
                             {
-                                var data = JsonConvert.DeserializeObject(json);
+                                var data = JsonConvert.DeserializeObject(json, JsonSerializerSettings);
                                 var jo = data as JObject;
                                 var evt = LogEventReader.ReadFromJObject(jo, messageFields);
                                 {
