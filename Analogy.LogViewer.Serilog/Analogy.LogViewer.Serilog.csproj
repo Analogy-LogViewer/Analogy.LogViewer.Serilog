@@ -12,7 +12,7 @@
 		<ApplicationIcon />
 		<StartupObject />
 		<Authors>Lior Banai</Authors>
-		<Description>Analogy Serilog Parser for Compact Formatting (*.clef files) and regex parser</Description>
+		<Description>Analogy Serilog Parser for Compact Formatting</Description>
 		<Copyright>Lior Banai © 2020-2022</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</PackageProjectUrl>
@@ -22,7 +22,7 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.6.1</Version>
+		<Version>2.6.2</Version>
 		<Company>Analogy.LogViewer</Company>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
