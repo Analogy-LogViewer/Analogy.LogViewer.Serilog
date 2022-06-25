@@ -1,11 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
+	  <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net472;net471</TargetFrameworks>  </PropertyGroup>
+	<ItemGroup>
     <Folder Include="IAnalogy\" />
   </ItemGroup>
 
+
+	<ItemGroup>
+		<PackageReference Include="Analogy.CommonUtilities" Version="2.2.2" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.2.3" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="3.2.3" />
+		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Serilog" Version="2.11.0" />
+		<PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
+	</ItemGroup>
 </Project>
