@@ -33,7 +33,7 @@ namespace Analogy.LogViewer.Serilog
         }
     }
 
-    public static class TraceLoggerConfigurationExtensions
+    public static class LoggerConfigurationExtensions
     {
         const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
 
