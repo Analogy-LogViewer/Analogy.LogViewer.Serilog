@@ -96,3 +96,8 @@ jobs:
           Get-ChildItem .\artifactory\Analogy.LogViewer.Serilog.Sinks\bin\Release -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { nuget push $_  -Source "GPR" -SkipDuplicate }
+          
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
