@@ -22,7 +22,7 @@
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>2.7.1</Version>
+		<Version>2.7.2</Version>
 		<Company>Analogy.LogViewer</Company>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 		<Nullable>enable</Nullable>
