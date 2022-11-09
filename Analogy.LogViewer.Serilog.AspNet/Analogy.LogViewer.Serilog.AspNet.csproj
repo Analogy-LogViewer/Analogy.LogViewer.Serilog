@@ -2,11 +2,11 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-windows;net6.0-windows</TargetFrameworks>
-		<Version>1.4.0</Version>
+		<Version>1.5.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="0.8.0" />
+		<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="1.0.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
 		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
 		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
