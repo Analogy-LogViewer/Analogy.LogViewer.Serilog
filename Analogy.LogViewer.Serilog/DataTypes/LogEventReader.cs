@@ -93,6 +93,25 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         }
 
         /// <summary>
+        /// Read a single log event from a JSON-encoded document.
+        /// </summary>
+        /// <param name="row">The event in compact-JSON.</param>
+        /// <param name="messageFields"></param>
+        /// <param name="serializer">If specified, a JSON serializer used when converting event documents.</param>
+        /// <returns>The log event.</returns>
+        public static LogEvent ReadFromString(string row, IMessageFields messageFields, JsonSerializer serializer = null)
+        {
+            if (row == null)
+            {
+                throw new ArgumentNullException(nameof(row));
+            }
+
+            serializer = serializer ?? CreateSerializer();
+            var jObject = serializer.Deserialize<JObject>(new JsonTextReader(new StringReader(row)));
+            return ReadFromJObject(jObject, messageFields);
+
+        }
+        /// <summary>
         /// Read a single log event from an already-deserialized JSON object.
         /// </summary>
         /// <param name="jObject">The deserialized compact-JSON event.</param>
