@@ -2,6 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
+	  <Copyright>Lior Banai © 2022-2023</Copyright>
   </PropertyGroup>
 	<ItemGroup>
     <Folder Include="IAnalogy\" />
@@ -9,9 +10,9 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="3.5.0" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.5.0" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="3.5.0" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="3.6.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.6.0" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="3.6.0" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
