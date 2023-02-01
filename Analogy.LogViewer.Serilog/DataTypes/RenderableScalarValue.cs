@@ -9,7 +9,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
     {
         readonly Dictionary<string, string> _renderings = new Dictionary<string, string>();
 
-        public RenderableScalarValue(object value, List<Rendering> renderings)
+        public RenderableScalarValue(object? value, List<Rendering> renderings)
             : base(value)
         {
             if (renderings == null)
@@ -23,10 +23,9 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             }
         }
 
-        public override void Render(TextWriter output, string format = null, IFormatProvider formatProvider = null)
+        public override void Render(TextWriter output, string? format = null, IFormatProvider? formatProvider = null)
         {
-            string rendering;
-            if (format != null && _renderings.TryGetValue(format, out rendering))
+            if (format != null && _renderings.TryGetValue(format, out var rendering))
             {
                 output.Write(rendering);
             }

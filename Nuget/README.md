@@ -63,5 +63,7 @@ the available tags to use for parsing are:
 
 ## History
 
-### V2.6.4(23.07.2022):
-- https://github.com/LiorBanai/HDF5-CSharp/issues/224: Memory increased #224
+
+### V3.6.1(01.02.2023):
+- https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog/issues/499: Can't parse dictionary that contains an empty key #499
+

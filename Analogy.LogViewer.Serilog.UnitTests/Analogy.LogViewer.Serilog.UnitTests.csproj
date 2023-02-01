@@ -30,6 +30,9 @@
     <None Update="log files\CompactJsonFormat.gz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="log files\empty_dictionary_key.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="log files\JsonFormatPerFile.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
