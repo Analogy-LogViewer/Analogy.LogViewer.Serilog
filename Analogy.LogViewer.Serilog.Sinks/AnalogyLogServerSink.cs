@@ -70,8 +70,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
             m.Text = evt.RenderMessage(formatProvider);
             if (evt.Properties.TryGetValue(Constants.ProcessName, out var processName))
             {
-                if (processName is ScalarValue scalarValue &&
-                    scalarValue.Value is string processNameString)
+                if (processName is ScalarValue { Value: string processNameString })
                 {
                     m.Module = processNameString;
                 }
@@ -139,20 +138,20 @@ namespace Analogy.LogViewer.Serilog.Sinks
                 }
             }
             m.AdditionalInformation = new Dictionary<string, string>();
-           foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
-           {
-               if (property.Key.Equals(Constants.EnvironmentUserName) ||
-                   property.Key.Equals(Constants.Source) ||
-                   property.Key.Equals(Constants.ThreadId) ||
-                   property.Key.Equals(Constants.ProcessName) ||
-                   property.Key.Equals(Constants.MachineName) ||
-                   property.Key.Equals(Constants.User) ||
-                   property.Key.Equals(Constants.ProcessId))
-               {
-                   continue;
-               }
-               m.AdditionalInformation.Add(property.Key, property.Value.ToString());
-           }
+            foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
+            {
+                if (property.Key.Equals(Constants.EnvironmentUserName) ||
+                    property.Key.Equals(Constants.Source) ||
+                    property.Key.Equals(Constants.ThreadId) ||
+                    property.Key.Equals(Constants.ProcessName) ||
+                    property.Key.Equals(Constants.MachineName) ||
+                    property.Key.Equals(Constants.User) ||
+                    property.Key.Equals(Constants.ProcessId))
+                {
+                    continue;
+                }
+                m.AdditionalInformation.Add(property.Key, property.Value.ToString());
+            }
             return m;
         }
 

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,8 +17,16 @@ namespace Analogy.LogViewer.Serilog.Sinks.Tests
 {
     public partial class Form1 : Form
     {
+       
         Logger log = new LoggerConfiguration()
-            .WriteTo.AnalogyLogServerSink().CreateLogger();
+            .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithProcessId()
+            .Enrich.WithThreadId()
+            .Enrich.With<ProcessNameEnricher>()
+            .WriteTo.AnalogyLogServerSink().
+            
+            CreateLogger();
         public Form1()
         {
             InitializeComponent();
@@ -41,5 +51,6 @@ namespace Analogy.LogViewer.Serilog.Sinks.Tests
             log = new LoggerConfiguration()
                 .WriteTo.AnalogyLogServerSink(txtAddress.Text).CreateLogger();
         }
+
     }
 }
