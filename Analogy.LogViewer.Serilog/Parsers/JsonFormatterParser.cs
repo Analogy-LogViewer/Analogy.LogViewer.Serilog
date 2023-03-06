@@ -30,11 +30,11 @@ namespace Analogy.LogViewer.Serilog
             };
 
         }
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
+        public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token,
             ILogMessageCreatedHandler messagesHandler)
         {
             //var formatter = new JsonFormatter();
-            List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
+            List<IAnalogyLogMessage> parsedMessages = new List<IAnalogyLogMessage>();
             try
             {
                 using (var analogy = new LoggerConfiguration()

@@ -31,8 +31,8 @@ namespace Analogy.LogViewer.Serilog.Sinks
         {
 
             var alm = ParseLogEventProperties(logEvent, in _formatProvider);
-            logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, alm.Category, alm.MachineName, alm.User,
-                alm.Module, alm.ProcessId, alm.ThreadId, alm.AdditionalInformation, alm.MethodName, alm.LineNumber, alm.FileName);
+            logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, "", alm.MachineName, alm.User,
+                alm.Module, alm.ProcessId, alm.ThreadId, alm.AdditionalProperties, alm.MethodName, alm.LineNumber, alm.FileName);
         }
 
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt, in IFormatProvider formatProvider)
@@ -137,7 +137,6 @@ namespace Analogy.LogViewer.Serilog.Sinks
                     m.User = structure.ToString();
                 }
             }
-            m.AdditionalInformation = new Dictionary<string, string>();
             foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
             {
                 if (property.Key.Equals(Constants.EnvironmentUserName) ||
@@ -150,7 +149,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
                 {
                     continue;
                 }
-                m.AdditionalInformation.Add(property.Key, property.Value.ToString());
+                m.AddOrReplaceAdditionalProperty(property.Key, property.Value.ToString());
             }
             return m;
         }

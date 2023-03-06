@@ -76,7 +76,6 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.AreEqual(1, firstEvent.ThreadId);
             Assert.IsNotNull(firstEvent.Module);
             Assert.IsNotNull(firstEvent.FileName);
-            Assert.IsNotNull(firstEvent.Category);
             Assert.IsNotNull(firstEvent.User);
             Assert.IsNotNull(firstEvent.MethodName);
             // The second event should have a source context
@@ -86,7 +85,6 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.AreEqual(1, secondEvent.ThreadId);
             Assert.IsNotNull(secondEvent.Module);
             Assert.IsNotNull(secondEvent.FileName);
-            Assert.IsNotNull(secondEvent.Category);
             Assert.IsNotNull(secondEvent.User);
             Assert.IsNotNull(secondEvent.MethodName);
         }
@@ -103,7 +101,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.AreEqual(4, messages.Count());
             // The first event doesn't have a source context
             Assert.IsTrue(messages[0].MachineName == "Test");
-            Assert.IsTrue(messages[1].AdditionalInformation["CustomProperty"] == "\"Custom Value\"");
+            Assert.IsTrue(messages[1].AdditionalProperties["CustomProperty"] == "\"Custom Value\"");
 
         }
 
@@ -117,7 +115,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.AreEqual(4, messages.Count());
             // The first event doesn't have a source context
-            Assert.IsTrue(messages[2].AdditionalInformation["Tags"] == "[\"test\", \"orange\"]");
+            Assert.IsTrue(messages[2].AdditionalProperties["Tags"] == "[\"test\", \"orange\"]");
 
         }
 

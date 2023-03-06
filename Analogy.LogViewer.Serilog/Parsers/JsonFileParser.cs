@@ -30,11 +30,11 @@ namespace Analogy.LogViewer.Serilog
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
         }
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
-            var messages = await Task<IEnumerable<AnalogyLogMessage>>.Factory.StartNew(() =>
+            var messages = await Task<IEnumerable<IAnalogyLogMessage>>.Factory.StartNew(() =>
             {
-                List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
+                List<IAnalogyLogMessage> parsedMessages = new List<IAnalogyLogMessage>();
                 try
                 {
                     using (var analogy = new LoggerConfiguration()
