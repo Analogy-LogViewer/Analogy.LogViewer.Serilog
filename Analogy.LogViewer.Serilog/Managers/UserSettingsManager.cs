@@ -41,7 +41,7 @@ namespace Analogy.LogViewer.Serilog.Managers
                     Settings = JsonConvert.DeserializeObject<SerilogSettings>(data, settings);
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
-                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
+                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz;*.zip|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz|ZIP file (*.zip)|*.zip";
 
                     }
                     return true;
@@ -52,7 +52,7 @@ namespace Analogy.LogViewer.Serilog.Managers
                     Settings = new SerilogSettings();
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
-                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
+                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz;*.zip|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz|ZIP file (*.zip)|*.zip";
 
                     }
                     return true;
@@ -65,7 +65,7 @@ namespace Analogy.LogViewer.Serilog.Managers
                     Settings = new SerilogSettings();
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
-                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
+                        Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz;*.zip|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz|ZIP file (*.zip)|*.zip";
 
                     }
                     return false;
