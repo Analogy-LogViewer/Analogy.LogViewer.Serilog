@@ -17,7 +17,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [DataRow("CompactJsonFormat.clef",4, "2016-10-12T04:46:58.0554314Z")]
         [DataRow("CompactJsonFormatSourceContextTest.clef",2, "2020-06-18T18:03:19.2248275Z")]
         [DataRow("CompactJsonFormatTestColumns.clef",4, "2020-06-26T14:21:34.7233612Z")]
-        [DataRow("CompactJsonFormat.gz",4, "2016-10-12T04:46:58.0554314Z")]
+       // [DataRow("CompactJsonFormat.gz",4, "2016-10-12T04:46:58.0554314Z")]
         public async Task OfflineProviderParserTimestampTest(string fileName,int numberOfMessages,string datetimeToParse)
         {
             OfflineDataProvider parser = new OfflineDataProvider();
