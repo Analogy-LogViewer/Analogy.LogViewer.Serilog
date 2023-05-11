@@ -1,7 +1,9 @@
 ﻿using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.IAnalogy;
+using Analogy.LogViewer.Serilog.Managers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -21,6 +23,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         public async Task OfflineProviderParserTimestampTest(string fileName,int numberOfMessages,string datetimeToParse)
         {
             OfflineDataProvider parser = new OfflineDataProvider();
+            UserSettingsManager.UserSettings.Settings.SupportFormats= new List<string> { "*.Clef", "*.log", "*.gz", "*.zip" };
             CancellationTokenSource cts = new CancellationTokenSource();
             string file = Path.Combine(Folder, "log files", fileName);
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
