@@ -6,7 +6,7 @@ namespace Analogy.LogViewer.Serilog
 
     public class SerilogSettings
     {
-        public bool UseApplicationFolderForSettings { get; set; } = false;
+        public bool UseApplicationFolderForSettings { get; set; }
         public string FileOpenDialogFilters { get; set; }
         public string FileSaveDialogFilters { get; } = string.Empty;
         public List<string> SupportFormats { get; set; }

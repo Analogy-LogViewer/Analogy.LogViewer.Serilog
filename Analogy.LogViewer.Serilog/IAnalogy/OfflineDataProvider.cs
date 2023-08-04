@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,14 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
     public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
     {
         public override Guid Id { get; set; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
-        public override Image LargeImage { get; set; } = null;
-        public override Image SmallImage { get; set; } = null;
+        public override Image LargeImage { get; set; }
+        public override Image SmallImage { get; set; }
         public override string OptionalTitle { get; set; } = "Serilog offline reader";
-        public override bool CanSaveToLogFile { get; set; } = false;
+        public override bool CanSaveToLogFile { get; set; }
         public override string FileOpenDialogFilters { get; set; } = UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
         public override string FileSaveDialogFilters { get; set; } = string.Empty;
         public override IEnumerable<string> SupportFormats { get; set; } = UserSettingsManager.UserSettings.Settings.SupportFormats;
-        public override bool DisableFilePoolingOption { get; set; } = false;
+        public override bool DisableFilePoolingOption { get; set; }
 
         public override string InitialFolderFullPath =>
             (!string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.Directory) &&
@@ -36,7 +37,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         private JsonFileParser CompactJsonFileParser { get; }
         private JsonFileParser JsonFileParser { get; }
 
-        public override bool UseCustomColors { get; set; } = false;
+        public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
@@ -51,9 +52,8 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
             JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
 
         }
-        public override Task InitializeDataProvider(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(ILogger logger)
         {
-            LogManager.Instance.SetLogger(logger);
             return base.InitializeDataProvider(logger);
         }
 
@@ -80,10 +80,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                     case FileFormat.Unknown:
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException($"Invalid format {UserSettingsManager.UserSettings.Settings.Format}");
                 }
             }
-            LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
+            Template.Managers.LogManager.Instance?.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
         }
 

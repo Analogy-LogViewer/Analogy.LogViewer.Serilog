@@ -2,6 +2,8 @@
 using System.Linq;
 using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.Managers;
+using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 using Serilog.Events;
 
 namespace Analogy.LogViewer.Serilog
@@ -34,7 +36,7 @@ namespace Analogy.LogViewer.Serilog
                     break;
                 default:
                     {
-                        LogManager.Instance.LogWarning("invalid log level:" + evt.Level,"Serilog parser");
+                        LogManager.Instance.LogWarning("invalid log level:" + evt.Level);
                         m.Level = AnalogyLogLevel.Unknown;
                         break;
                     }

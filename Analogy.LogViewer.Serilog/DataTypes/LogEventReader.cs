@@ -216,7 +216,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
         {
             if (data.TryGetValue("ExceptionDetail", out var info))
             {
-                var ex = new ExternalException(string.Join(" ", header, info["Message"]?.Value<string>()),
+                var ex = new ExternalException(string.Join(" ", header, info["Message"]?.Value<string>(), ""),
                     (info["HResult"].HasValues ? info["HResult"].Value<int>() : -1))
                 {
                     Source = info["Source"]?.Value<string>()

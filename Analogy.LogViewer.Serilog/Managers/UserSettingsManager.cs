@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -48,7 +50,7 @@ namespace Analogy.LogViewer.Serilog.Managers
                 }
                 catch (Exception ex)
                 {
-                    LogManager.Instance.LogWarning($"Error loading user setting file: {ex.Message}", "Analogy Serilog Parser");
+                    LogManager.Instance?.LogWarning($"Error loading user setting file: {ex.Message}", "Analogy Serilog Parser");
                     Settings = new SerilogSettings();
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
@@ -103,7 +105,7 @@ namespace Analogy.LogViewer.Serilog.Managers
             }
             catch (Exception e)
             {
-                LogManager.Instance.LogException("Error saving settings: " + e.Message, e, "Analogy Serilog Parser");
+                LogManager.Instance.LogError(e, "Error saving settings: " + e.Message);
             }
 
 
