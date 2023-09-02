@@ -13,7 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.AspNet", "Analogy.LogViewer.Serilog.AspNet\Analogy.LogViewer.Serilog.AspNet.csproj", "{863AEB49-888E-49BF-ACDA-5290BE40E039}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analogy.LogViewer.Serilog.Sinks.MongoDB", "Analogy.LogViewer.Serilog.Sinks.MongoDB\Analogy.LogViewer.Serilog.Sinks.MongoDB.csproj", "{44C3F7B3-D820-4770-8836-98365AD77140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.Serilog.Sinks.MongoDB", "Analogy.LogViewer.Serilog.Sinks.MongoDB\Analogy.LogViewer.Serilog.Sinks.MongoDB.csproj", "{44C3F7B3-D820-4770-8836-98365AD77140}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{47A63431-A8BD-4B24-84A5-606F5DB73E6F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
