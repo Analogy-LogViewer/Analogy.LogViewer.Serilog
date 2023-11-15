@@ -22,6 +22,5 @@ namespace Analogy.LogViewer.Serilog.Sinks
                 .Where(f => f.FieldType == typeof(string))
                 .ToDictionary(f => f.Name, f => (string)f.GetValue(null));
         }
-
     }
 }

@@ -17,6 +17,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
             _formatProvider = formatProvider;
             logServerMessageProducer = new AnalogyMessageProducer("http://localhost:6000");
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,10 +30,9 @@ namespace Analogy.LogViewer.Serilog.Sinks
         }
         public void Emit(LogEvent logEvent)
         {
-
             var alm = ParseLogEventProperties(logEvent, in _formatProvider);
-            logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, "", alm.MachineName, alm.User,
-                alm.Module, alm.ProcessId, alm.ThreadId, alm.AdditionalProperties, alm.MethodName, alm.LineNumber, alm.FileName);
+            _ = (logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, "", alm.MachineName, alm.User,
+                alm.Module, alm.ProcessId, alm.ThreadId, alm.AdditionalProperties, alm.MethodName, alm.LineNumber, alm.FileName));
         }
 
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt, in IFormatProvider formatProvider)

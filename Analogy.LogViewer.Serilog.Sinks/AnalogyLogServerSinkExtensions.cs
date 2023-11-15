@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Serilog;
+﻿using Serilog;
 using Serilog.Configuration;
+using System;
 
 namespace Analogy.LogViewer.Serilog.Sinks
 {
