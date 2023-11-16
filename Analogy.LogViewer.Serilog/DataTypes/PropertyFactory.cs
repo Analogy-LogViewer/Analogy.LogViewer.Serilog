@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json.Linq;
 using Serilog.Events;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Analogy.LogViewer.Serilog.DataTypes
 {
-    static class PropertyFactory
+    internal static class PropertyFactory
     {
-        const string TypeTagPropertyName = "$type";
+        private const string TypeTagPropertyName = "$type";
 
         public static LogEventProperty CreateProperty(string name, JToken value, List<Rendering>? renderings)
         {
@@ -32,7 +32,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             return new LogEventProperty(name, CreatePropertyValue(value, renderings));
         }
 
-        static LogEventPropertyValue CreatePropertyValue(JToken value, List<Rendering>? renderings)
+        private static LogEventPropertyValue CreatePropertyValue(JToken value, List<Rendering>? renderings)
         {
             if (value.Type == JTokenType.Null)
             {

@@ -16,9 +16,9 @@ using System;
 
 namespace Analogy.LogViewer.Serilog.DataTypes
 {
-    class TextException : Exception
+    internal class TextException : Exception
     {
-        readonly string _text;
+        private readonly string _text;
 
         public TextException(string text)
             : base("This exception type provides ToString() access to details only.")

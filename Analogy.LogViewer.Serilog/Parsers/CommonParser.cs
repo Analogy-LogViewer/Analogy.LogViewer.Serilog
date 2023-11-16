@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.LogViewer.Serilog.Managers;
 using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
 using Serilog.Events;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -103,14 +103,14 @@ namespace Analogy.LogViewer.Serilog
             }
             if (evt.Properties.TryGetValue(Constants.EnvironmentUserName, out var environmentUserName))
             {
-                if (environmentUserName is ScalarValue {Value: string environmentUserNameString})
+                if (environmentUserName is ScalarValue { Value: string environmentUserNameString})
                 {
                     m.User = environmentUserNameString;
                 }
             }
             if (evt.Properties.TryGetValue(Constants.User, out var environmentUser))
             {
-                if (environmentUser is ScalarValue {Value: string environmentUserString} scalarValue)
+                if (environmentUser is ScalarValue { Value: string environmentUserString} scalarValue)
                 {
                     m.User = environmentUserString;
                 }

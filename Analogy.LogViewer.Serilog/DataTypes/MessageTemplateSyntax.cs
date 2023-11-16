@@ -2,7 +2,7 @@
 
 namespace Analogy.LogViewer.Serilog.DataTypes
 {
-    static class MessageTemplateSyntax
+    internal static class MessageTemplateSyntax
     {
         public static string Escape(string text)
         {

@@ -1,7 +1,7 @@
 ﻿
 namespace Analogy.LogViewer.Serilog.DataTypes
 {
-    class Rendering
+    internal class Rendering
     {
         public string Name { get; }
         public string Format { get; }

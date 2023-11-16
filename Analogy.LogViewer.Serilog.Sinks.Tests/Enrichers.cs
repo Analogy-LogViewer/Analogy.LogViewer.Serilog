@@ -1,23 +1,22 @@
 ﻿using Serilog.Core;
+using Serilog.Events;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Serilog.Events;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace Analogy.LogViewer.Serilog.Sinks.Tests
 {
     public class ProcessNameEnricher: ILogEventEnricher
     {
-        LogEventProperty _cachedProperty;
+        private LogEventProperty _cachedProperty;
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
             logEvent.AddPropertyIfAbsent(GetLogEventProperty(propertyFactory));
-
         }
         private LogEventProperty GetLogEventProperty(ILogEventPropertyFactory propertyFactory)
         {

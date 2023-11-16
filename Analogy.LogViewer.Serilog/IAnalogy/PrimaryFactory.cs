@@ -1,9 +1,9 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.Serilog.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Analogy.LogViewer.Serilog.Properties;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
@@ -17,7 +17,5 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         public override string About { get; set; } = "Serilog Parser for Analogy Log Viewer";
         public override Image SmallImage { get; set; } = Resources.AnalogySerilog16x16;
         public override Image LargeImage { get; set; } = Resources.AnalogySerilog32x32;
-
-
     }
 }

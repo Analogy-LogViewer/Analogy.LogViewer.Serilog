@@ -10,14 +10,13 @@ using System.IO;
 
 namespace Analogy.LogViewer.Serilog
 {
-    class AnalogySink : ILogEventSink
+    public class AnalogySink : ILogEventSink
     {
-        readonly ITextFormatter _textFormatter;
+        private readonly ITextFormatter _textFormatter;
         public static string output = string.Empty;
         public AnalogySink(ITextFormatter textFormatter)
         {
             _textFormatter = textFormatter ?? throw new ArgumentNullException(nameof(textFormatter));
-
         }
 
         public void Emit(LogEvent logEvent)
@@ -35,7 +34,7 @@ namespace Analogy.LogViewer.Serilog
 
     public static class LoggerConfigurationExtensions
     {
-        const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
+        private const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
 
         /// <summary>
         /// Write log events to the <see cref="System.Diagnostics.Trace"/>.

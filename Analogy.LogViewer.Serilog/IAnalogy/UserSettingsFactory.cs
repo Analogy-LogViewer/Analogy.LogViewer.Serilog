@@ -1,10 +1,10 @@
-﻿using Analogy.LogViewer.Serilog.Properties;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.Serilog.Properties;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Analogy.Interfaces;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {

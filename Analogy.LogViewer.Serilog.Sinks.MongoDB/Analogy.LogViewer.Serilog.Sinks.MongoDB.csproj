@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
+	  <TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
 	  <Copyright>Lior Banai © 2022-2023</Copyright>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 	<ItemGroup>
     <Folder Include="IAnalogy\" />
@@ -10,10 +11,10 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="5.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="5.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="5.0.3" />
-		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
+		<PackageReference Include="Analogy.CommonUtilities" Version="6.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="6.0.0.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="8.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -22,7 +23,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Serilog" Version="3.0.1" />
-		<PackageReference Include="System.Resources.Extensions" Version="7.0.0" />
+		<PackageReference Include="Serilog" Version="3.1.1" />
+		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
 	</ItemGroup>
 </Project>

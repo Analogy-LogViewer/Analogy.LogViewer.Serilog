@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Analogy.LogViewer.Serilog
 {
-
     public class SerilogSettings
     {
         public bool UseApplicationFolderForSettings { get; set; }

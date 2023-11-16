@@ -2,56 +2,27 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
-		<UseWindowsForms>true</UseWindowsForms>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<ApplicationIcon />
-		<StartupObject />
+		<TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
 		<Authors>Lior Banai</Authors>
 		<Description>Analogy Serilog Parser for Compact Formatting</Description>
-		<Copyright>Lior Banai © 2020-2023</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Copyright>Lior Banai © 2020-2024</Copyright>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
 		<PackageReleaseNotes>Analogy Serilog Parsers</PackageReleaseNotes>
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
-		<PackageIconUrl />
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<VersionPrefix>5.0.3.0</VersionPrefix>
+		<VersionPrefix>6.0.0</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
-		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
-		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="5.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="5.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="5.0.3" />
-		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Analogy.CommonUtilities" Version="6.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="6.0.0.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="6.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Serilog" Version="3.0.1" />
-		<PackageReference Include="System.Resources.Extensions" Version="7.0.0" />
-	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net48' or '$(TargetFramework)' == 'net471' ">
-		<PackageReference Include="PolySharp" Version="1.13.2">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Serilog" Version="3.1.1" />
+		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">

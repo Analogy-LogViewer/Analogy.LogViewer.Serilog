@@ -12,6 +12,6 @@
     public enum FileFormatDetection
     {
         Automatic,
-        Manual
+        Manual,
     }
 }

@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.Serilog.AspNet
 {
@@ -27,7 +27,7 @@ namespace Analogy.LogViewer.Serilog.AspNet
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILogger<Startup> logger)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             //var log = new LoggerConfiguration()
             //    .WriteTo.AnalogyLogServerSink("http://localhost:7000").CreateLogger();

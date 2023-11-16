@@ -17,11 +17,11 @@ namespace Analogy.LogViewer.Serilog.DataTypes
     /// </summary>
     public class LogEventReader : IDisposable
     {
-        static readonly MessageTemplateParser Parser = new MessageTemplateParser();
-        readonly TextReader _text;
-        readonly JsonSerializer _serializer;
+        private static readonly MessageTemplateParser Parser = new MessageTemplateParser();
+        private readonly TextReader _text;
+        private readonly JsonSerializer _serializer;
         private readonly IMessageFields _messageFields;
-        int _lineNumber;
+        private int _lineNumber;
 
         /// <summary>
         /// Construct a <see cref="LogEventReader"/>.
@@ -89,7 +89,6 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             serializer = serializer ?? CreateSerializer();
             var jObject = serializer.Deserialize<JObject>(new JsonTextReader(new StringReader(document)));
             return ReadFromJObject(jObject, _messageFields);
-
         }
 
         /// <summary>
@@ -109,8 +108,8 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             serializer = serializer ?? CreateSerializer();
             var jObject = serializer.Deserialize<JObject>(new JsonTextReader(new StringReader(row)));
             return ReadFromJObject(jObject, messageFields);
-
         }
+
         /// <summary>
         /// Read a single log event from an already-deserialized JSON object.
         /// </summary>
@@ -219,7 +218,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
                 var ex = new ExternalException(string.Join(" ", header, info["Message"]?.Value<string>(), ""),
                     (info["HResult"].HasValues ? info["HResult"].Value<int>() : -1))
                 {
-                    Source = info["Source"]?.Value<string>()
+                    Source = info["Source"]?.Value<string>(),
                 };
                 return ex;
             }
@@ -276,7 +275,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             return JsonSerializer.Create(new JsonSerializerSettings
             {
                 DateParseHandling = DateParseHandling.None,
-                Culture = CultureInfo.InvariantCulture
+                Culture = CultureInfo.InvariantCulture,
             });
         }
     }

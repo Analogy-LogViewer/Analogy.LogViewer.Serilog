@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,7 +11,6 @@ using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -28,7 +28,6 @@ namespace Analogy.LogViewer.Serilog
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
-
         }
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token,
             ILogMessageCreatedHandler messagesHandler)
@@ -45,7 +44,6 @@ namespace Analogy.LogViewer.Serilog
                     using (var fileStream =
                         new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
-
                         if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
                         {
                             using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
@@ -56,7 +54,6 @@ namespace Analogy.LogViewer.Serilog
                                     long count = 0;
                                     while ((json = await streamReader.ReadLineAsync()) != null)
                                     {
-
                                         var data = JsonConvert.DeserializeObject(json, JsonSerializerSettings);
                                         var jo = data as JObject;
                                         var evt = LogEventReader.ReadFromJObject(jo, messageFields);
@@ -67,14 +64,11 @@ namespace Analogy.LogViewer.Serilog
                                             m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
                                             messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-
                                         }
                                     }
-
                                 }
                             }
                         }
-
 
                         using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
                         {
@@ -93,11 +87,9 @@ namespace Analogy.LogViewer.Serilog
                                     parsedMessages.Add(m);
                                     count++;
                                     messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-
                                 }
                             }
                         }
-
                     }
 
                     messagesHandler.AppendMessages(parsedMessages, fileName);

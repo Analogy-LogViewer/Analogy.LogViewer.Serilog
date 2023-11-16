@@ -9,6 +9,7 @@ namespace Analogy.LogViewer.Serilog
         public static IEnumerable<AnalogyChangeLog> GetChangeLog() =>
         new List<AnalogyChangeLog>
         {
+            new AnalogyChangeLog("[V6.0.0] - NET8", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2023, 11, 16), "6.0.0"),
             new AnalogyChangeLog("[V2.6.0] - [UI] Add parsing counter #374", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2022, 04, 04), ""),
             new AnalogyChangeLog("[V2.5.0] - Add NET6 compilation target #330", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2021, 11, 09), ""),
             new AnalogyChangeLog("[V2.3.0] - fill the new Analogy Interface fields #231", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2021, 02, 11), ""),
@@ -26,7 +27,7 @@ namespace Analogy.LogViewer.Serilog
             new AnalogyChangeLog("Support for reading compressed files. #45", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 07, 22), ""),
             new AnalogyChangeLog("Duplicated/Extra columns with the dynamic columns feature. #44", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 07, 10), ""),
             new AnalogyChangeLog("Add dynamic columns per file properties. #43", AnalogChangeLogType.Improvement, "Lior Banai", new DateTime(2020, 07, 03), ""),
-            new AnalogyChangeLog("Initial version", AnalogChangeLogType.None, "Lior Banai", new DateTime(2019, 12, 14), "")
+            new AnalogyChangeLog("Initial version", AnalogChangeLogType.None, "Lior Banai", new DateTime(2019, 12, 14), ""),
         };
     }
 }

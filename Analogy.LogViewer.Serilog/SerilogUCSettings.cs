@@ -80,14 +80,12 @@ namespace Analogy.LogViewer.Serilog
                     File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(Settings));
                     MessageBox.Show("File Saved", @"Export settings", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error Export: " + ex.Message, @"Error Saving file", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-
             }
         }
 
@@ -106,7 +104,6 @@ namespace Analogy.LogViewer.Serilog
                     LoadSettings(settings);
                     MessageBox.Show("File Imported. Save settings if desired", @"Import settings", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-
                 }
                 catch (Exception ex)
                 {
@@ -166,7 +163,7 @@ namespace Analogy.LogViewer.Serilog
                 {
                     Filter = txtbOpenFileFilters.Text,
                     Title = @"Test Open Files",
-                    Multiselect = true
+                    Multiselect = true,
                 };
                 openFileDialog1.ShowDialog(this);
             }

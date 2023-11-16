@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Serilog;
 using System;
@@ -8,7 +9,6 @@ using System.IO.Compression;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -50,8 +50,7 @@ namespace Analogy.LogViewer.Serilog
                                             m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
                                             count++;
-                                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1,count, count));
-
+                                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
                                         }
 
                                         messagesHandler.AppendMessages(parsedMessages, fileName);
@@ -73,7 +72,6 @@ namespace Analogy.LogViewer.Serilog
                                     parsedMessages.Add(m);
                                     count++;
                                     messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-
                                 }
 
                                 messagesHandler.AppendMessages(parsedMessages, fileName);
@@ -81,7 +79,6 @@ namespace Analogy.LogViewer.Serilog
                             }
                         }
                     }
-
                 }
                 catch (Exception e)
                 {
@@ -93,11 +90,8 @@ namespace Analogy.LogViewer.Serilog
                     messagesHandler.AppendMessages(parsedMessages, fileName);
                     return parsedMessages;
                 }
-
-
             });
             return messages;
         }
-
     }
 }

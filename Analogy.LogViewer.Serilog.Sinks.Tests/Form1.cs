@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Serilog;
+using Serilog.Core;
+using Serilog.Events;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +12,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Serilog;
-using Serilog.Core;
-using Serilog.Events;
 
 namespace Analogy.LogViewer.Serilog.Sinks.Tests
 {
     public partial class Form1 : Form
     {
-       
-        Logger log = new LoggerConfiguration()
+        private Logger log = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .Enrich.WithMachineName()
             .Enrich.WithProcessId()
@@ -34,7 +33,6 @@ namespace Analogy.LogViewer.Serilog.Sinks.Tests
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -51,6 +49,5 @@ namespace Analogy.LogViewer.Serilog.Sinks.Tests
             log = new LoggerConfiguration()
                 .WriteTo.AnalogyLogServerSink(txtAddress.Text).CreateLogger();
         }
-
     }
 }

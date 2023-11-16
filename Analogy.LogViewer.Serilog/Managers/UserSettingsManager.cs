@@ -8,7 +8,6 @@ namespace Analogy.LogViewer.Serilog.Managers
 {
     public class UserSettingsManager
     {
-
         private static readonly Lazy<UserSettingsManager> _instance =
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
@@ -19,14 +18,12 @@ namespace Analogy.LogViewer.Serilog.Managers
 
         public UserSettingsManager()
         {
-
             //check if local file exist:
             var loaded = LoadFileSettings(LocalSettingFileName, true);
             if (!loaded)
             {
                 LoadFileSettings(SerilogPerUserFileSetting, false);
             }
-
         }
 
         private bool LoadFileSettings(string localSettingFileName, bool optional)
@@ -37,14 +34,13 @@ namespace Analogy.LogViewer.Serilog.Managers
                 {
                     var settings = new JsonSerializerSettings
                     {
-                        ObjectCreationHandling = ObjectCreationHandling.Replace
+                        ObjectCreationHandling = ObjectCreationHandling.Replace,
                     };
                     string data = File.ReadAllText(localSettingFileName);
                     Settings = JsonConvert.DeserializeObject<SerilogSettings>(data, settings);
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
                         Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz;*.zip|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz|ZIP file (*.zip)|*.zip";
-
                     }
                     return true;
                 }
@@ -55,7 +51,6 @@ namespace Analogy.LogViewer.Serilog.Managers
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
                         Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz;*.zip|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz|ZIP file (*.zip)|*.zip";
-
                     }
                     return true;
                 }
@@ -68,7 +63,6 @@ namespace Analogy.LogViewer.Serilog.Managers
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
                         Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz;*.zip|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz|ZIP file (*.zip)|*.zip";
-
                     }
                     return false;
                 }
@@ -83,7 +77,6 @@ namespace Analogy.LogViewer.Serilog.Managers
             {
                 if (Settings.UseApplicationFolderForSettings)
                 {
-
                     File.WriteAllText(LocalSettingFileName, JsonConvert.SerializeObject(Settings));
                 }
                 else
@@ -100,15 +93,12 @@ namespace Analogy.LogViewer.Serilog.Managers
                         }
                     }
                     File.WriteAllText(SerilogPerUserFileSetting, JsonConvert.SerializeObject(Settings));
-
                 }
             }
             catch (Exception e)
             {
                 LogManager.Instance.LogError(e, "Error saving settings: " + e.Message);
             }
-
-
         }
     }
 }

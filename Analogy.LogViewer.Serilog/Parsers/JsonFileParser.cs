@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,7 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.Serilog
 {
@@ -52,7 +52,6 @@ namespace Analogy.LogViewer.Serilog
                                     using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
                                     {
                                         jsonData = streamReader.ReadToEnd();
-
                                     }
                                 }
                             }
@@ -64,7 +63,6 @@ namespace Analogy.LogViewer.Serilog
                                 }
                             }
 
-
                             var data = JsonConvert.DeserializeObject(jsonData, JsonSerializerSettings);
                             if (data is JObject jo)
                             {
@@ -74,7 +72,7 @@ namespace Analogy.LogViewer.Serilog
                                 m.RawText = jo.ToString(Formatting.None);
                                 m.RawTextType = AnalogyRowTextType.JSON;
                                 parsedMessages.Add(m);
-                                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, 1,1));
+                                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, 1, 1));
                             }
                             else if (data is JArray arr)
                             {
@@ -89,7 +87,7 @@ namespace Analogy.LogViewer.Serilog
                                         m.RawText = j.ToString(Formatting.None);
                                         m.RawTextType = AnalogyRowTextType.JSON;
                                         parsedMessages.Add(m);
-                                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1,i, arr.Count));
+                                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, i, arr.Count));
                                     }
                                 }
                             }

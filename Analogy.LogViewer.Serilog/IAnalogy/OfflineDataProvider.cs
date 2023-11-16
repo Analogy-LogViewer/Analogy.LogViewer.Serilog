@@ -38,10 +38,10 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         private JsonFileParser JsonFileParser { get; }
 
         public override bool UseCustomColors { get; set; }
-        public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {
@@ -50,7 +50,6 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
             JsonPerLineParser = new JsonFormatterParser(new JsonFormatMessageFields());
             JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
-
         }
         public override Task InitializeDataProvider(ILogger logger)
         {

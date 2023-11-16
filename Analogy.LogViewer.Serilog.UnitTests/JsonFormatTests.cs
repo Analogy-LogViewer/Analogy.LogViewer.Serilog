@@ -26,7 +26,6 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.IsTrue(messages[0].MachineName == "MY-MACHINE");
             Assert.IsTrue(messages[1].Text.StartsWith("An unknown error occurred"));
             Assert.IsTrue((messages[1].Module == "My process"));
-
         }
 
         [TestMethod]
@@ -38,6 +37,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count == 2);
+            
             //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
             Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
         }
@@ -51,6 +51,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count == 2);
+            
             //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
             Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
         }
@@ -100,6 +101,5 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.IsTrue(messages.Count == 1);
             Assert.IsTrue(messages[0].Text == "A dictionary: @{ FirstKey: \"FirstItem\", SecondKey: \"SecondItem\", <empty key>: \"\", FourthKey: \"FourthItem\" }");
         }
-
     }
 }

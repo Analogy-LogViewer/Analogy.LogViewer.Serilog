@@ -1,20 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-windows;net6.0-windows</TargetFrameworks>
-		<Version>2.0.3.1</Version>
-		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
+		<TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows</TargetFrameworks>
+		<Version>6.0.0</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="5.0.3.1" />
-		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="6.0.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
 		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
 		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.3.0" />
 		<PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" />
 		<PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-		<PackageReference Include="Serilog.Extensions.Hosting" Version="7.0.0" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
 	</ItemGroup>
 
 </Project>
