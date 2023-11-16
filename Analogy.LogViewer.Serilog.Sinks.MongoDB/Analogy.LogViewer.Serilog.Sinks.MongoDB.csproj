@@ -14,14 +14,6 @@
 		<PackageReference Include="Analogy.CommonUtilities" Version="6.0.0" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="6.0.0.1" />
 		<PackageReference Include="Analogy.LogViewer.Template" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="8.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Serilog" Version="3.1.1" />
 		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
