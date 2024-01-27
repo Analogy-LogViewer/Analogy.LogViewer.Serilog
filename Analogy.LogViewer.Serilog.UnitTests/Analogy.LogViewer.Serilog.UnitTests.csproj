@@ -49,6 +49,12 @@
     <None Update="log files\JsonFileCompactFormat.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="log files\rendered1.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\rendered2.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

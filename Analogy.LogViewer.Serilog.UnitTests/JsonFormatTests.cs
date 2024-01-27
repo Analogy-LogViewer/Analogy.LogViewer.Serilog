@@ -101,5 +101,32 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             Assert.IsTrue(messages.Count == 1);
             Assert.IsTrue(messages[0].Text == "A dictionary: @{ FirstKey: \"FirstItem\", SecondKey: \"SecondItem\", <empty key>: \"\", FourthKey: \"FourthItem\" }");
         }
+
+        [TestMethod]
+        public async Task JsonFileRendered1PerLineTest()
+        {
+            var p = new JsonFormatterParser(new CompactJsonFormatMessageFields());
+            CancellationTokenSource cts = new CancellationTokenSource();
+            string fileName = Path.Combine(Folder, "log files", "rendered1.clef");
+            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            Assert.IsTrue(messages.Count == 2);
+
+            Assert.IsTrue(messages[0].Text == "test");
+            Assert.IsTrue(messages[1].Text == "test 2");
+        }
+        [TestMethod]
+        public async Task JsonFileRendered2PerLineTest()
+        {
+            var p = new JsonFormatterParser(new CompactJsonFormatMessageFields());
+            CancellationTokenSource cts = new CancellationTokenSource();
+            string fileName = Path.Combine(Folder, "log files", "rendered2.clef");
+            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+            Assert.IsTrue(messages.Count == 2);
+
+            Assert.IsTrue(messages[0].Text == "test");
+            Assert.IsTrue(messages[1].Text == "test 2");
+        }
     }
 }
