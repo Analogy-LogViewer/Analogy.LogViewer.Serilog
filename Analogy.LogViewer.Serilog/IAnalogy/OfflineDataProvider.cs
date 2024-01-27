@@ -167,7 +167,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                 }
 
                 fields = new CompactJsonFormatMessageFields();
-                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+                if (jsonData.Contains(fields.Timestamp) && (jsonData.Contains(fields.MessageTemplate) || jsonData.Contains(fields.Message)))
                 {
                     return FileFormat.CompactJsonFormatPerLine;
                 }

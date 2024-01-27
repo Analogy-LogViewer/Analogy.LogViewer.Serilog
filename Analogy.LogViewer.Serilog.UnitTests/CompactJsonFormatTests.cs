@@ -44,6 +44,21 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             var type = OfflineDataProvider.TryDetectFormat(file);
             Assert.IsTrue(type == FileFormat.CompactJsonFormatPerLine);
         }
+        [TestMethod]
+
+        // [DataRow("rendered1.clef", 2, "test 2")]
+        [DataRow("rendered2.clef", 2, "test 2")]
+        public async Task OfflineProviderParserAlreadyRenderedTest(string fileName, int numberOfMessages, string text)
+        {
+            OfflineDataProvider parser = new OfflineDataProvider();
+            UserSettingsManager.UserSettings.Settings.SupportFormats = new List<string> { "*.Clef", "*.log", "*.gz", "*.zip" };
+            CancellationTokenSource cts = new CancellationTokenSource();
+            string file = Path.Combine(Folder, "log files", fileName);
+            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+            var messages = (await parser.Process(file, cts.Token, forTesting)).ToList();
+            Assert.IsTrue(messages.Count == numberOfMessages);
+            Assert.IsTrue(messages[1].Text == text);
+        }
 
         [TestMethod]
         public async Task CompactJsonFormatParserTest()
