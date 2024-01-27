@@ -10,7 +10,7 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
 		<PackageReleaseNotes>Analogy Serilog Parsers</PackageReleaseNotes>
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
-		<VersionPrefix>6.0.0</VersionPrefix>
+		<VersionPrefix>6.0.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
