@@ -1,19 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
-	  <Copyright>Lior Banai © 2022-2023</Copyright>
+	  <TargetFrameworks>net8.0-windows;net6.0-windows;net48</TargetFrameworks>
+	  <Copyright>Lior Banai © 2022-2024</Copyright>
 	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-	<ItemGroup>
-    <Folder Include="IAnalogy\" />
+
+  <ItemGroup>
+    <Compile Remove="IAnalogy\**" />
+    <EmbeddedResource Remove="IAnalogy\**" />
+    <None Remove="IAnalogy\**" />
   </ItemGroup>
 
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="6.0.0" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="6.0.0.1" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="6.0.0" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="7.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="7.0.0.1" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Serilog" Version="4.0.1" />
 		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
