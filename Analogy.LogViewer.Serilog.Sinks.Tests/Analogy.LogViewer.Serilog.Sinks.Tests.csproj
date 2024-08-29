@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
+		<UseWindowsForms>true</UseWindowsForms>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	</PropertyGroup>

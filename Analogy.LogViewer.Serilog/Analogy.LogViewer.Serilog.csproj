@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>net8.0-windows;net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
+		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Lior Banai</Authors>
 		<Description>Analogy Serilog Parser for Compact Formatting</Description>
 		<Copyright>Lior Banai © 2020-2024</Copyright>

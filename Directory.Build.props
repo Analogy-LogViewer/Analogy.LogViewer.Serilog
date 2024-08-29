@@ -1,6 +1,5 @@
 <Project>
 	<PropertyGroup>
-		<UseWindowsForms>true</UseWindowsForms>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -31,11 +30,11 @@
 	</ItemGroup>
 	<!-- Analyzers (Roslyn, Meziantou, StyleCop, ...) -->
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="4.10.0">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="4.11.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Meziantou.Analyzer" Version="2.0.159">
+		<PackageReference Include="Meziantou.Analyzer" Version="2.0.163">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
