@@ -54,9 +54,9 @@ jobs:
 
     # Publish Artifacts 
     - name: 'Publish Artifacts'   
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4.4.0
       with:
-       name: 'artifactory'
+       name: artifactory_${{ matrix.configuration }}
        path: |
         ./Analogy.LogViewer.Serilog/bin/${{ matrix.configuration }}
         ./Analogy.LogViewer.Serilog.Sinks/bin/${{ matrix.configuration }}
@@ -70,13 +70,13 @@ jobs:
       - name: 'Download Artifact'
         uses: actions/download-artifact@v4.1.7
         with:
-          name: 'artifactory'
+          name: artifactory_Release
       - name: 'Dotnet NuGet Push'
         run: |
-          Get-ChildItem .\artifactory\Analogy.LogViewer.Serilog\bin\Release -Filter *.nupkg |
+          Get-ChildItem .\Analogy.LogViewer.Serilog\bin\Release -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
-          Get-ChildItem .\artifactory\Analogy.LogViewer.Serilog.Sinks\bin\Release -Filter *.nupkg |
+          Get-ChildItem .\Analogy.LogViewer.Serilog.Sinks\bin\Release -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_SINKS_API_KEY}} }
         shell: pwsh
@@ -85,18 +85,6 @@ jobs:
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v1.0.5
 
-      - name: Add private GitHub registry to NuGet
-        run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/Analogy-LogViewer/index.json -Username Analogy-LogViewer -Password ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Dotnet NuGet Push to github registry'     
-        run: |
-          Get-ChildItem .\artifactory\Analogy.LogViewer.Serilog\bin\Release -Filter *.nupkg |
-          Where-Object { !$_.Name.Contains('preview') } |
-          ForEach-Object { nuget push $_  -Source "GPR" -SkipDuplicate }
-          Get-ChildItem .\artifactory\Analogy.LogViewer.Serilog.Sinks\bin\Release -Filter *.nupkg |
-          Where-Object { !$_.Name.Contains('preview') } |
-          ForEach-Object { nuget push $_  -Source "GPR" -SkipDuplicate }
-          
 concurrency: 
   group: ${{ github.ref }}
   cancel-in-progress: true
