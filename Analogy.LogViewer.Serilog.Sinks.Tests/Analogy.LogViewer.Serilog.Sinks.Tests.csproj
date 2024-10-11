@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 		<!--<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="0.1.3" />-->
-		<PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
 		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
 		<PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
 		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
