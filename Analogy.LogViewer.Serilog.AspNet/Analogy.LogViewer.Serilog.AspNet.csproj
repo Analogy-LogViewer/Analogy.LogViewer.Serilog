@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFrameworks>net9.0-windows;net8.0-windows</TargetFrameworks>
 		<Version>7.0.0</Version>
 	</PropertyGroup>
 

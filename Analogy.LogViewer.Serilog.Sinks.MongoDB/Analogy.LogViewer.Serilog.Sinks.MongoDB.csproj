@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net8.0-windows;net6.0-windows;net48</TargetFrameworks>
-	  <Copyright>Lior Banai © 2022-2024</Copyright>
+	  <TargetFrameworks>net9.0-windows;net8.0-windows;net48</TargetFrameworks>
+	  <Copyright>Lior Banai 2022-2025</Copyright>
 	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
