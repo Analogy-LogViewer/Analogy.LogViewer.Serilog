@@ -34,6 +34,12 @@
     <None Update="log files\empty_dictionary_key.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="log files\format_linux_style.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\format_windows_style.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="log files\JsonFormatPerFile.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -49,10 +55,19 @@
     <None Update="log files\JsonFileCompactFormat.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="log files\ObjectKey.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="log files\rendered1.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log files\rendered2.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\slow_load.clef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log files\timestamps.clef">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
