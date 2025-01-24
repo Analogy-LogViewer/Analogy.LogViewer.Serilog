@@ -11,6 +11,7 @@
 		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 		<RepositoryType>git</RepositoryType>
 		<DebugType>portable</DebugType>
+		<NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Nullable>enable</Nullable>

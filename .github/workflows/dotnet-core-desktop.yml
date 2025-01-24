@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Release, Debug]
+        configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to 
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -23,13 +23,13 @@ jobs:
      
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.2.2
       with:
         fetch-depth: 0
 
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v4.1.0
+      uses: actions/setup-dotnet@v4.2.0
       with:
         dotnet-version: 9.0.x
 
@@ -54,7 +54,7 @@ jobs:
 
     # Publish Artifacts 
     - name: 'Publish Artifacts'   
-      uses: actions/upload-artifact@v4.4.0
+      uses: actions/upload-artifact@v4.4.3
       with:
        name: artifactory_${{ matrix.configuration }}
        path: |
@@ -67,6 +67,8 @@ jobs:
     if: ${{ github.event_name == 'push'}}
     runs-on: windows-latest
     steps:
+      - name: Setup NuGet.exe for use with actions
+        uses: NuGet/setup-nuget@v2.0.1
       - name: 'Download Artifact'
         uses: actions/download-artifact@v4.1.8
         with:
@@ -80,11 +82,6 @@ jobs:
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_SINKS_API_KEY}} }
         shell: pwsh
-
-
-      - name: Setup NuGet.exe for use with actions
-        uses: NuGet/setup-nuget@v2.0.1
-
 concurrency: 
   group: ${{ github.ref }}
   cancel-in-progress: true
