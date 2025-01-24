@@ -16,16 +16,17 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         private string Folder { get; } = Environment.CurrentDirectory;
 
         [TestMethod]
-        public async Task CompactJsonFormatFullFileTest()
+        [DataRow("timestamps.clef", 4, "2016-10-12T04:46:58.0554314+03:00")]
+        public async Task CompactJsonFormatFullFileTest(string fileName, int numberOfMessages, string datetimeToParse)
         {
             CompactJsonFormatParser parser = new CompactJsonFormatParser();
             CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(Folder, "log files", "timestamps.clef");
+            string file = Path.Combine(Folder, "log files", fileName);
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
+            var messages = (await parser.Process(file, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count is 4);
-
-            // Assert.IsTrue(messages[9].Date.Equals(new DateTimeOffset(2016, 10, 12, 04, 46, 58, 55, TimeSpan.Zero)));
+            DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse);
+            Assert.IsTrue(messages[0].Date.Equals(dto));
         }
     }
 }

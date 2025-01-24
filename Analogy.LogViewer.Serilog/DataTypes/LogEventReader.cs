@@ -258,7 +258,13 @@ namespace Analogy.LogViewer.Serilog.DataTypes
                     return offset;
                 }
 
-                return (DateTime)dt;
+                if (dt is DateTime time)
+                {
+#pragma warning disable MA0132
+                    return time;
+#pragma warning restore MA0132
+                }
+                return DateTimeOffset.Now;
             }
 
             if (token.Type != JTokenType.String)

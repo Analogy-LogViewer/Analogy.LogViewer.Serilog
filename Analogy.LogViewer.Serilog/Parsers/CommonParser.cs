@@ -42,7 +42,7 @@ namespace Analogy.LogViewer.Serilog
                     }
             }
 
-            m.Date = evt.Timestamp.DateTime;
+            m.Date = evt.Timestamp;
             m.Text = AnalogySink.output;// evt.MessageTemplate.Text;
             if (evt.Properties.TryGetValue(Constants.ProcessName, out var processName))
             {

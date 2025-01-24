@@ -30,7 +30,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             var messages = (await parser.Process(file, cts.Token, forTesting)).ToList();
             DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse);
             Assert.IsTrue(messages.Count == numberOfMessages);
-            Assert.IsTrue(messages[0].Date == dto.DateTime);
+            Assert.IsTrue(messages[0].Date == dto);
         }
 
         [TestMethod]
