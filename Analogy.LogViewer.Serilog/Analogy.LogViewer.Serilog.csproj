@@ -11,8 +11,8 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
 		<PackageReleaseNotes>Analogy Serilog Parsers</PackageReleaseNotes>
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
-		<VersionPrefix>7.2.0</VersionPrefix>
-		<VersionSuffix></VersionSuffix>
+		<VersionPrefix>8.0.0.0</VersionPrefix>
+		<VersionSuffix>a1</VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
