@@ -4,6 +4,7 @@ using Serilog.Core;
 using Serilog.Events;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog.Sinks
 {
@@ -31,42 +32,29 @@ namespace Analogy.LogViewer.Serilog.Sinks
         public void Emit(LogEvent logEvent)
         {
             var alm = ParseLogEventProperties(logEvent, in _formatProvider);
-            _ = (logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, "", alm.MachineName, alm.User,
-                alm.Module, alm.ProcessId, alm.ThreadId, alm.AdditionalProperties, alm.MethodName, alm.LineNumber, alm.FileName));
+            if (logServerMessageProducer is not null)
+            {
+                SafeFireAndForget(logServerMessageProducer?.Log(alm.Text, alm.Source, alm.Level, "", alm.MachineName, alm.User,
+                    alm.Module, alm.ProcessId, alm.ThreadId, alm.AdditionalProperties, alm.MethodName, alm.LineNumber, alm.FileName));
+            }
         }
 
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt, in IFormatProvider formatProvider)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
 
-            switch (evt.Level)
+            m.Level = evt.Level switch
             {
-                case LogEventLevel.Verbose:
-                    m.Level = AnalogyLogLevel.Verbose;
-                    break;
-                case LogEventLevel.Debug:
-                    m.Level = AnalogyLogLevel.Debug;
-                    break;
-                case LogEventLevel.Information:
-                    m.Level = AnalogyLogLevel.Information;
-                    break;
-                case LogEventLevel.Warning:
-                    m.Level = AnalogyLogLevel.Warning;
-                    break;
-                case LogEventLevel.Error:
-                    m.Level = AnalogyLogLevel.Error;
-                    break;
-                case LogEventLevel.Fatal:
-                    m.Level = AnalogyLogLevel.Critical;
-                    break;
-                default:
-                    {
-                        m.Level = AnalogyLogLevel.Unknown;
-                        break;
-                    }
-            }
+                LogEventLevel.Verbose => AnalogyLogLevel.Verbose,
+                LogEventLevel.Debug => AnalogyLogLevel.Debug,
+                LogEventLevel.Information => AnalogyLogLevel.Information,
+                LogEventLevel.Warning => AnalogyLogLevel.Warning,
+                LogEventLevel.Error => AnalogyLogLevel.Error,
+                LogEventLevel.Fatal => AnalogyLogLevel.Critical,
+                _ => AnalogyLogLevel.Unknown,
+            };
 
-            m.Date = evt.Timestamp.DateTime;
+            m.Date = evt.Timestamp;
             m.Text = evt.RenderMessage(formatProvider);
             if (evt.Properties.TryGetValue(Constants.ProcessName, out var processName))
             {
@@ -152,6 +140,17 @@ namespace Analogy.LogViewer.Serilog.Sinks
                 m.AddOrReplaceAdditionalProperty(property.Key, property.Value.ToString());
             }
             return m;
+        }
+        public static async void SafeFireAndForget(Task task)
+        {
+            try
+            {
+                await task.ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                //ignore
+            }
         }
 
         public void Dispose()
