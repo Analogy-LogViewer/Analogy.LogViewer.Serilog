@@ -13,6 +13,7 @@
 		<DebugType>portable</DebugType>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
