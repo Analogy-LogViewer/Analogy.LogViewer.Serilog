@@ -12,6 +12,7 @@
 		<RepositoryType>git</RepositoryType>
 		<DebugType>portable</DebugType>
 		<NeutralLanguage>en-US</NeutralLanguage>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Nullable>enable</Nullable>

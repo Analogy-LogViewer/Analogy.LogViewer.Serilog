@@ -252,7 +252,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 
             if (token.Type == JTokenType.Date)
             {
-                var dt = token.Value<JValue>().Value;
+                var dt = token.Value<JValue>()?.Value;
                 if (dt is DateTimeOffset offset)
                 {
                     return offset;
