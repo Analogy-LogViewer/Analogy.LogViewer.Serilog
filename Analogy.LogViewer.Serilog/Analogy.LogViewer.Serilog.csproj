@@ -12,7 +12,7 @@
 		<PackageReleaseNotes>Analogy Serilog Parsers</PackageReleaseNotes>
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<VersionPrefix>8.0.0.0</VersionPrefix>
-		<VersionSuffix>a1</VersionSuffix>
+		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
