@@ -1,4 +1,4 @@
-{"@t":"2016-10-12T04:46:58.0554314+03:00","@mt":"Hello, {@User}","User":{"Name":"nblumhardt","Id":101}}
-{"@t":"2016-10-12T04:46:58.0684369+03:00","@mt":"Number {N:x8}","@r":["0000002a"],"N":42}
-{"@t":"2016-10-12T04:46:58.0724384+03:00","@mt":"Tags are {Tags}","@l":"Warning","Tags":["test","orange"]}
-{"@t":"2016-10-12T04:46:58.0904378+03:00","@mt":"Something failed","@l":"Error", "@x":"System.DivideByZer...<snip>"}
+{"@t":"2016-10-12T04:46:58.0554314+04:00","@mt":"Hello, {@User}","User":{"Name":"nblumhardt","Id":101}}
+{"@t":"2016-10-12T04:46:58.0684369+05:00","@mt":"Number {N:x8}","@r":["0000002a"],"N":42}
+{"@t":"2016-10-12T04:46:58.0724384+06:00","@mt":"Tags are {Tags}","@l":"Warning","Tags":["test","orange"]}
+{"@t":"2016-10-12T04:46:58.0904378+07:00","@mt":"Something failed","@l":"Error", "@x":"System.DivideByZer...<snip>"}

@@ -4,6 +4,7 @@
 		<TargetFrameworks>net9.0-windows</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 
 	<ItemGroup>

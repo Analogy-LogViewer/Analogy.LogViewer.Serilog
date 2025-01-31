@@ -15,6 +15,8 @@
 		<VersionSuffix></VersionSuffix>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 	</PropertyGroup>
 
 	<ItemGroup>
