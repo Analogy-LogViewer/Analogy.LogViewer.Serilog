@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
-    public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
+    public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProviderWinforms
     {
         public override Guid Id { get; set; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
         public override Image LargeImage { get; set; }
@@ -40,7 +40,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
-            => Array.Empty<(string, string)>();
+            => [];
 
         public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);

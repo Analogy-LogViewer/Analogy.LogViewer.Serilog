@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
-    public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactory
+    public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactoryWinforms
     {
         public override string Title { get; set; } = "Serilog User Settings";
         public override UserControl DataProviderSettings { get; set; }

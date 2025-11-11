@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
-    public class PrimaryFactory : Analogy.LogViewer.Template.PrimaryFactory
+    public class PrimaryFactory : Analogy.LogViewer.Template.PrimaryFactoryWinforms
     {
         internal static Guid Id { get; } = new Guid("513A4393-425E-4054-92D4-6A816983E51F");
         public override Guid FactoryId { get; set; } = Id;
