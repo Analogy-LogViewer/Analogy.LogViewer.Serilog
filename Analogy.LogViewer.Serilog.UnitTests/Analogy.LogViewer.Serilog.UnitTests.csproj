@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.0-rc1" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.0-rc2" />
 		<PackageReference Include="System.Resources.Extensions" Version="9.0.10" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="4.0.1" />
