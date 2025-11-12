@@ -14,9 +14,9 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.0-rc1" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.0-rc1" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.0-rc3" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.0-rc2" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.0-rc2" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.0-rc4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Serilog" Version="4.3.0" />
 		<PackageReference Include="System.Resources.Extensions" Version="9.0.10" />
