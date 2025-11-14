@@ -2,7 +2,7 @@
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
-using Analogy.LogViewer.Template.WinForms;
+using Analogy.LogViewer.Template;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -11,17 +11,16 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
-    public class SerilogOfflineDataProvider : OfflineDataProviderWinForms
+    public class SerilogOfflineDataProvider : OfflineDataProvider
     {
         public override Guid Id { get; set; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
-        public override Image LargeImage { get; set; }
-        public override Image SmallImage { get; set; }
         public override string OptionalTitle { get; set; } = "Serilog offline reader";
         public override bool CanSaveToLogFile { get; set; }
         public override string FileOpenDialogFilters { get; set; } = UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;

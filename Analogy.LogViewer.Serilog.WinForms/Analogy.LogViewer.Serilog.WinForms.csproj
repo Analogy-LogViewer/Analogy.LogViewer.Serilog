@@ -2,9 +2,10 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net10.0;net9.0;net8.0;net48</TargetFrameworks>
+		<TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows;net48</TargetFrameworks>
 		<VersionPrefix>9.0.0</VersionPrefix>
 		<VersionSuffix>rc2</VersionSuffix>
+		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Lior Banai</Authors>
 		<Description>Analogy Serilog Parser for Compact Formatting</Description>
 		<Copyright>Lior Banai 2020-2026</Copyright>
@@ -12,33 +13,49 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Serilog</RepositoryUrl>
 		<PackageReleaseNotes>Analogy Serilog Parsers</PackageReleaseNotes>
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
-		<AssemblyName>Analogy.LogViewer.Serilog</AssemblyName>
-		<RootNamespace>Analogy.LogViewer.Serilog</RootNamespace>
-		<PackageId>Analogy.LogViewer.Serilog</PackageId>
+		<AssemblyName>Analogy.LogViewer.Serilog.WinForms</AssemblyName>
+		<RootNamespace>Analogy.LogViewer.Serilog.WinForms</RootNamespace>
+		<PackageId>Analogy.LogViewer.Serilog.WinForms</PackageId>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Include="..\AnalogySerilog.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.2" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.1" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces.Winforms" Version="9.0.1" />
 		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.2" />
+		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Serilog" Version="4.3.0" />
+		<PackageReference Include="System.Resources.Extensions" Version="10.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Resources\AnalogySerilog.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 		<None Include="..\Nuget\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Properties\" />
+	  <ProjectReference Include="..\Analogy.LogViewer.Serilog\Analogy.LogViewer.Serilog.csproj" />
 	</ItemGroup>
 </Project>

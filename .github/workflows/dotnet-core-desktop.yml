@@ -57,10 +57,7 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
        name: artifactory_${{ matrix.configuration }}
-       path: |
-        ./Analogy.LogViewer.Serilog/bin/${{ matrix.configuration }}
-        ./Analogy.LogViewer.Serilog.Sinks/bin/${{ matrix.configuration }}
-        
+       path: ./
   push-nuget:
     name: 'Push NuGet Packages'
     needs: build
@@ -75,10 +72,8 @@ jobs:
           name: artifactory_Release
       - name: 'Dotnet NuGet Push'
         run: |
-          Get-ChildItem .\Analogy.LogViewer.Serilog\bin\Release -Filter *.nupkg |
+          Get-ChildItem ./ -Recurse -Filter *.nupkg |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
-          Get-ChildItem .\Analogy.LogViewer.Serilog.Sinks\bin\Release -Filter *.nupkg |
-          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_SINKS_API_KEY}} }
         shell: pwsh
 concurrency: 
   group: ${{ github.ref }}
