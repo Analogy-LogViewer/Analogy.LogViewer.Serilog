@@ -23,8 +23,8 @@
 		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.2" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.1" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces.Winforms" Version="9.0.1" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.1" />
-		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.2" />
+		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Serilog" Version="4.3.0" />
 		<PackageReference Include="System.Resources.Extensions" Version="10.0.0" />
