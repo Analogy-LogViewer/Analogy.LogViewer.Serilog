@@ -22,7 +22,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [DataRow("CompactJsonFormat.gz", 4, "2016-10-12T04:46:58.0554314Z")]
         public async Task OfflineProviderParserTimestampTest(string fileName, int numberOfMessages, string datetimeToParse)
         {
-            OfflineDataProvider parser = new OfflineDataProvider();
+            SerilogOfflineDataProvider parser = new SerilogOfflineDataProvider();
             UserSettingsManager.UserSettings.Settings.SupportFormats= new List<string> { "*.Clef", "*.log", "*.gz", "*.zip" };
             CancellationTokenSource cts = new CancellationTokenSource();
             string file = Path.Combine(Folder, "log files", fileName);
@@ -41,7 +41,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         public void CompactJsonFormatTestAutomaticDetection(string fileName)
         {
             string file = Path.Combine(Folder, "log files", fileName);
-            var type = OfflineDataProvider.TryDetectFormat(file);
+            var type = SerilogOfflineDataProvider.TryDetectFormat(file);
             Assert.IsTrue(type == FileFormat.CompactJsonFormatPerLine);
         }
         [TestMethod]
@@ -50,7 +50,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         [DataRow("rendered2.clef", 2, "test 2")]
         public async Task OfflineProviderParserAlreadyRenderedTest(string fileName, int numberOfMessages, string text)
         {
-            OfflineDataProvider parser = new OfflineDataProvider();
+            SerilogOfflineDataProvider parser = new SerilogOfflineDataProvider();
             UserSettingsManager.UserSettings.Settings.SupportFormats = new List<string> { "*.Clef", "*.log", "*.gz", "*.zip" };
             CancellationTokenSource cts = new CancellationTokenSource();
             string file = Path.Combine(Folder, "log files", fileName);

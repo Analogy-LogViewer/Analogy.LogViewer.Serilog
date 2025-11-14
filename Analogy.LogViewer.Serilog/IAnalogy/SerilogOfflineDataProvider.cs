@@ -2,6 +2,7 @@
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
+using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.Serilog.IAnalogy
 {
-    public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProviderWinforms
+    public class SerilogOfflineDataProvider : OfflineDataProviderWinForms
     {
         public override Guid Id { get; set; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
         public override Image LargeImage { get; set; }
@@ -44,7 +45,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
 
         public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
-        public OfflineDataProvider()
+        public SerilogOfflineDataProvider()
         {
             CompactFormatPerLineParser = new CompactJsonFormatParser();
             CompactJsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
@@ -83,7 +84,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
                         throw new ArgumentOutOfRangeException($"Invalid format {UserSettingsManager.UserSettings.Settings.Format}");
                 }
             }
-            Template.Managers.LogManager.Instance?.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
+            Template.Managers.LogManager.Instance?.LogError($"Unsupported File {fileName}", nameof(SerilogOfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
         }
 

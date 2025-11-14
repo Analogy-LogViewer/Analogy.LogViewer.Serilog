@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
 using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;

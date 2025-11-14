@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogServer.Clients;
 using Serilog.Core;
 using Serilog.Events;

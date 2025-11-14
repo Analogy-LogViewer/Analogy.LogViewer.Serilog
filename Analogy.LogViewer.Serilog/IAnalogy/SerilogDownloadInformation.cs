@@ -14,7 +14,7 @@ namespace Analogy.LogViewer.Serilog.IAnalogy
         protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/Analogy-LogViewer/Analogy.LogViewer.Serilog";
         public override TargetFrameworkAttribute CurrentFrameworkAttribute { get; set; } = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(TargetFrameworkAttribute));
 
-        public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
+        public override Guid FactoryId { get; set; } = SerilogPrimaryFactory.Id;
         public override string Name { get; set; } = "Serilog Data Provider";
 
         private string? _installedVersionNumber;

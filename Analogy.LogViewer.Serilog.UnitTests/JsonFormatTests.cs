@@ -62,7 +62,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
         public void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
         {
             string file = Path.Combine(Folder, "log files", fileName);
-            var type = OfflineDataProvider.TryDetectFormat(file);
+            var type = SerilogOfflineDataProvider.TryDetectFormat(file);
             Assert.IsTrue(type == format);
         }
 
