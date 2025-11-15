@@ -1,6 +1,6 @@
 ﻿using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.Managers;
-using Analogy.LogViewer.Serilog.Properties;
+using Analogy.LogViewer.Serilog.WinForms.Properties;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

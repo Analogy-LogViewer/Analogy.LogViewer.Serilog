@@ -1,5 +1,5 @@
 ﻿using Analogy.LogViewer.Serilog.IAnalogy;
-using Analogy.LogViewer.Serilog.Properties;
+using Analogy.LogViewer.Serilog.WinForms.Properties;
 using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using System;

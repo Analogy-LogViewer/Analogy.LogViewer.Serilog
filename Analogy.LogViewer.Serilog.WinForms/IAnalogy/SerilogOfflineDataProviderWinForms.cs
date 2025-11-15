@@ -5,8 +5,8 @@ using Analogy.Interfaces.WinForms.DataTypes;
 using Analogy.LogViewer.Serilog.DataTypes;
 using Analogy.LogViewer.Serilog.IAnalogy;
 using Analogy.LogViewer.Serilog.Managers;
+using Analogy.LogViewer.Serilog.WinForms.Properties;
 using Analogy.LogViewer.Template.WinForms;
-using Analogy.LogViewer.Template.WinForms.Properties;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -23,9 +23,15 @@ namespace Analogy.LogViewer.Serilog.WinForms
 {
     public class SerilogOfflineDataProviderWinForms : SerilogOfflineDataProvider, IAnalogyOfflineDataProviderWinForms
     {
-        public Image LargeImage { get; set; } = Resources.Analogy32x32;
-        public Image SmallImage { get; set; } = Resources.Analogy32x32;
-        
-        public AnalogyToolTipWinForms? ToolTip { get; set; }
+        public virtual Image LargeImage { get; set; } = Resources.AnalogySerilog32x32;
+        public virtual Image SmallImage { get; set; } = Resources.AnalogySerilog16x16;
+
+        public virtual Image? GetDataProviderSmallImage() => SmallImage;
+
+        public virtual Image? GetDataProviderLargeImage() => LargeImage;
+
+        public virtual Image? GetDataProviderToolTipSmallImage() => SmallImage;
+
+        public virtual Image? GetDataProviderToolTipLargeImage() => LargeImage;
     }
 }

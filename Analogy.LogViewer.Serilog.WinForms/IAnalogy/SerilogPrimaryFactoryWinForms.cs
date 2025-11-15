@@ -1,7 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.WinForms.Factories;
 using Analogy.LogViewer.Serilog.IAnalogy;
-using Analogy.LogViewer.Serilog.Properties;
+using Analogy.LogViewer.Serilog.WinForms.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
