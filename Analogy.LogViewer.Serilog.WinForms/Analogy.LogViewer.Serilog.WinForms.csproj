@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows;net48</TargetFrameworks>
-		<VersionPrefix>9.0.3</VersionPrefix>
+		<VersionPrefix>9.0.4</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Lior Banai</Authors>
@@ -25,10 +25,10 @@
 	<ItemGroup>
 		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.3" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.2" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces.Winforms" Version="9.0.3" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces.Winforms" Version="9.0.4" />
 		<PackageReference Include="Analogy.LogViewer.Serilog" Version="9.0.3" />
 		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.3" />
+		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Serilog" Version="4.3.0" />
 		<PackageReference Include="System.Resources.Extensions" Version="10.0.0" />
