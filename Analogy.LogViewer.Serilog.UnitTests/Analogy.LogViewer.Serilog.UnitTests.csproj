@@ -36,6 +36,9 @@
 		<None Update="log files\empty_dictionary_key.clef">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="log files\formatException.log">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="log files\format_linux_style.clef">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
