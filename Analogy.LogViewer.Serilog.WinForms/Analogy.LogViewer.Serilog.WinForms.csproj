@@ -30,8 +30,8 @@
 		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.3" />
 		<PackageReference Include="Analogy.LogViewer.Template.WinForms" Version="9.0.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-		<PackageReference Include="Serilog" Version="4.3.0" />
-		<PackageReference Include="System.Resources.Extensions" Version="10.0.3" />
+		<PackageReference Include="Serilog" Version="4.3.1" />
+		<PackageReference Include="System.Resources.Extensions" Version="10.0.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">
@@ -54,5 +54,9 @@
 			<PackagePath></PackagePath>
 		</None>
 		<None Include="..\Nuget\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.300" />
 	</ItemGroup>
 </Project>

@@ -21,4 +21,8 @@
 		<ProjectReference Include="..\Analogy.LogViewer.Serilog.Sinks\Analogy.LogViewer.Serilog.Sinks.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.300" />
+	</ItemGroup>
+
 </Project>
