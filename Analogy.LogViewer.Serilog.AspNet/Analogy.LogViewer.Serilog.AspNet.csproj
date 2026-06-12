@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
-		<VersionPrefix>9.0.2</VersionPrefix>
+		<VersionPrefix>9.0.6</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="9.0.2" />
+		<PackageReference Include="Analogy.LogViewer.Serilog.Sinks" Version="9.0.6" />
 		<PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
 		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
 		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
