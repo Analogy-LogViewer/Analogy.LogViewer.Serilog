@@ -65,7 +65,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Setup NuGet.exe for use with actions
-        uses: NuGet/setup-nuget@v3.1.0
+        uses: NuGet/setup-nuget@v4
       - name: 'Download Artifact'
         uses: actions/download-artifact@v8.0.1
         with:
