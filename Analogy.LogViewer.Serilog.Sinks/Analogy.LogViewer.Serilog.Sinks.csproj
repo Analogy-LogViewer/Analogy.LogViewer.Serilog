@@ -23,6 +23,6 @@
 		<PackageReference Include="Serilog" Version="4.4.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.300" />
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.301" />
 	</ItemGroup>
 </Project>
