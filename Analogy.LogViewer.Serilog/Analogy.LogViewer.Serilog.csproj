@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -27,11 +27,11 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.6" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.6" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.6" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-		<PackageReference Include="Serilog" Version="4.4.0" />
+		<PackageReference Include="Analogy.CommonUtilities" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" />
+		<PackageReference Include="Analogy.LogViewer.Template" />
+		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="Serilog" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +43,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.300" />
+	  <PackageReference Update="Microsoft.SourceLink.GitHub" />
 	</ItemGroup>
 </Project>

@@ -18,8 +18,8 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: Analogy.LogViewer.Serilog.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: Analogy.LogViewer.Serilog.UnitTests\Analogy.LogViewer.Serilog.UnitTests.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution_Name: Analogy.LogViewer.Serilog.slnx
+      Test_Project_Path: Analogy.LogViewer.Serilog.UnitTests\Analogy.LogViewer.Serilog.UnitTests.csproj
      
     steps:
     - name: Checkout
