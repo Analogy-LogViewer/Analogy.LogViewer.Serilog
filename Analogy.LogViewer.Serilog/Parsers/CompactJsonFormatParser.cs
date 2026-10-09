@@ -44,8 +44,8 @@ namespace Analogy.LogViewer.Serilog
                                         var reader = new LogEventReader(streamReader, messageFields);
                                         while (reader.TryRead(out var result) && !token.IsCancellationRequested)
                                         {
-                                            analogy.Write(result.evt);
-                                            AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.evt);
+                                            analogy.Write(result.Evt);
+                                            AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.Evt);
                                             m.RawText = result.Line;
                                             m.RawTextType = AnalogyRowTextType.JSON;
                                             parsedMessages.Add(m);
@@ -65,8 +65,8 @@ namespace Analogy.LogViewer.Serilog
                                 long count = 0;
                                 while (reader.TryRead(out var result))
                                 {
-                                    analogy.Write(result.evt);
-                                    AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.evt);
+                                    analogy.Write(result.Evt);
+                                    AnalogyLogMessage m = CommonParser.ParseLogEventProperties(result.Evt);
                                     m.RawText = result.Line;
                                     m.RawTextType = AnalogyRowTextType.JSON;
                                     parsedMessages.Add(m);

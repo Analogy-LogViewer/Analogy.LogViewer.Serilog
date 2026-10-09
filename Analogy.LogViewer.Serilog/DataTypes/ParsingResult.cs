@@ -4,12 +4,12 @@ namespace Analogy.LogViewer.Serilog.DataTypes
 {
     public class ParsingResult
     {
-        public LogEvent? evt { get; set; }
+        public LogEvent? Evt { get; set; }
         public string Line { get; set; }
 
         public ParsingResult(LogEvent? evt, string line)
         {
-            this.evt = evt;
+            this.Evt = evt;
             this.Line = line;
         }
     }

@@ -44,7 +44,7 @@ namespace Analogy.LogViewer.Serilog
             }
 
             m.Date = evt.Timestamp;
-            m.Text = AnalogySink.output;// evt.MessageTemplate.Text;
+            m.Text = AnalogySink.output;// Evt.MessageTemplate.Text;
             if (evt.Properties.TryGetValue(Constants.ProcessName, out var processName))
             {
                 if (processName is ScalarValue scalarValue &&
