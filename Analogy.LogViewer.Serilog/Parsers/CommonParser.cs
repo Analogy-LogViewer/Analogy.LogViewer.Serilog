@@ -4,6 +4,7 @@ using Analogy.LogViewer.Serilog.Managers;
 using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
 using Serilog.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +12,9 @@ namespace Analogy.LogViewer.Serilog
 {
     public static class CommonParser
     {
+        private const string DatePropertyName = "Date";
+        private const string DatePropertyAlias = "Date (property)";
+
         public static AnalogyLogMessage ParseLogEventProperties(LogEvent evt)
         {
             AnalogyLogMessage m = new AnalogyLogMessage();
@@ -44,11 +48,10 @@ namespace Analogy.LogViewer.Serilog
             }
 
             m.Date = evt.Timestamp;
-            m.Text = AnalogySink.output;// Evt.MessageTemplate.Text;
+            m.Text = AnalogySink.output;
             if (evt.Properties.TryGetValue(Constants.ProcessName, out var processName))
             {
-                if (processName is ScalarValue scalarValue &&
-                    scalarValue.Value is string processNameString)
+                if (processName is ScalarValue { Value: string processNameString })
                 {
                     m.Module = processNameString;
                 }
@@ -56,13 +59,13 @@ namespace Analogy.LogViewer.Serilog
 
             if (evt.Properties.TryGetValue(Constants.Source, out var sourceContext))
             {
-                if (sourceContext is ScalarValue scalarValue && scalarValue.Value is string sourceContextString)
+                if (sourceContext is ScalarValue { Value: string sourceContextString })
                 {
                     m.Source = sourceContextString;
                 }
                 else
                 {
-                    m.Source = sourceContext.ToString();
+                    m.Source = sourceContext.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
                 }
             }
 
@@ -70,34 +73,29 @@ namespace Analogy.LogViewer.Serilog
             {
                 if (threadId is ScalarValue scalarValue)
                 {
-                    if (scalarValue.Value is int intValue)
+                    m.ThreadId = scalarValue.Value switch
                     {
-                        m.ThreadId = intValue;
-                    }
-                    else if (scalarValue.Value is long longValue && longValue <= int.MaxValue)
-                    {
-                        m.ThreadId = (int)longValue;
-                    }
+                        int intValue => intValue,
+                        long longValue and <= int.MaxValue => (int)longValue,
+                        _ => m.ThreadId,
+                    };
                 }
             }
             if (evt.Properties.TryGetValue(Constants.ProcessId, out var processId))
             {
                 if (processId is ScalarValue scalarValue)
                 {
-                    if (scalarValue.Value is int intValue)
+                    m.ProcessId = scalarValue.Value switch
                     {
-                        m.ProcessId = intValue;
-                    }
-                    else if (scalarValue.Value is long longValue && longValue <= int.MaxValue)
-                    {
-                        m.ProcessId = (int)longValue;
-                    }
+                        int intValue => intValue,
+                        long longValue and <= int.MaxValue => (int)longValue,
+                        _ => m.ProcessId,
+                    };
                 }
             }
             if (evt.Properties.TryGetValue(Constants.MachineName, out var machineName))
             {
-                if (machineName is ScalarValue scalarValue &&
-                    scalarValue.Value is string machineNameString)
+                if (machineName is ScalarValue { Value: string machineNameString })
                 {
                     m.MachineName = machineNameString;
                 }
@@ -111,15 +109,13 @@ namespace Analogy.LogViewer.Serilog
             }
             if (evt.Properties.TryGetValue(Constants.User, out var environmentUser))
             {
-                if (environmentUser is ScalarValue { Value: string environmentUserString} scalarValue)
+                m.User = environmentUser switch
                 {
-                    m.User = environmentUserString;
-                }
-                if (environmentUser is StructureValue structure)
-
-                {
-                    m.User = structure.ToString();
-                }
+                    ScalarValue { Value: string environmentUserString } scalarValue => environmentUserString,
+                    StructureValue structure => structure.ToString(null,
+                        System.Globalization.CultureInfo.InvariantCulture),
+                    _ => m.User,
+                };
             }
             foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
             {
@@ -135,7 +131,10 @@ namespace Analogy.LogViewer.Serilog
                     continue;
                 }
 
-                m.AddOrReplaceAdditionalProperty(property.Key, property.Value.ToString());
+                var key = property.Key.Equals(DatePropertyName, StringComparison.OrdinalIgnoreCase)
+                    ? DatePropertyAlias
+                    : property.Key;
+                m.AddOrReplaceAdditionalProperty(key, property.Value.ToString(null, System.Globalization.CultureInfo.InvariantCulture));
             }
             return m;
         }

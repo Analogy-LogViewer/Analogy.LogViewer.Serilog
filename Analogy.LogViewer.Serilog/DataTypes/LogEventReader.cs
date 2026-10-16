@@ -273,7 +273,7 @@ namespace Analogy.LogViewer.Serilog.DataTypes
             }
 
             var text = token.Value<string>();
-            return DateTimeOffset.Parse(text);
+            return DateTimeOffset.Parse(text, System.Globalization.CultureInfo.InvariantCulture);
         }
 
         private static JsonSerializer CreateSerializer()
