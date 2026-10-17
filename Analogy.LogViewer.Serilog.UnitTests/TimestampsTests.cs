@@ -25,7 +25,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = (await parser.Process(file, cts.Token, forTesting)).ToList();
             Assert.IsTrue(messages.Count is 4);
-            DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse);
+            DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse, System.Globalization.CultureInfo.InvariantCulture);
             Assert.IsTrue(messages[0].Date.Equals(dto));
             Assert.IsTrue(dto.Offset.Equals(TimeSpan.FromHours(4)));
         }

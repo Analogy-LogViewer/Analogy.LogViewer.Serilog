@@ -28,7 +28,7 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             string file = Path.Combine(Folder, "log files", fileName);
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
             var messages = (await parser.Process(file, cts.Token, forTesting)).ToList();
-            DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse);
+            DateTimeOffset dto = DateTimeOffset.Parse(datetimeToParse, System.Globalization.CultureInfo.InvariantCulture);
             Assert.IsTrue(messages.Count == numberOfMessages);
             Assert.IsTrue(messages[0].Date == dto);
         }
@@ -133,6 +133,34 @@ namespace Analogy.LogViewer.Serilog.UnitTests
             
             // The first event doesn't have a source context
             Assert.IsTrue(messages[2].AdditionalProperties["Tags"] == "[\"test\", \"orange\"]");
+        }
+
+        [TestMethod]
+        public async Task CompactJsonFormatDatePropertyShouldBeKeptAsText()
+        {
+            string tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}.clef");
+            try
+            {
+                string row = "{\"@t\":\"2026-10-15T18:40:26.5929398Z\",\"@mt\":\"Headers\",\"Date\":[\"Thu, 15 Oct 2026 18:40:27 GMT\"]}";
+                await File.WriteAllTextAsync(tempFile, row);
+
+                CompactJsonFormatParser parser = new CompactJsonFormatParser();
+                CancellationTokenSource cts = new CancellationTokenSource();
+                MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+                var messages = (await parser.Process(tempFile, cts.Token, forTesting)).ToList();
+
+                Assert.AreEqual(1, messages.Count);
+                Assert.AreEqual(DateTimeOffset.Parse("2026-10-15T18:40:26.5929398Z", System.Globalization.CultureInfo.InvariantCulture), messages[0].Date);
+                Assert.IsTrue(messages[0].AdditionalProperties.ContainsKey("Date (property)"));
+                Assert.IsFalse(messages[0].AdditionalProperties.ContainsKey("Date"));
+            }
+            finally
+            {
+                if (File.Exists(tempFile))
+                {
+                    File.Delete(tempFile);
+                }
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Analogy.LogViewer.Serilog.Sinks
 {
     public class AnalogyLogServerSink : ILogEventSink, IDisposable
     {
+        private const string DatePropertyName = "Date";
+        private const string DatePropertyAlias = "Date (property)";
         private readonly IFormatProvider _formatProvider;
         private AnalogyMessageProducer logServerMessageProducer;
 
@@ -69,7 +71,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
             {
                 m.Source = sourceContext is ScalarValue { Value: string sourceContextString }
                     ? sourceContextString
-                    : sourceContext.ToString();
+                    : sourceContext.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
             }
 
             if (evt.Properties.TryGetValue(Constants.ThreadId, out var threadId))
@@ -123,7 +125,7 @@ namespace Analogy.LogViewer.Serilog.Sinks
                 if (environmentUser is StructureValue structure)
 
                 {
-                    m.User = structure.ToString();
+                    m.User = structure.ToString(null, System.Globalization.CultureInfo.InvariantCulture);
                 }
             }
             foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
@@ -138,7 +140,10 @@ namespace Analogy.LogViewer.Serilog.Sinks
                 {
                     continue;
                 }
-                m.AddOrReplaceAdditionalProperty(property.Key, property.Value.ToString());
+                var key = property.Key.Equals(DatePropertyName, StringComparison.OrdinalIgnoreCase)
+                    ? DatePropertyAlias
+                    : property.Key;
+                m.AddOrReplaceAdditionalProperty(key, property.Value.ToString(null, System.Globalization.CultureInfo.InvariantCulture));
             }
             return m;
         }
