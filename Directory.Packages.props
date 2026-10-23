@@ -8,13 +8,13 @@
     <PackageVersion Include="Analogy.LogServer.Clients" Version="9.0.6" />
     <PackageVersion Include="Analogy.LogViewer.Interfaces" Version="9.0.6" />
     <PackageVersion Include="Analogy.LogViewer.Interfaces.Winforms" Version="9.0.6" />
-    <PackageVersion Include="Analogy.LogViewer.Serilog" Version="9.0.5" />
+    <PackageVersion Include="Analogy.LogViewer.Serilog" Version="9.0.7" />
     <PackageVersion Include="Analogy.LogViewer.Serilog.Sinks" Version="9.0.6" />
     <PackageVersion Include="Analogy.LogViewer.Template" Version="9.0.6" />
     <PackageVersion Include="Analogy.LogViewer.Template.WinForms" Version="9.0.6" />
     <PackageVersion Include="coverlet.collector" Version="10.1.0" />
-    <PackageVersion Include="Meziantou.Analyzer" Version="3.0.303" />
-    <PackageVersion Include="Meziantou.Polyfill" Version="1.0.166" />
+    <PackageVersion Include="Meziantou.Analyzer" Version="3.0.316" />
+    <PackageVersion Include="Meziantou.Polyfill" Version="1.0.168" />
     <PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="5.9.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
